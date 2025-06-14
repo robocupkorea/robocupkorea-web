@@ -8,14 +8,14 @@ import {
 } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import rckaLogo from "@/assets/images/rcka-logo.png";
 import robocupLogo from "@/assets/images/robocup-logo.png";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isChildMenuOpen, setIsChildMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 모바일 메뉴
+  const [isChildMenuOpen, setIsChildMenuOpen] = useState(true); // 모바일 메뉴 하위 메뉴
 
   const menuItems = [
     {
@@ -31,6 +31,24 @@ export default function Header() {
     { name: "로보컵 대회", href: "/events" },
     { name: "공지사항", href: "/notices" },
   ];
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsMenuOpen(false); // Esc 키로 모바일 메뉴 닫기
+    }
+
+    if (isMenuOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden"; // 모바일 메뉴 열렸을 시 스크롤 잠금
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className="sticky top-0 z-50 h-16 w-full min-w-[320px] border-b border-gray-200 bg-white md:h-20">
