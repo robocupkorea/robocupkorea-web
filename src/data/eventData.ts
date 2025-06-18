@@ -1,0 +1,162 @@
+export interface EventData {
+  id: number;
+  slug: string;
+  year: string;
+  dateStart: string;
+  dateEnd: string;
+}
+
+/*
+ * TODO: event 데이터베이스 구조 참고
+ *
+ * CREATE TABLE event (
+ *   id         INT AUTO_INCREMENT PRIMARY KEY,
+ *   slug       VARCHAR(255) NOT NULL UNIQUE,
+ *   year       VARCHAR(4) NOT NULL,
+ *   date_start DATE NOT NULL,
+ *   date_end   DATE NOT NULL
+ * ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ */
+
+export const eventData: EventData[] = [
+  {
+    id: 1,
+    slug: "robocup-korea-junior-2013",
+    year: "2013",
+    dateStart: "2013-03-10",
+    dateEnd: "2013-03-10",
+  },
+  {
+    id: 2,
+    slug: "robocup-korea-junior-2014",
+    year: "2014",
+    dateStart: "2014-02-15",
+    dateEnd: "2014-02-15",
+  },
+  {
+    id: 3,
+    slug: "robocup-korea-junior-open-2015",
+    year: "2015",
+    dateStart: "2015-02-26",
+    dateEnd: "2015-02-26",
+  },
+  {
+    id: 4,
+    slug: "robocup-korea-open-2016",
+    year: "2016",
+    dateStart: "2016-12-26",
+    dateEnd: "2016-12-26",
+  },
+  {
+    id: 5,
+    slug: "creative-coding-challenge-2017",
+    year: "2017",
+    dateStart: "2017-08-19",
+    dateEnd: "2017-08-19",
+  },
+  {
+    id: 6,
+    slug: "robocup-korea-open-2017",
+    year: "2017",
+    dateStart: "2017-02-17",
+    dateEnd: "2017-02-18",
+  },
+  {
+    id: 7,
+    slug: "creative-coding-challenge-2018",
+    year: "2018",
+    dateStart: "2018-08-15",
+    dateEnd: "2018-08-15",
+  },
+  {
+    id: 8,
+    slug: "robocup-korea-open-2018",
+    year: "2018",
+    dateStart: "2018-02-09",
+    dateEnd: "2018-02-09",
+  },
+  {
+    id: 9,
+    slug: "robocup-korea-open-2019",
+    year: "2019",
+    dateStart: "2019-02-14",
+    dateEnd: "2019-02-16",
+  },
+  {
+    id: 10,
+    slug: "robocup-korea-open-2020",
+    year: "2020",
+    dateStart: "2020-08-14",
+    dateEnd: "2020-08-15",
+  },
+  {
+    id: 11,
+    slug: "robocup-korea-open-2021",
+    year: "2021",
+    dateStart: "2021-12-17",
+    dateEnd: "2021-12-19",
+  },
+  {
+    id: 12,
+    slug: "creative-coding-challenge-2022",
+    year: "2022",
+    dateStart: "2022-08-17",
+    dateEnd: "2022-08-17",
+  },
+  {
+    id: 13,
+    slug: "robocup-korea-open-2022",
+    year: "2022",
+    dateStart: "2022-06-10",
+    dateEnd: "2022-06-12",
+  },
+  {
+    id: 14,
+    slug: "robocup-asia-pacific-pyeongchang-2023",
+    year: "2023",
+    dateStart: "2023-12-05",
+    dateEnd: "2023-12-09",
+  },
+  {
+    id: 15,
+    slug: "creative-coding-challenge-2023",
+    year: "2023",
+    dateStart: "2023-07-30",
+    dateEnd: "2023-07-30",
+  },
+  {
+    id: 16,
+    slug: "robocup-korea-open-2023",
+    year: "2023",
+    dateStart: "2023-02-19",
+    dateEnd: "2023-02-21",
+  },
+  {
+    id: 17,
+    slug: "creative-coding-challenge-2024",
+    year: "2024",
+    dateStart: "2024-08-15",
+    dateEnd: "2024-08-15",
+  },
+  {
+    id: 18,
+    slug: "robocup-korea-open-2024",
+    year: "2024",
+    dateStart: "2024-02-16",
+    dateEnd: "2024-02-18",
+  },
+  {
+    id: 19,
+    slug: "robocup-korea-open-2025",
+    year: "2025",
+    dateStart: "2025-02-15",
+    dateEnd: "2025-02-16",
+  },
+  {
+    id: 20,
+    slug: "creative-coding-challenge-2025",
+    year: "2025",
+    dateStart: "2025-08-09",
+    dateEnd: "2025-08-10",
+  },
+];
