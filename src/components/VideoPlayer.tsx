@@ -13,7 +13,12 @@ const VideoPlayer = ({ src, ...props }: VideoPlayerProps) => {
   useEffect(() => {
     if (videoRef.current) {
       if (Hls.isSupported()) {
-        const hls = new Hls();
+        const hls = new Hls({
+          xhrSetup: (xhr) => {
+            xhr.withCredentials = false;
+          },
+        });
+
         hls.loadSource(src);
         hls.attachMedia(videoRef.current);
         return () => {
