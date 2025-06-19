@@ -26,7 +26,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Humanoid",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-soccer/humanoid.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-soccer/humanoid.png",
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Standard Platform",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-soccer/standard-platform.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-soccer/standard-platform.png",
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Middle Size",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-soccer/middle-size.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-soccer/middle-size.png",
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Small Size",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-soccer/small-size.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-soccer/small-size.png",
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Simulation",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-soccer/simulation.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-soccer/simulation.png",
   },
 
   {
@@ -71,7 +71,8 @@ export const leagueDivisionData: LeagueDivision[] = [
     slug: "robot",
     name: "Robot",
     description: "",
-    imageUrl: "https://media.robocupkorea.org/leagues/robocup-rescue/robot.png",
+    imageUrl:
+      "https://media.robocupkorea.org/images/leagues/robocup-rescue/robot.png",
   },
   {
     id: 7,
@@ -80,7 +81,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Simulation",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-rescue/simulation.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-rescue/simulation.png",
   },
 
   {
@@ -90,7 +91,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Open Platform",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-home/open-platform.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-home/open-platform.png",
   },
   {
     id: 9,
@@ -99,7 +100,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Domestic Standard Platform",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-home/domestic-standard-platform.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-home/domestic-standard-platform.png",
   },
   {
     id: 10,
@@ -108,7 +109,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Social Standard Platform",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-home/social-standard-platform.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-home/social-standard-platform.png",
   },
 
   {
@@ -118,7 +119,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "RoboCup@Work",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-industrial/robocup-work.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-industrial/robocup-work.png",
   },
   {
     id: 12,
@@ -127,7 +128,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Logistics",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-industrial/logistics.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-industrial/logistics.png",
   },
 
   {
@@ -137,7 +138,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Soccer",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-junior/soccer.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-junior/soccer.png",
   },
   {
     id: 14,
@@ -146,7 +147,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "OnStage",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-junior/onstage.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-junior/onstage.png",
   },
   {
     id: 15,
@@ -155,7 +156,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Rescue",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-junior/rescue.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-junior/rescue.png",
   },
 
   {
@@ -165,7 +166,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "CoSpace Autonomous Driving",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-asia-pacific/cospace-autonomous-driving.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-asia-pacific/cospace-autonomous-driving.png",
   },
   {
     id: 17,
@@ -174,7 +175,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "CoSpace Rescue",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-asia-pacific/cospace-rescue.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-asia-pacific/cospace-rescue.png",
   },
 
   {
@@ -184,7 +185,7 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Rescue Basic",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-junior-korea/rescue-basic.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-junior-korea/rescue-basic.png",
   },
   {
     id: 19,
@@ -193,6 +194,6 @@ export const leagueDivisionData: LeagueDivision[] = [
     name: "Rescue MazeBasic",
     description: "",
     imageUrl:
-      "https://media.robocupkorea.org/leagues/robocup-junior-korea/rescue-mazebasic.png",
+      "https://media.robocupkorea.org/images/leagues/robocup-junior-korea/rescue-mazebasic.png",
   },
 ];

@@ -165,9 +165,9 @@ export const eventContentData: EventContentData[] = [
     title: "제13회 한국로보컵오픈",
     location: "평창 알펜시아리조트",
     poster_image_url:
-      "https://media.robocupkorea.org/events/robocup-south-korea-open/2025/ko/poster.jpg",
+      "https://media.robocupkorea.org/images/events/robocup-south-korea-open/2025/ko/poster.jpg",
     banner_image_url:
-      "https://media.robocupkorea.org/events/robocup-south-korea-open/2025/ko/banner.jpg",
+      "https://media.robocupkorea.org/images/events/robocup-south-korea-open/2025/ko/banner.jpg",
     showInEventPage: true,
   },
   {

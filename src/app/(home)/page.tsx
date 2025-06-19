@@ -35,7 +35,7 @@ export default function Home() {
     <>
       <div className="relative h-[calc(100svh-64px)] max-h-[1000px] w-full md:h-[calc(100svh-80px)]">
         <VideoPlayer
-          src="https://media.robocupkorea.org/intro/playlist.m3u8"
+          src="https://media.robocupkorea.org/videos/landing/intro.m3u8"
           className="h-full w-full object-cover"
           autoPlay
           muted
