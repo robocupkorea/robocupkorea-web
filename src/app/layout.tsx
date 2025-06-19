@@ -65,9 +65,11 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={`${pretendard.variable} min-w-[320px] antialiased`}>
+      <body
+        className={`${pretendard.variable} flex min-h-svh min-w-[320px] flex-col antialiased`}
+      >
         <Header />
-        <main className="min-h-[30rem]">{children}</main>
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
