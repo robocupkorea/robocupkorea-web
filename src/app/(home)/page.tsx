@@ -142,16 +142,18 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4 py-24 text-center md:px-8 xl:px-20">
+      <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 text-gray-500">로보컵 소개</p>
           <h2 className="text-3xl font-bold">로보컵 리그의 주요 활동과 목표</h2>
         </div>
-        <p className="mx-auto mb-12 max-w-2xl leading-relaxed text-gray-700">
-          로보컵 리그는 매년 정기적으로 개최되는 로봇·AI 대회를 통해 참가자들이
-          실제 환경에서 기술을 적용하고, 협업과 문제 해결 능력을 기를 수 있는
-          기회를 제공합니다.
-        </p>
+        <div className="text-center">
+          <p className="mx-auto mb-12 max-w-2xl leading-relaxed text-gray-700">
+            로보컵 리그는 매년 정기적으로 개최되는 로봇·AI 대회를 통해
+            참가자들이 실제 환경에서 기술을 적용하고, 협업과 문제 해결 능력을
+            기를 수 있는 기회를 제공합니다.
+          </p>
+        </div>
 
         <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="flex flex-col items-center">
@@ -332,7 +334,7 @@ export default function Home() {
       </div>
 
       <div className="bg-gray-50">
-        <div className="container mx-auto max-w-7xl px-4 py-24 text-center md:px-8 xl:px-20">
+        <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
           <div className="mb-12 text-center">
             <p className="text-md mb-2 text-gray-500">로보컵 대회</p>
             <h2 className="text-3xl font-bold">대회에 도전해보세요</h2>
