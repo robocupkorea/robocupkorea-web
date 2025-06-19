@@ -162,6 +162,7 @@ export default function Home() {
                 src={AccountGroupIcon}
                 alt="Computer Imac Smiley Face Streamline Icon"
                 fill
+                sizes="160px"
                 className="object-contain"
               />
             </div>
@@ -177,6 +178,7 @@ export default function Home() {
                 src={ComputerImacSmileyFaceIcon}
                 alt="Business Idea Light Bulb Streamline Icon"
                 fill
+                sizes="160px"
                 className="object-contain"
               />
             </div>
@@ -191,6 +193,7 @@ export default function Home() {
                 src={BadgeStarIcon}
                 alt="Globe 1 Streamline Icon"
                 fill
+                sizes="160px"
                 className="object-contain"
               />
             </div>
@@ -292,6 +295,7 @@ export default function Home() {
                       src={leagueDivision.imageUrl}
                       alt={leagueDivision.name}
                       fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
                       className="object-cover"
                     />
                   </div>
@@ -358,6 +362,7 @@ export default function Home() {
                         src={eventContent.poster_image_url ?? ""}
                         alt={eventContent.title}
                         fill
+                        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
                         className="object-cover"
                       />
                     </div>
@@ -394,6 +399,7 @@ export default function Home() {
               src={sponsorBanner}
               alt="Sponsor Banner"
               fill
+              sizes="100vw"
               className="object-cover object-[center_20%]"
               priority
             />
