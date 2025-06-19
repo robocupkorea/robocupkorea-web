@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
 import "@/app/globals.css";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 export const metadata: Metadata = {
@@ -65,7 +67,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={`${pretendard.variable} min-w-[320px] antialiased`}>
         <Header />
-        {children}
+        <main className="min-h-[30rem]">{children}</main>
+        <Footer />
       </body>
     </html>
   );
