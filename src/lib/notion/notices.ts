@@ -9,11 +9,12 @@ import { notion } from "@/lib/notion/client";
 import { Notice } from "@/types/notice";
 
 /**
- * Notice에 필요한 속성이 모두 있는지 확인
+ * Notion 공지사항 페이지에서 Notice에 필요한 속성이 모두 있는지 확인
  */
 type NoticeProps = {
   Title: { type: "title"; title: Array<{ plain_text: string }> };
   CreatedAt: { type: "created_time"; created_time: string };
+  Status?: { type: "select"; select: { name: string } | null }; // 발행 여부
 };
 
 function hasNoticeProps(
@@ -65,6 +66,9 @@ export async function getNoticePage(id: string): Promise<NoticePage | null> {
 
   // 타입 가드
   if (!isFullPage(response) || !hasNoticeProps(response)) return null;
+
+  // 공지사항 상태가 발행된 것만 반환
+  if (response.properties.Status?.select?.name !== "Published") return null;
 
   const notice = mapPageToNotice(response);
 
