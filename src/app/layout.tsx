@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "@/app/globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import "highlight.js/styles/github.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
