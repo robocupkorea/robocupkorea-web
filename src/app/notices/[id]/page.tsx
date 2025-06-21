@@ -37,7 +37,7 @@ export default async function NoticeDetailPage({
 
       <div className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
         <div
-          className="prose dark:prose-invert max-w-none"
+          className="prose space-y-5"
           dangerouslySetInnerHTML={{
             __html: await convertMarkdownToHtml(mdString),
           }}
