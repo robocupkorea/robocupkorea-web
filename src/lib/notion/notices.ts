@@ -11,15 +11,15 @@ import { Notice } from "@/types/notice";
 /**
  * Notion 공지사항 페이지에서 Notice에 필요한 속성이 모두 있는지 확인
  */
-type NoticeProps = {
+type NotionNoticeProps = {
   Title: { type: "title"; title: Array<{ plain_text: string }> };
   CreatedAt: { type: "created_time"; created_time: string };
   Status?: { type: "select"; select: { name: string } | null }; // 발행 여부
 };
 
-function hasNoticeProps(
+function hasNotionNoticeProps(
   page: PageObjectResponse,
-): page is PageObjectResponse & { properties: NoticeProps } {
+): page is PageObjectResponse & { properties: NotionNoticeProps } {
   const p = page.properties as Record<string, { type: string }>;
   return (
     "Title" in p &&
@@ -29,9 +29,12 @@ function hasNoticeProps(
   );
 }
 
+/**
+ * Notion 공지사항 페이지, 마크다운 블록
+ */
 export interface NoticePage {
-  notice: Notice;
-  blocks: Array<BlockObjectResponse | PartialBlockObjectResponse>;
+  notice: Notice; // 공지사항 타입
+  blocks: Array<BlockObjectResponse | PartialBlockObjectResponse>; // 공지사항 페이지 마크다운 블록
 }
 
 /**
@@ -42,13 +45,13 @@ export async function getNotices(): Promise<Notice[]> {
   try {
     const { results } = await notion.databases.query({
       database_id: process.env.NOTION_NOTICES_DATABASE_ID!,
-      filter: { property: "Status", select: { equals: "Published" } },
-      sorts: [{ property: "CreatedAt", direction: "descending" }],
+      filter: { property: "Status", select: { equals: "Published" } }, // 발행된 공지사항만 반환
+      sorts: [{ property: "CreatedAt", direction: "descending" }], // 작성일 기준 내림차순 정렬
     });
 
     return results
       .filter(isFullPage) // 타입 가드
-      .filter(hasNoticeProps) // Notice에 필요한 속성이 모두 있는지 확인
+      .filter(hasNotionNoticeProps) // Notice에 필요한 속성이 모두 있는지 확인
       .map(mapPageToNotice);
   } catch (err) {
     console.error("Error fetching getNotices:", err);
@@ -65,9 +68,9 @@ export async function getNoticePage(id: string): Promise<NoticePage | null> {
   const response = await notion.pages.retrieve({ page_id: id });
 
   // 타입 가드
-  if (!isFullPage(response) || !hasNoticeProps(response)) return null;
+  if (!isFullPage(response) || !hasNotionNoticeProps(response)) return null;
 
-  // 공지사항 상태가 발행된 것만 반환
+  // 발행된 공지사항만 반환
   if (response.properties.Status?.select?.name !== "Published") return null;
 
   const notice = mapPageToNotice(response);
@@ -95,7 +98,7 @@ export async function getNoticePage(id: string): Promise<NoticePage | null> {
  * @returns 공지사항
  */
 function mapPageToNotice(
-  page: PageObjectResponse & { properties: NoticeProps },
+  page: PageObjectResponse & { properties: NotionNoticeProps },
 ): Notice {
   const { Title, CreatedAt } = page.properties;
   return {
