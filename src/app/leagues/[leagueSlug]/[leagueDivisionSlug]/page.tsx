@@ -1,8 +1,9 @@
+import { notFound } from "next/navigation";
+
 import { leagueData } from "@/data/leagueData";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { getLeagueDivisionPage } from "@/lib/notion/leagues";
 import { convertPage } from "@/lib/notion/notion-to-md";
-import { notFound } from "next/navigation";
 
 export default async function LeagueDivisionPage({
   params,

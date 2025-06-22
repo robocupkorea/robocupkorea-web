@@ -24,6 +24,7 @@ export default function Header() {
         { name: "소개", href: "/about" },
         { name: "위원회", href: "/committee" },
         { name: "연혁", href: "/history" },
+        { name: "인증 교육기관", href: "/learning-centers" },
         { name: "후원", href: "/sponsors" },
       ],
     },
