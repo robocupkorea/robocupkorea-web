@@ -22,7 +22,7 @@ type NotionEventDetailProps = {
   IsEvent: { type: "checkbox"; checkbox: boolean };
 };
 
-function hasEventProps(
+function hasNotionEventDetailProps(
   page: PageObjectResponse,
 ): page is PageObjectResponse & { properties: NotionEventDetailProps } {
   const p = page.properties as Record<string, { type: string }>;
@@ -47,9 +47,12 @@ function hasEventProps(
   );
 }
 
-interface EventPage {
-  event: EventDetail;
-  blocks: Array<BlockObjectResponse | PartialBlockObjectResponse>;
+/**
+ * Notion 대회 상세, 페이지 마크다운 블록
+ */
+interface EventDetailPage {
+  eventDetail: EventDetail; // 대회 상세 타입
+  blocks: Array<BlockObjectResponse | PartialBlockObjectResponse>; // 대회 상세 페이지 마크다운 블록
 }
 
 /**
@@ -71,8 +74,8 @@ export async function getEventDetails(): Promise<EventDetail[]> {
 
     return results
       .filter(isFullPage) // 타입 가드
-      .filter(hasEventProps) // Event에 필요한 속성이 모두 있는지 확인
-      .map(mapPageToEvent);
+      .filter(hasNotionEventDetailProps) // Event에 필요한 속성이 모두 있는지 확인
+      .map(mapPageToEventDetail);
   } catch (err) {
     console.error("Error fetching getEventDetails:", err);
     return [];
@@ -86,18 +89,19 @@ export async function getEventDetails(): Promise<EventDetail[]> {
  */
 export async function getEventDetailPage(
   id: string,
-): Promise<EventPage | null> {
+): Promise<EventDetailPage | null> {
   const response = await notion.pages.retrieve({ page_id: id });
 
   // 타입 가드
-  if (!isFullPage(response) || !hasEventProps(response)) return null;
+  if (!isFullPage(response) || !hasNotionEventDetailProps(response))
+    return null;
 
   // 이벤트인 대회만 반환
   if (response.properties.IsEvent?.checkbox !== true) return null;
 
-  const event = mapPageToEvent(response);
+  const eventDetail = mapPageToEventDetail(response);
 
-  const blocks: EventPage["blocks"] = [];
+  const blocks: EventDetailPage["blocks"] = [];
   let cursor: string | undefined;
 
   do {
@@ -111,7 +115,7 @@ export async function getEventDetailPage(
     cursor = has_more ? (next_cursor ?? undefined) : undefined;
   } while (cursor);
 
-  return { event, blocks };
+  return { eventDetail, blocks };
 }
 
 /**
@@ -119,7 +123,7 @@ export async function getEventDetailPage(
  * @param page 대회 페이지
  * @returns 대회 페이지
  */
-function mapPageToEvent(
+function mapPageToEventDetail(
   page: PageObjectResponse & { properties: NotionEventDetailProps },
 ): EventDetail {
   const {
