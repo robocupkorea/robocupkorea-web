@@ -1,24 +1,6 @@
-export interface EventData {
-  id: number;
-  slug: string;
-  year: string;
-  dateStart: string;
-  dateEnd: string;
-}
+import { Event } from "@/types/events";
 
-/*
- * TODO: event 데이터베이스 구조 참고
- *
- * CREATE TABLE event (
- *   id         INT AUTO_INCREMENT PRIMARY KEY,
- *   slug       VARCHAR(255) NOT NULL UNIQUE,
- *   year       VARCHAR(4) NOT NULL,
- *   date_start DATE NOT NULL,
- *   date_end   DATE NOT NULL
- * ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
- */
-
-export const eventData: EventData[] = [
+export const eventData: Event[] = [
   {
     id: 1,
     slug: "robocup-korea-junior-2013",
