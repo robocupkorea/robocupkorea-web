@@ -60,6 +60,13 @@ export async function getEventDetails(): Promise<EventDetail[]> {
   try {
     const { results } = await notion.databases.query({
       database_id: process.env.NOTION_EVENTS_DATABASE_ID!,
+      filter: {
+        // 이벤트인 대회만 반환
+        property: "IsEvent",
+        checkbox: {
+          equals: true,
+        },
+      },
     });
 
     return results
@@ -73,9 +80,9 @@ export async function getEventDetails(): Promise<EventDetail[]> {
 }
 
 /**
- * Notion 공지사항 페이지 조회
- * @param id 공지사항 페이지 ID
- * @returns 공지사항 페이지
+ * Notion 대회 상세 페이지 조회
+ * @param id 대회 상세 페이지 ID
+ * @returns 대회 상세 페이지
  */
 export async function getEventDetailPage(
   id: string,
