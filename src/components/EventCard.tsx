@@ -4,9 +4,9 @@ import { CalendarIcon, MapPinIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { formatDateRange, getEventStatus } from "@/utils/date";
-import { EventDetail, Event } from "@/types/events";
 import EventStatus from "@/components/EventStatus";
+import { Event, EventDetail } from "@/types/events";
+import { formatDateRange, getEventStatus } from "@/utils/date";
 
 interface EventCardProps {
   eventDetail: EventDetail;
