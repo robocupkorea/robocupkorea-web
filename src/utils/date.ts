@@ -38,3 +38,17 @@ export const formatDateRange = (startDate: string, endDate: string) => {
 
   return `${formatDate(startDate)} - ${formatDate(endDate || startDate)}`;
 };
+
+export const getEventStatus = (startDate: string, endDate: string) => {
+  const now = new Date();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (now < start) {
+    return "UPCOMING";
+  } else if (now >= start && now <= end) {
+    return "ONGOING";
+  } else {
+    return "ENDED";
+  }
+};

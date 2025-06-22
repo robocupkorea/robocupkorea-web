@@ -1,12 +1,23 @@
-"use client";
-
-import Image from "next/image";
-
-import { eventContentData } from "@/data/eventContentData";
+import EventCard from "@/components/EventCard";
 import { eventData } from "@/data/eventData";
-import { formatDateRange } from "@/utils/date";
+import { getEventDetails } from "@/lib/notion/events";
 
-export default function EventPage() {
+export default async function EventPage() {
+  const eventDetails = await getEventDetails();
+
+  // eventDetails와 eventData를 Join하고 dateStart 기준으로 내림차순 정렬
+  const eventWithDetails = eventDetails
+    .map((eventDetail) => {
+      const event = eventData.find((event) => event.id === eventDetail.eventId);
+      return event ? { eventDetail, event } : null;
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null)
+    .sort(
+      (a, b) =>
+        new Date(b.event.dateStart).getTime() -
+        new Date(a.event.dateStart).getTime(),
+    );
+
   return (
     <>
       <div className="bg-gray-50">
@@ -20,44 +31,21 @@ export default function EventPage() {
         </div>
       </div>
 
+      {eventWithDetails.length === 0 && (
+        <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+          <p className="text-center text-gray-500">대회가 없습니다.</p>
+        </div>
+      )}
+
       <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
-        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {eventContentData
-            .filter((eventContent) => eventContent.showInEventPage)
-            .map((eventContent) => {
-              const event = eventData.find(
-                (event) => event.id === eventContent.eventId,
-              );
-
-              return (
-                <div
-                  key={eventContent.id}
-                  className="group relative h-full w-full cursor-pointer border bg-white hover:bg-gray-100"
-                >
-                  <div className="relative aspect-[842/1191] w-full overflow-hidden">
-                    <Image
-                      src={eventContent.poster_image_url ?? ""}
-                      alt={eventContent.title}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="p-5 text-left">
-                    <h3 className="line-clamp-2 text-xl font-bold text-gray-900">
-                      {eventContent.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm text-gray-600">
-                      {eventContent.location}
-                    </p>
-                    <p className="mt-1 text-sm text-gray-500">
-                      {event && formatDateRange(event.dateStart, event.dateEnd)}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+        <div className="mb-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {eventWithDetails.map(({ eventDetail, event }) => (
+            <EventCard
+              key={eventDetail.id}
+              eventDetail={eventDetail}
+              event={event}
+            />
+          ))}
         </div>
       </div>
     </>
