@@ -41,7 +41,7 @@ export interface NoticePage {
 export async function getNotices(): Promise<Notice[]> {
   try {
     const { results } = await notion.databases.query({
-      database_id: process.env.NOTION_NOTICES_TABLE_ID!,
+      database_id: process.env.NOTION_NOTICES_DATABASE_ID!,
       filter: { property: "Status", select: { equals: "Published" } },
       sorts: [{ property: "CreatedAt", direction: "descending" }],
     });
