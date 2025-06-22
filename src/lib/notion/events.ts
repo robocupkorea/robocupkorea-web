@@ -47,6 +47,11 @@ function hasEventProps(
   );
 }
 
+interface EventPage {
+  event: EventDetail;
+  blocks: Array<BlockObjectResponse | PartialBlockObjectResponse>;
+}
+
 /**
  * Notion 대회 목록 조회
  * @returns 대회 목록
@@ -68,6 +73,41 @@ export async function getEventDetails(): Promise<EventDetail[]> {
 }
 
 /**
+ * Notion 공지사항 페이지 조회
+ * @param id 공지사항 페이지 ID
+ * @returns 공지사항 페이지
+ */
+export async function getEventDetailPage(
+  id: string,
+): Promise<EventPage | null> {
+  const response = await notion.pages.retrieve({ page_id: id });
+
+  // 타입 가드
+  if (!isFullPage(response) || !hasEventProps(response)) return null;
+
+  // 이벤트인 대회만 반환
+  if (response.properties.IsEvent?.checkbox !== true) return null;
+
+  const event = mapPageToEvent(response);
+
+  const blocks: EventPage["blocks"] = [];
+  let cursor: string | undefined;
+
+  do {
+    const { results, next_cursor, has_more } =
+      await notion.blocks.children.list({
+        block_id: id,
+        page_size: 100,
+        start_cursor: cursor,
+      });
+    blocks.push(...results);
+    cursor = has_more ? (next_cursor ?? undefined) : undefined;
+  } while (cursor);
+
+  return { event, blocks };
+}
+
+/**
  * Notion 대회 페이지를 EventDetail 타입으로 변환
  * @param page 대회 페이지
  * @returns 대회 페이지
@@ -85,8 +125,6 @@ function mapPageToEvent(
     IsMain,
     IsEvent,
   } = page.properties;
-
-  console.log("hi", PosterImageUrl);
 
   return {
     id: page.id, // Notion Page ID
