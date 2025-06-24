@@ -1,10 +1,8 @@
 "use client";
 
-import { ArrowRightIcon } from "@phosphor-icons/react";
-import Image from "next/image";
-import { useLocale } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import LeagueCard from "@/components/LeagueCard";
 import type { League, LeagueDivision } from "@/types/leagues";
 
 export default function ScrollableLeagueSection({
@@ -14,7 +12,6 @@ export default function ScrollableLeagueSection({
   league: League;
   divisions: LeagueDivision[];
 }) {
-  const locale = useLocale();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -95,39 +92,12 @@ export default function ScrollableLeagueSection({
           className="scrollbar-hide flex gap-4 overflow-x-auto"
         >
           {divisions.map((leagueDivision: LeagueDivision) => (
-            <div
+            <LeagueCard
               key={leagueDivision.id}
-              className="group w-[calc(100vw-6rem)] min-w-64 flex-shrink-0 cursor-pointer border bg-white hover:bg-gray-100 sm:w-64 md:w-72 lg:w-80"
-            >
-              <div className="relative h-40 w-full sm:h-48">
-                <Image
-                  src={leagueDivision.imageUrl}
-                  alt={leagueDivision.name}
-                  fill
-                  sizes="(max-width: 640px) calc(100vw - 6rem), (max-width: 768px) 256px, (max-width: 1024px) 288px, 375px"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="p-4">
-                <div className="mb-2">
-                  <h3 className="mt-0.5 line-clamp-2 text-lg font-bold text-gray-900">
-                    {leagueDivision.name}
-                  </h3>
-                </div>
-
-                <div className="mt-4 flex items-center gap-1">
-                  <span className="text-sm font-medium text-gray-900">
-                    {locale === "ko" ? "자세히 보기" : "View Details"}
-                  </span>
-                  <ArrowRightIcon
-                    size={14}
-                    weight="regular"
-                    className="text-gray-900"
-                  />
-                </div>
-              </div>
-            </div>
+              league={league}
+              leagueDivision={leagueDivision}
+              fullWidth={false}
+            />
           ))}
         </div>
 
