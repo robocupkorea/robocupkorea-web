@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-1 -1 160 160" id="Computer-Imac-Smiley-Face--Streamline-Cyber" height="160" width="160">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-1 -1 170 170" id="Computer-Imac-Smiley-Face--Streamline-Cyber" height="170" width="170">
   <desc>
     Computer Imac Smiley Face Streamline Icon: https://streamlinehq.com
   </desc>
-  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M148.125 9.875H3.291666666666667v111.91666666666667h144.83333333333334v-111.91666666666667Z" stroke-width="2"></path>
-  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M3.291666666666667 102.04166666666667h144.83333333333334" stroke-width="2"></path>
-  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M115.20833333333334 148.125v6.583333333333334h-79v-6.583333333333334l26.333333333333336 -9.875v-16.458333333333336h26.333333333333336V138.25l26.333333333333336 9.875Z" stroke-width="2"></path>
-  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="m52.66666666666667 59.25000000000001 9.875 9.875h26.333333333333336L98.75000000000001 59.25000000000001" stroke-width="2"></path>
-  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M62.54166666666667 36.208333333333336v6.583333333333334" stroke-width="2"></path>
-  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M88.87500000000001 36.208333333333336v6.583333333333334" stroke-width="2"></path>
+  <path fill="#ffffff" d="M162.7409 126.9499V5.259079H5.258974V126.9499H69.68346v17.895500000000002l-28.6328 10.737300000000001v7.1582H126.9499v-7.1582l-28.633499999999998 -10.737300000000001v-17.895500000000002h64.4245Z" stroke-width="2"></path>
+  <path fill="#ffffff" d="M162.7409 5.259079 5.258974 105.4746H162.7409V5.259079Z" stroke-width="2"></path>
+  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" d="M162.7409 5.259079H5.258974V126.9499H162.7409V5.259079Z" stroke-width="2"></path>
+  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" d="M5.258974 105.4746H162.7409" stroke-width="2"></path>
+  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" d="M126.9492 155.5827v7.1582H41.05066v-7.1582l28.6328 -10.737300000000001v-17.895500000000002h28.632939999999998v17.895500000000002l28.6328 10.737300000000001Z" stroke-width="2"></path>
+  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" d="m58.946299999999994 58.946299999999994 10.737300000000001 10.737300000000001h28.6328l10.737300000000001 -10.737300000000001" stroke-width="2"></path>
+  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" d="M69.68339 33.8919v7.158899999999999" stroke-width="2"></path>
+  <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" d="M98.3164 33.8919v7.158899999999999" stroke-width="2"></path>
 </svg>

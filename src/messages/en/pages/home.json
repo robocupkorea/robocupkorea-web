@@ -15,17 +15,17 @@
     },
     "stats": {
       "section": "Key figures",
-      "title": "RoboCup events held annually in Korea",
+      "title": "RoboCup Korea events held annually in Korea",
       "participants": { "label": "Participants each event", "value": "500+" },
       "events": { "label": "Events held so far", "value": "17+" },
       "sponsors": { "label": "Partner sponsors", "value": "10+" },
       "schools": { "label": "Certified learning centers", "value": "19+" },
-      "note": "*RoboCup Korea data (updated 2025)"
+      "note": "*RoboCup Korea Association data (updated 2025)"
     },
     "aboutLeague": {
-      "section": "About RoboCup",
-      "title": "Main activities & goals of RoboCup Leagues",
-      "description": "RoboCup leagues provide opportunities for participants to apply their skills in real environments and develop collaboration and problem-solving skills through regular robot and AI competitions held annually.",
+      "section": "About RoboCup Korea",
+      "title": "Main activities & goals of RoboCup Korea Leagues",
+      "description": "RoboCup Korea leagues provide opportunities for participants to apply their skills in real environments and develop collaboration and problem-solving skills through regular robot and AI competitions held annually.",
       "items": {
         "teamGoal": "Achieve common goals through teamwork",
         "creativity": "Develop creative algorithms for problem solving",
@@ -37,16 +37,19 @@
       "title": "Journey of RoboCup Korea",
       "viewMore": "View history"
     },
-    "leagues": { "section": "RoboCup Leagues", "title": "Explore the leagues" },
+    "leagues": {
+      "section": "RoboCup Korea Leagues",
+      "title": "Explore the leagues"
+    },
     "events": {
-      "section": "RoboCup Events",
+      "section": "RoboCup Korea Events",
       "title": "Take on the challenge",
       "viewMore": "More events"
     },
     "sponsor": {
       "description1": "The RoboCup Korea Association is a non-profit organization that has been operating RoboCup competitions for over 10 years since 2013.",
       "description2": "All sponsorship funds are used for various purposes to foster young talents in robotics and promote AI and robotics education.",
-      "cta": "Sponsorship inquiry"
+      "cta": "Become a Sponsor"
     }
   }
 }

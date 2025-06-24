@@ -12,31 +12,38 @@ import Image from "next/image";
 import { getLocale, getMessages } from "next-intl/server";
 
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
-import AccountGroupIcon from "@/assets/svg/Account-Group-1--Streamline-Cyber.svg";
-import BadgeStarIcon from "@/assets/svg/Badge-Star-2--Streamline-Cyber.svg";
-import ComputerImacSmileyFaceIcon from "@/assets/svg/Computer-Imac-Smiley-Face--Streamline-Cyber.svg";
+import accountGroupIcon from "@/assets/svg/Account-Group-1--Streamline-Cyber.svg";
+import trophyIcon from "@/assets/svg/Trophy-4--Streamline-Cyber.svg";
+import computerImacSmileyFaceIcon from "@/assets/svg/Computer-Imac-Smiley-Face--Streamline-Cyber.svg";
+import LeagueCard from "@/components/LeagueCard";
 import VideoPlayer from "@/components/VideoPlayer";
 import { eventData } from "@/data/eventData";
 import { eventDetailData } from "@/data/eventDetailData";
 import { leagueData } from "@/data/leagueData";
 import { leagueDivisionData } from "@/data/leagueDivisionData";
+import { Link } from "@/i18n/navigation";
 import { LeagueDivision } from "@/types/leagues";
 import { formatDateRange } from "@/utils/date";
+import EventCard from "@/components/EventCard";
 
 export default async function Home() {
   const locale = await getLocale();
 
   const { home } = await getMessages();
 
-  const mainEvent = eventDetailData.find(
+  // 상세 이벤트에서 메인 이벤트 찾기
+  const mainEventDetail = eventDetailData.find(
     (eventDetail) => eventDetail.showInMain && eventDetail.locale === locale,
   );
-  const mainEventDate = eventData.find(
-    (event) => event.id === mainEvent?.eventId,
+
+  // 메인 이벤트에서 날짜 찾기
+  const mainEvent = eventData.find(
+    (event) => event.id === mainEventDetail?.eventId,
   );
 
   return (
     <>
+      {/* 메인 이벤트 및 랜딩 비디오 */}
       <div className="relative h-[calc(100svh-64px)] max-h-[1000px] w-full bg-black md:h-[calc(100svh-80px)]">
         <VideoPlayer
           src="https://media.robocupkorea.org/videos/landing/intro.m3u8"
@@ -51,34 +58,40 @@ export default async function Home() {
           style={{ overflowClipMargin: "content-box 0px" }}
           webkit-playsinline="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/10 to-black/60" />
-        <div className="absolute inset-x-0 top-12">
-          <div className="container mx-auto flex max-w-7xl flex-col gap-8 px-4 text-white md:px-8 xl:px-20">
-            <h1 className="text-3xl font-black sm:text-6xl lg:text-6xl">
-              {mainEvent?.title}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/15 to-black/50" />
+        <div className="absolute inset-x-0 top-8">
+          <div className="container mx-auto flex max-w-7xl flex-col px-4 text-white md:px-8 xl:px-20">
+            <h1 className="mb-3 break-keep text-[2.5rem] font-black leading-tight sm:text-5xl lg:mb-5 lg:text-6xl">
+              {mainEventDetail?.title}
             </h1>
-            <div className="flex flex-col gap-3 text-lg">
+            <div className="mb-8 flex flex-col gap-3 md:text-lg">
               <div className="flex items-center gap-2">
                 <CalendarIcon size={24} weight="fill" />
                 <time className="font-medium">
                   {formatDateRange(
-                    mainEventDate?.dateStart || "",
-                    mainEventDate?.dateEnd || "",
+                    mainEvent?.dateStart || "",
+                    mainEvent?.dateEnd || "",
                     locale,
                   )}
                 </time>
               </div>
               <div className="flex items-center gap-2">
                 <MapPinIcon size={24} weight="fill" />
-                <span className="font-medium">{mainEvent?.location}</span>
+                <span className="font-medium">{mainEventDetail?.location}</span>
               </div>
             </div>
-            <div>
-              <button className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100">
-                {home.button.learnMore}
-                <ArrowRightIcon size={24} weight="thin" />
-              </button>
-            </div>
+            <Link
+              href={
+                mainEventDetail?.cmsPageId
+                  ? `/events/${mainEventDetail.cmsPageId}`
+                  : "/events"
+              }
+              prefetch
+              className="flex h-12 w-full items-center justify-center gap-1.5 border border-gray-500 bg-white px-8 font-medium text-black hover:bg-gray-100 sm:w-fit"
+            >
+              {home.button.learnMore}
+              <ArrowRightIcon size={24} weight="thin" />
+            </Link>
           </div>
         </div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
@@ -88,32 +101,41 @@ export default async function Home() {
         </div>
       </div>
 
+      {/* 협회 소개 */}
       <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="flex-1">
             <p className="text-md mb-2 text-gray-500">{home.intro.section}</p>
-            <h2 className="text-4xl font-bold">{home.intro.association}</h2>
+            <h2 className="break-keep text-4xl font-bold">
+              {home.intro.association}
+            </h2>
           </div>
 
           <div className="flex-1">
             <p className="mb-6 break-keep leading-relaxed text-gray-800">
               {home.intro.description}
             </p>
-            <button className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100">
+            <Link
+              href="/info/about"
+              className="flex h-12 w-fit items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100"
+            >
               {home.button.learnMore}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
 
+      {/* 주요 통계 */}
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
           <div className="mb-12 text-center">
             <p className="text-md mb-2 text-gray-500">{home.stats.section}</p>
-            <h2 className="text-3xl font-bold">{home.stats.title}</h2>
+            <h2 className="break-keep text-3xl font-bold">
+              {home.stats.title}
+            </h2>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <div className="flex flex-col items-center border bg-white p-8">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
+            <div className="flex flex-col items-center border bg-white p-6 md:p-8">
               <UsersIcon size={48} weight="thin" />
               <p className="mt-4 text-3xl font-bold">
                 {home.stats.participants.value}
@@ -122,7 +144,7 @@ export default async function Home() {
                 {home.stats.participants.label}
               </p>
             </div>
-            <div className="flex flex-col items-center border bg-white p-8">
+            <div className="flex flex-col items-center border bg-white p-6 md:p-8">
               <TrophyIcon size={48} weight="thin" />
               <p className="mt-4 text-3xl font-bold">
                 {home.stats.events.value}
@@ -131,7 +153,7 @@ export default async function Home() {
                 {home.stats.events.label}
               </p>
             </div>
-            <div className="flex flex-col items-center border bg-white p-8">
+            <div className="flex flex-col items-center border bg-white p-6 md:p-8">
               <BuildingOfficeIcon size={48} weight="thin" />
               <p className="mt-4 text-3xl font-bold">
                 {home.stats.sponsors.value}
@@ -140,7 +162,7 @@ export default async function Home() {
                 {home.stats.sponsors.label}
               </p>
             </div>
-            <div className="flex flex-col items-center border bg-white p-8">
+            <div className="flex flex-col items-center border bg-white p-6 md:p-8">
               <GraduationCapIcon size={48} weight="thin" />
               <p className="mt-4 text-3xl font-bold">
                 {home.stats.schools.value}
@@ -158,73 +180,71 @@ export default async function Home() {
         </div>
       </div>
 
+      {/* 한국 로보컵 소개 */}
       <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 text-gray-500">
             {home.aboutLeague.section}
           </p>
-          <h2 className="text-3xl font-bold">{home.aboutLeague.title}</h2>
+          <h2 className="break-keep text-3xl font-bold">
+            {home.aboutLeague.title}
+          </h2>
         </div>
-        <div className="text-center">
-          <p className="mx-auto mb-12 max-w-2xl leading-relaxed text-gray-700">
+        <div className="mb-12 text-center">
+          <p className="mx-auto max-w-2xl break-keep leading-relaxed text-gray-700">
             {home.aboutLeague.description}
           </p>
         </div>
 
-        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-3 md:gap-10">
           <div className="flex flex-col items-center">
-            <div className="relative mb-4 h-40 w-40">
+            <div className="relative mb-6 h-40 w-40">
               <Image
-                src={AccountGroupIcon}
+                src={accountGroupIcon}
                 alt="Computer Imac Smiley Face Streamline Icon"
                 fill
                 sizes="160px"
                 className="object-contain"
               />
             </div>
-            <p className="text-center leading-relaxed text-gray-700">
+            <p className="break-keep text-center leading-relaxed text-gray-700">
               {home.aboutLeague.items.teamGoal}
             </p>
           </div>
 
           <div className="flex flex-col items-center">
-            <div className="relative mb-4 h-40 w-40">
+            <div className="relative mb-6 h-40 w-40">
               <Image
-                src={ComputerImacSmileyFaceIcon}
+                src={computerImacSmileyFaceIcon}
                 alt="Business Idea Light Bulb Streamline Icon"
                 fill
                 sizes="160px"
                 className="object-contain"
               />
             </div>
-            <p className="text-center leading-relaxed text-gray-700">
+            <p className="break-keep text-center leading-relaxed text-gray-700">
               {home.aboutLeague.items.creativity}
             </p>
           </div>
 
           <div className="flex flex-col items-center">
-            <div className="relative mb-4 h-40 w-40">
+            <div className="relative mb-6 h-40 w-40">
               <Image
-                src={BadgeStarIcon}
+                src={trophyIcon}
                 alt="Globe 1 Streamline Icon"
                 fill
                 sizes="160px"
                 className="object-contain"
               />
             </div>
-            <p className="text-center leading-relaxed text-gray-700">
+            <p className="break-keep text-center leading-relaxed text-gray-700">
               {home.aboutLeague.items.international}
             </p>
           </div>
         </div>
-
-        <div className="flex justify-center">
-          <button className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100">
-            {home.button.learnMore}
-          </button>
-        </div>
       </div>
 
+      {/* 연혁 */}
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
           <div className="mb-16 flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
@@ -285,75 +305,51 @@ export default async function Home() {
           </div>
 
           <div className="flex justify-center">
-            <button className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100">
+            <Link
+              href="/info/history"
+              className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100"
+            >
               {home.history.viewMore}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
 
+      {/* 한국 로보컵 리그 */}
       <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 text-gray-500">{home.leagues.section}</p>
-          <h2 className="text-3xl font-bold">{home.leagues.title}</h2>
+          <h2 className="break-keep text-3xl font-bold">
+            {home.leagues.title}
+          </h2>
         </div>
 
-        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="mb-12 grid grid-cols-1 gap-10 max-md:mx-auto max-md:max-w-md md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {leagueDivisionData
             .slice(0, 3)
             .map((leagueDivision: LeagueDivision) => {
-              const league = leagueData.find(
-                (league) => league.id === leagueDivision.leagueId,
-              );
-
               return (
-                <div
+                <LeagueCard
                   key={leagueDivision.id}
-                  className="group relative h-full w-full cursor-pointer border bg-white hover:bg-gray-100"
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={leagueDivision.imageUrl}
-                      alt={leagueDivision.name}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="p-5">
-                    <div className="mb-2">
-                      <p className="text-sm font-medium tracking-wide text-gray-500">
-                        {league?.name}
-                      </p>
-                      <h3 className="mt-0.5 line-clamp-2 text-xl font-bold text-gray-900">
-                        {leagueDivision.name}
-                      </h3>
-                    </div>
-
-                    <div className="mt-5 flex items-center gap-1">
-                      <span className="font-medium text-gray-900">
-                        {home.button.more}
-                      </span>
-                      <ArrowRightIcon
-                        size={16}
-                        weight="regular"
-                        className="text-gray-900"
-                      />
-                    </div>
-                  </div>
-                </div>
+                  league={leagueData[0]}
+                  leagueDivision={leagueDivision}
+                  fullWidth
+                />
               );
             })}
         </div>
 
         <div className="flex justify-center">
-          <button className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100">
+          <Link
+            href="/leagues"
+            className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100"
+          >
             {home.button.viewLeague}
-          </button>
+          </Link>
         </div>
       </div>
 
+      {/* 한국 로보컵 대회 */}
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
           <div className="mb-12 text-center">
@@ -361,7 +357,7 @@ export default async function Home() {
             <h2 className="text-3xl font-bold">{home.events.title}</h2>
           </div>
 
-          <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="mb-12 grid grid-cols-1 gap-10 max-md:mx-auto max-md:max-w-md md:grid-cols-2 md:gap-8 lg:grid-cols-3">
             {eventDetailData
               .filter(
                 (eventDetail) =>
@@ -371,39 +367,21 @@ export default async function Home() {
                 const event = eventData.find(
                   (event) => event.id === eventDetail.eventId,
                 );
-
+                return event ? { eventDetail, event } : null;
+              })
+              .filter((item): item is NonNullable<typeof item> => item !== null)
+              .sort(
+                (a, b) =>
+                  new Date(b.event.dateStart).getTime() -
+                  new Date(a.event.dateStart).getTime(),
+              )
+              .map(({ eventDetail, event }) => {
                 return (
-                  <div
+                  <EventCard
                     key={eventDetail.id}
-                    className="group relative h-full w-full cursor-pointer border bg-white hover:bg-gray-100"
-                  >
-                    <div className="relative aspect-[842/1191] w-full overflow-hidden">
-                      <Image
-                        src={eventDetail.posterImageUrl ?? ""}
-                        alt={eventDetail.title}
-                        fill
-                        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div className="p-5 text-left">
-                      <h3 className="line-clamp-2 text-xl font-bold text-gray-900">
-                        {eventDetail.title}
-                      </h3>
-                      <p className="mt-1.5 text-sm text-gray-600">
-                        {eventDetail.location}
-                      </p>
-                      <p className="mt-1 text-sm text-gray-500">
-                        {event &&
-                          formatDateRange(
-                            event.dateStart,
-                            event.dateEnd,
-                            locale,
-                          )}
-                      </p>
-                    </div>
-                  </div>
+                    eventDetail={eventDetail}
+                    event={event}
+                  />
                 );
               })}
           </div>
@@ -416,7 +394,8 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
+      {/* 후원 */}
+      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="relative min-h-72">
           <div className="absolute inset-0">
             <Image
@@ -427,7 +406,7 @@ export default async function Home() {
               className="object-cover object-[center_20%]"
               priority
             />
-            <div className="absolute inset-0 bg-black/60" />
+            <div className="absolute inset-0 bg-black/70" />
           </div>
           <div className="relative flex h-full w-full flex-col items-start justify-between gap-20 px-8 py-12">
             <p className="break-keep text-center text-base font-medium leading-relaxed text-white md:text-left">
@@ -436,9 +415,12 @@ export default async function Home() {
               {home.sponsor.description2}
             </p>
             <div className="flex w-full justify-center md:justify-end">
-              <button className="flex h-12 items-center justify-center gap-1.5 border border-white bg-transparent px-6 font-medium text-white hover:bg-white/10">
+              <Link
+                href="/info/sponsors"
+                className="flex h-12 items-center justify-center gap-1.5 border border-white bg-transparent px-10 font-semibold text-white hover:bg-white/20"
+              >
                 {home.sponsor.cta}
-              </button>
+              </Link>
             </div>
           </div>
         </div>
