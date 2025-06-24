@@ -1,16 +1,34 @@
-import { CaretDownIcon } from "@phosphor-icons/react/dist/ssr";
+"use client";
+
+import { CaretDownIcon } from "@phosphor-icons/react";
 import Image from "next/image";
-import { getMessages } from "next-intl/server";
+import { useLocale, useMessages } from "next-intl";
 
 import rckaLogo from "@/assets/images/rcka-logo.png";
 import robocupLogo from "@/assets/images/robocup-logo.png";
 import LocaleSelector from "@/components/LocaleSelector";
 import MobileMenu from "@/components/MobileMenu";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { MenuItem } from "@/types/menuItem";
 
-export default async function Header() {
-  const messages = await getMessages();
+export default function Header() {
+  const locale = useLocale();
+  const messages = useMessages();
+
+  // 현재 경로 가져오기
+  const pathname = usePathname();
+
+  // 현재 경로가 메뉴 아이템과 일치하는지 확인하는 함수
+  const isActive = (href: string) => {
+    // locale prefix 제거
+    const pathWithoutLocale = pathname.replace(
+      /^\/[a-z]{2}(?:-[A-Z]{2})?(?=\/|$)/,
+      "",
+    );
+
+    if (href === "/") return pathWithoutLocale === "/";
+    return pathWithoutLocale.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-50 h-16 w-full min-w-[375px] border-b border-gray-200 bg-white md:h-20">
@@ -35,9 +53,24 @@ export default async function Header() {
                       <div className="relative">
                         <button
                           type="button"
-                          className="flex w-full cursor-pointer items-center gap-1 px-2.5 py-3 font-medium group-hover:text-gray-600"
+                          className={`flex w-full cursor-pointer items-center gap-1 px-2.5 py-3 ${
+                            item.submenu.some((subItem) =>
+                              isActive(subItem.href || ""),
+                            )
+                              ? "font-bold"
+                              : "font-medium group-hover:text-gray-600"
+                          }`}
                         >
-                          {item.name}
+                          {locale === "en" ? (
+                            <>
+                              <span className="hidden lg:inline">
+                                {item.name[0]}
+                              </span>
+                              <span className="lg:hidden">{item.name[1]}</span>
+                            </>
+                          ) : (
+                            <span>{item.name}</span>
+                          )}
                           <CaretDownIcon size={16} weight="bold" />
                         </button>
                         <ul className="absolute left-0 top-full hidden w-32 border border-gray-200 bg-white py-2 shadow-lg group-hover:block">
@@ -45,7 +78,11 @@ export default async function Header() {
                             <li key={subItem.name}>
                               <Link
                                 href={subItem.href || "#"}
-                                className="block border-l border-transparent px-4 py-2 text-sm font-medium hover:border-gray-900 hover:bg-gray-50"
+                                className={`block border-l px-4 py-2 text-sm hover:border-gray-900 hover:bg-gray-50 ${
+                                  isActive(subItem.href || "")
+                                    ? "border-l border-gray-900 bg-gray-50 font-bold"
+                                    : "border-transparent font-medium"
+                                }`}
                               >
                                 {subItem.name}
                               </Link>
@@ -56,7 +93,11 @@ export default async function Header() {
                     ) : (
                       <Link
                         href={item.href || "#"}
-                        className="px-2.5 py-3 font-medium hover:text-gray-600"
+                        className={`px-2.5 py-3 ${
+                          isActive(item.href || "")
+                            ? "font-bold"
+                            : "font-medium hover:text-gray-600"
+                        }`}
                       >
                         {item.name}
                       </Link>
@@ -72,12 +113,12 @@ export default async function Header() {
               href="https://www.robocup.org"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border bg-gray-50 px-1 py-0.5 hover:opacity-80"
+              className="hover:opacity-80"
             >
               <Image
                 src={robocupLogo}
                 alt="RoboCup International Federation"
-                className="h-8 w-auto md:h-10"
+                className="h-9 w-auto md:h-10"
               />
             </a>
 

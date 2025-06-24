@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "name": "RoboCup Korea Association",
+      "name": ["RoboCup Korea Association", "RCKA"],
       "submenu": [
         { "name": "About", "href": "/info/about" },
         { "name": "Committee", "href": "/info/committee" },
@@ -9,8 +9,8 @@
         { "name": "Sponsors", "href": "/info/sponsors" }
       ]
     },
-    { "name": "RoboCup Leagues", "href": "/leagues" },
-    { "name": "RoboCup Events", "href": "/events" },
+    { "name": "Leagues", "href": "/leagues" },
+    { "name": "Events", "href": "/events" },
     { "name": "Notices", "href": "/notices" }
   ]
 }

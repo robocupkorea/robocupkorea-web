@@ -6,7 +6,7 @@ import { Link } from "@/i18n/navigation";
 
 export default function LocaleSelector() {
   return (
-    <div className="group relative">
+    <div className="group relative z-50">
       <button type="button" className="py-1">
         <GlobeIcon
           weight="thin"

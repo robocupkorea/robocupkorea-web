@@ -10,8 +10,8 @@
         { "name": "후원", "href": "/info/sponsors" }
       ]
     },
-    { "name": "로보컵 리그", "href": "/leagues" },
-    { "name": "로보컵 대회", "href": "/events" },
-    { "name": "공지사항", "href": "/notices" }
+    { "name": "리그", "href": "/leagues" },
+    { "name": "대회", "href": "/events" },
+    { "name": "공지", "href": "/notices" }
   ]
 }
