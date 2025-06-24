@@ -37,13 +37,19 @@ export default async function Home() {
 
   return (
     <>
-      <div className="relative h-[calc(100svh-64px)] max-h-[1000px] w-full md:h-[calc(100svh-80px)]">
+      <div className="relative h-[calc(100svh-64px)] max-h-[1000px] w-full bg-black md:h-[calc(100svh-80px)]">
         <VideoPlayer
           src="https://media.robocupkorea.org/videos/landing/intro.m3u8"
-          className="h-full w-full object-cover"
+          fallbackSrc="https://media.robocupkorea.org/images/landing/fallback.png"
           autoPlay
-          muted
+          className="pointer-events-none h-full w-full object-cover"
+          controls={false}
           loop
+          muted
+          playsInline
+          preload="none"
+          style={{ overflowClipMargin: "content-box 0px" }}
+          webkit-playsinline="true"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/10 to-black/60" />
         <div className="absolute inset-x-0 top-12">
