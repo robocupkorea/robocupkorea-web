@@ -13,8 +13,9 @@ import { getLocale, getMessages } from "next-intl/server";
 
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
 import accountGroupIcon from "@/assets/svg/Account-Group-1--Streamline-Cyber.svg";
-import trophyIcon from "@/assets/svg/Trophy-4--Streamline-Cyber.svg";
 import computerImacSmileyFaceIcon from "@/assets/svg/Computer-Imac-Smiley-Face--Streamline-Cyber.svg";
+import trophyIcon from "@/assets/svg/Trophy-4--Streamline-Cyber.svg";
+import EventCard from "@/components/EventCard";
 import LeagueCard from "@/components/LeagueCard";
 import VideoPlayer from "@/components/VideoPlayer";
 import { eventData } from "@/data/eventData";
@@ -24,7 +25,6 @@ import { leagueDivisionData } from "@/data/leagueDivisionData";
 import { Link } from "@/i18n/navigation";
 import { LeagueDivision } from "@/types/leagues";
 import { formatDateRange } from "@/utils/date";
-import EventCard from "@/components/EventCard";
 
 export default async function Home() {
   const locale = await getLocale();

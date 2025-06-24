@@ -4,8 +4,8 @@ import { ArrowRightIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 
-import { League, LeagueDivision } from "@/types/leagues";
 import { Link } from "@/i18n/navigation";
+import { League, LeagueDivision } from "@/types/leagues";
 
 export default function LeagueCard({
   league,
