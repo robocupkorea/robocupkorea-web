@@ -1,13 +1,36 @@
 import Image from "next/image";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 
-import antiCorruption from "@/assets/images/anti-corruption-and-civil-rights-commission.png";
-import ministryOfTradeIndustryAndEnergy from "@/assets/images/ministry-of-trade-industry-and-energy.png";
-import nationalTaxService from "@/assets/images/national-tax-service.png";
+// 한국어 이미지
+import antiCorruptionKo from "@/assets/images/ko/anti-corruption-and-civil-rights-commission.png";
+import ministryOfTradeIndustryAndEnergyKo from "@/assets/images/ko/ministry-of-trade-industry-and-energy.png";
+import nationalTaxServiceKo from "@/assets/images/ko/national-tax-service.png";
+
+// 영어 이미지
+import antiCorruptionEn from "@/assets/images/en/anti-corruption-and-civil-rights-commission.png";
+import ministryOfTradeIndustryAndEnergyEn from "@/assets/images/en/ministry-of-trade-industry-and-energy.png";
+import nationalTaxServiceEn from "@/assets/images/en/national-tax-service.png";
+
 import CreditsButton from "@/components/CreditsButton";
 
 export default async function Footer() {
   const { footer } = await getMessages();
+
+  const locale = await getLocale();
+
+  // locale에 따라 이미지 선택
+  const images =
+    locale === "en"
+      ? {
+          antiCorruption: antiCorruptionEn,
+          ministryOfTradeIndustryAndEnergy: ministryOfTradeIndustryAndEnergyEn,
+          nationalTaxService: nationalTaxServiceEn,
+        }
+      : {
+          antiCorruption: antiCorruptionKo,
+          ministryOfTradeIndustryAndEnergy: ministryOfTradeIndustryAndEnergyKo,
+          nationalTaxService: nationalTaxServiceKo,
+        };
 
   return (
     <footer className="bg-white py-20">
@@ -20,9 +43,11 @@ export default async function Footer() {
             className="cursor-pointer hover:opacity-80"
           >
             <Image
-              src={ministryOfTradeIndustryAndEnergy}
+              src={images.ministryOfTradeIndustryAndEnergy}
               alt={footer.sponsors.ministryOfTradeIndustryAndEnergy}
               className="mb-2 h-12 w-auto"
+              width={145}
+              height={48}
             />
           </a>
           <a
@@ -32,9 +57,11 @@ export default async function Footer() {
             className="cursor-pointer hover:opacity-80"
           >
             <Image
-              src={nationalTaxService}
+              src={images.nationalTaxService}
               alt={footer.sponsors.nationalTaxService}
               className="mb-2 h-12 w-auto"
+              width={94}
+              height={48}
             />
           </a>
           <a
@@ -44,9 +71,11 @@ export default async function Footer() {
             className="cursor-pointer hover:opacity-80"
           >
             <Image
-              src={antiCorruption}
+              src={images.antiCorruption}
               alt={footer.sponsors.antiCorruption}
               className="mb-2 h-12 w-auto"
+              width={181}
+              height={48}
             />
           </a>
         </div>
