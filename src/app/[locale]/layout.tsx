@@ -81,7 +81,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${pretendard.variable} flex min-h-svh min-w-[320px] flex-col antialiased`}
+        className={`${pretendard.variable} flex min-h-svh min-w-[375px] flex-col antialiased`}
       >
         <NextIntlClientProvider>
           <Header />

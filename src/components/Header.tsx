@@ -13,7 +13,7 @@ export default async function Header() {
   const messages = await getMessages();
 
   return (
-    <header className="sticky top-0 z-50 h-16 w-full min-w-[320px] border-b border-gray-200 bg-white md:h-20">
+    <header className="sticky top-0 z-50 h-16 w-full min-w-[375px] border-b border-gray-200 bg-white md:h-20">
       <div className="container mx-auto h-full max-w-7xl px-4 md:px-8 xl:px-20">
         <nav className="flex h-full items-center justify-between">
           <div className="flex h-full items-center gap-10">
