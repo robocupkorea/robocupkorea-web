@@ -1,6 +1,7 @@
 "use client";
 
 import Hls from "hls.js";
+import Image from "next/image";
 import { type VideoHTMLAttributes, useEffect, useRef, useState } from "react";
 
 type VideoPlayerProps = VideoHTMLAttributes<HTMLVideoElement> & {
@@ -93,7 +94,7 @@ const VideoPlayer = ({ src, fallbackSrc, ...props }: VideoPlayerProps) => {
         {...props}
       />
       {showFallback && fallbackSrc && (
-        <img
+        <Image
           src={fallbackSrc}
           alt="Video fallback"
           className="absolute inset-0 h-full w-full object-cover"
