@@ -1,0 +1,19 @@
+{
+  "notFound": {
+    "default": {
+      "title": "Page Not Found",
+      "desc": "The page you are looking for does not exist or has been deleted.",
+      "back": "Back to Home"
+    },
+    "leagues": {
+      "title": "League Not Found",
+      "desc": "The league you are looking for does not exist or has been deleted.",
+      "back": "Back to Leagues"
+    },
+    "notices": {
+      "title": "Notice Not Found",
+      "desc": "The notice you are looking for does not exist or has been deleted.",
+      "back": "Back to Notices"
+    }
+  }
+}

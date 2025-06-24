@@ -1,0 +1,34 @@
+import { notFound } from "next/navigation";
+
+import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
+import { getNoticePage } from "@/lib/notion/notices";
+import { convertPage } from "@/lib/notion/notion-to-md";
+
+export default async function NoticeDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = params;
+
+  const page = await getNoticePage(id);
+
+  if (!page) {
+    notFound(); // 발행되지 않은 공지사항 페이지
+  }
+
+  const mdString = await convertPage(id);
+
+  return (
+    <>
+      <div className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
+        <div
+          className="prose space-y-5"
+          dangerouslySetInnerHTML={{
+            __html: await convertMarkdownToHtml(mdString),
+          }}
+        />
+      </div>
+    </>
+  );
+}

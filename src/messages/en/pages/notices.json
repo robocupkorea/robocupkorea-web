@@ -1,0 +1,12 @@
+{
+  "notices": {
+    "title": "Notices",
+    "subtitle": "Check out competition news, updates, and announcements from the RoboCup Korea Association",
+    "table": {
+      "number": "No.",
+      "title": "Title",
+      "date": "Date"
+    },
+    "noNotices": "No notices available."
+  }
+}

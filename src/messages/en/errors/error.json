@@ -1,0 +1,19 @@
+{
+  "error": {
+    "events": {
+      "title": "Event Not Found",
+      "desc": "An error occurred while loading the event.",
+      "retry": "Retry"
+    },
+    "leagues": {
+      "title": "League Not Found",
+      "desc": "An error occurred while loading the league.",
+      "retry": "Retry"
+    },
+    "notices": {
+      "title": "Notice Not Found",
+      "desc": "An error occurred while loading the notice.",
+      "retry": "Retry"
+    }
+  }
+}

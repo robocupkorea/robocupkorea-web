@@ -2,9 +2,10 @@
 
 import { CalendarIcon, MapPinIcon } from "@phosphor-icons/react";
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale } from "next-intl";
 
 import EventStatus from "@/components/EventStatus";
+import { Link } from "@/i18n/navigation";
 import { Event, EventDetail } from "@/types/events";
 import { formatDateRange, getEventStatus } from "@/utils/date";
 
@@ -14,9 +15,11 @@ interface EventCardProps {
 }
 
 export default function EventCard({ eventDetail, event }: EventCardProps) {
+  const locale = useLocale();
+
   return (
     <Link
-      href={`/events/${eventDetail.id}`}
+      href={`/events/${eventDetail.cmsPageId}`}
       className="group relative h-full w-full cursor-pointer border bg-white hover:bg-gray-100"
     >
       <div className="relative aspect-[842/1191] w-full overflow-hidden">
@@ -48,7 +51,9 @@ export default function EventCard({ eventDetail, event }: EventCardProps) {
           </div>
           <div className="flex items-center gap-1.5">
             <CalendarIcon size={16} aria-hidden />
-            <span>{formatDateRange(event.dateStart, event.dateEnd)}</span>
+            <span>
+              {formatDateRange(event.dateStart, event.dateEnd, locale)}
+            </span>
           </div>
         </div>
       </div>

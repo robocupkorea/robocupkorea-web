@@ -1,0 +1,52 @@
+{
+  "home": {
+    "button": {
+      "more": "View more",
+      "learnMore": "Learn more",
+      "viewHistory": "See history",
+      "viewLeague": "Explore leagues",
+      "viewEvents": "Explore events",
+      "sponsorInquiry": "Become a sponsor"
+    },
+    "intro": {
+      "section": "About the Association",
+      "association": "RoboCup Korea Association",
+      "description": "The RoboCup Korea Association is a non-profit organization that hosts national and international robot events called RoboCup leagues for students studying robotics, and promotes project-based education."
+    },
+    "stats": {
+      "section": "Key figures",
+      "title": "RoboCup events held annually in Korea",
+      "participants": { "label": "Participants each event", "value": "500+" },
+      "events": { "label": "Events held so far", "value": "17+" },
+      "sponsors": { "label": "Partner sponsors", "value": "10+" },
+      "schools": { "label": "Certified learning centers", "value": "19+" },
+      "note": "*RoboCup Korea data (updated 2025)"
+    },
+    "aboutLeague": {
+      "section": "About RoboCup",
+      "title": "Main activities & goals of RoboCup Leagues",
+      "description": "RoboCup leagues provide opportunities for participants to apply their skills in real environments and develop collaboration and problem-solving skills through regular robot and AI competitions held annually.",
+      "items": {
+        "teamGoal": "Achieve common goals through teamwork",
+        "creativity": "Develop creative algorithms for problem solving",
+        "international": "Opportunity to join the international RoboCup"
+      }
+    },
+    "history": {
+      "section": "History",
+      "title": "Journey of RoboCup Korea",
+      "viewMore": "View history"
+    },
+    "leagues": { "section": "RoboCup Leagues", "title": "Explore the leagues" },
+    "events": {
+      "section": "RoboCup Events",
+      "title": "Take on the challenge",
+      "viewMore": "More events"
+    },
+    "sponsor": {
+      "description1": "The RoboCup Korea Association is a non-profit organization that has been operating RoboCup competitions for over 10 years since 2013.",
+      "description2": "All sponsorship funds are used for various purposes to foster young talents in robotics and promote AI and robotics education.",
+      "cta": "Sponsorship inquiry"
+    }
+  }
+}

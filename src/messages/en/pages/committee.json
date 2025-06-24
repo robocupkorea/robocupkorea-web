@@ -1,0 +1,19 @@
+{
+  "committee": {
+    "title": "RoboCup Korea Association Committee",
+    "subtitle": "The RoboCup Korea Association Committee is a non-profit organization composed of educators and volunteers who share the goal of providing quality and diverse AI and robotics education.",
+    "members": {
+      "section": "Committee Members",
+      "title": "Executive Committee Members"
+    },
+    "contact": {
+      "section": "Contact Us",
+      "title": "Contact the Committee",
+      "description": "If you have any questions about RoboCup competitions or association operations, please contact the association.",
+      "email": "contact@robocupkorea.org",
+      "copyText": "Click to copy",
+      "copySuccess": "Email address copied to clipboard",
+      "copyError": "Failed to copy email address"
+    }
+  }
+}

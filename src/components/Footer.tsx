@@ -1,15 +1,13 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
+import { getMessages } from "next-intl/server";
 
 import antiCorruption from "@/assets/images/anti-corruption-and-civil-rights-commission.png";
 import ministryOfTradeIndustryAndEnergy from "@/assets/images/ministry-of-trade-industry-and-energy.png";
 import nationalTaxService from "@/assets/images/national-tax-service.png";
-import CreditsModal from "@/components/CreditsModal";
+import CreditsButton from "@/components/CreditsButton";
 
-export default function Footer() {
-  const [isCreditsOpen, setCreditsOpen] = useState(false); // 크레딧 모달
+export default async function Footer() {
+  const { footer } = await getMessages();
 
   return (
     <footer className="bg-white py-20">
@@ -55,29 +53,16 @@ export default function Footer() {
         <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
           <div className="text-sm leading-relaxed text-black">
             <p className="mb-1 font-bold">
-              한국로보컵협회
-              <span className="ml-2 font-normal">
-                (06732) 서울시 서초구 서운로 13 중앙로얄 오피스텔 1308 TEL.
-                070-4247-7485
-              </span>
+              {footer.organization}
+              <span className="ml-2 font-normal">{footer.address}</span>
             </p>
-            <p>COPYRIGHT ©한국로보컵협회. ALL RIGHT RESERVED.</p>
+            <p>{footer.copyright}</p>
           </div>
           <div>
-            <button
-              onClick={() => setCreditsOpen(true)}
-              className="text-sm underline hover:text-blue-600"
-            >
-              Credits
-            </button>
+            <CreditsButton />
           </div>
         </div>
       </div>
-
-      <CreditsModal
-        isOpen={isCreditsOpen}
-        onClose={() => setCreditsOpen(false)}
-      />
     </footer>
   );
 }

@@ -1,0 +1,41 @@
+{
+  "about": {
+    "title": "About RoboCup Korea Association",
+    "subtitle": "Introducing the goals and activities of the RoboCup Korea Association leading the future of robotics education",
+    "chairperson": {
+      "section": "Chairperson Introduction",
+      "title": "Greeting",
+      "name": "Chairperson Sangyong Han",
+      "message": [
+        "The RoboCup Korea Association (RCKA) is a project-based educational promotion movement that conducts regional, national, and international robot events for students studying robotics.",
+        "We deeply thank all customers who visit the RoboCup Korea Association website.",
+        "The purpose of establishing RoboCup leagues is to provide quality and diverse robotics education.",
+        "RCKA is a non-profit organization composed of education-related practitioners and volunteers who share the same vision for genuine robotics education.",
+        "RCKA provides everything needed for education, including challenge, cooperation, and competition aspects. For young students, RCKA provides opportunities to directly develop technical skills in various robotics fields - electronics, hardware, and software. Additionally, it presents new methods for motivation and experience where they can learn about teamwork while sharing technology with friends.",
+        "RCKA provides opportunities for diverse participants to research together as teams that can achieve the common goal of excellent robot development.",
+        "We ask for your continuous encouragement and interest in supporting us.",
+        "Thank you."
+      ]
+    },
+    "robocup": {
+      "section": "About RoboCup",
+      "title": "Main Activities and Goals of RoboCup Leagues",
+      "description": [
+        "RoboCup is one of the most prestigious competitions in robotics and artificial intelligence worldwide, started to provide a platform for education and research.",
+        "Participants develop problem-solving skills, collaboration capabilities, and technical implementation abilities in real environments, growing into future leaders in robotics engineering.",
+        "RoboCup aims for a culture of sharing and learning beyond competition, bringing out participants' creativity and technical skills through various leagues and challenges.",
+        "For more information, please visit the official website."
+      ]
+    },
+    "video": {
+      "section": "Competition Video",
+      "title": "1st RoboCup Korea Junior Competition Field Sketch",
+      "eventTitle": "1st RoboCup Korea Junior Competition",
+      "eventDate": "March 10, 2013, Lotte Department Store Pyeongchon Branch",
+      "description": [
+        "It was a meaningful event where students and researchers from across the country participated to showcase the possibilities of robots and artificial intelligence at the first officially certified RoboCup league competition held in Korea.",
+        "Watch the vivid scenes of participants demonstrating their creativity and technical skills through various leagues and missions in the video."
+      ]
+    }
+  }
+}

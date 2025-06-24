@@ -2,10 +2,13 @@
  * 날짜와 요일을 포맷팅하는 함수
  * yyyy-mm-dd -> yyyy.mm.dd(d)
  */
-export const formatDate = (dateString: string) => {
+export const formatDate = (dateString: string, locale: string) => {
+  if (!dateString) return "";
+
   const date = new Date(dateString);
+
   const formattedDate = dateString.replaceAll("-", ".");
-  const weekday = date.toLocaleDateString("ko-KR", { weekday: "short" });
+  const weekday = date.toLocaleDateString(locale, { weekday: "short" });
   return `${formattedDate}(${weekday})`;
 };
 
@@ -28,15 +31,19 @@ export const formatISODate = (isoDateString: string) => {
  * 날짜 범위를 포맷팅하는 함수
  * yyyy-mm-dd -> yyyy.mm.dd(d) - yyyy.mm.dd(d)
  */
-export const formatDateRange = (startDate: string, endDate: string) => {
+export const formatDateRange = (
+  startDate: string,
+  endDate: string,
+  locale: string,
+) => {
   if (!startDate) return "";
 
-  // 날짜가 같으면 시작 날짜만 반환
-  if (startDate === endDate) {
-    return formatDate(startDate);
+  // endDate가 없거나 빈 문자열이면 시작 날짜만 반환
+  if (!endDate || endDate === startDate) {
+    return formatDate(startDate, locale);
   }
 
-  return `${formatDate(startDate)} - ${formatDate(endDate || startDate)}`;
+  return `${formatDate(startDate, locale)} - ${formatDate(endDate, locale)}`;
 };
 
 export const getEventStatus = (startDate: string, endDate: string) => {

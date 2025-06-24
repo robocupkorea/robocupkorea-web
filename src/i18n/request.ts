@@ -11,6 +11,19 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale, // 언어
-    messages: { ...(await import(`@/messages/${locale}.json`)).default }, // 언어별 message
+    messages: {
+      ...(await import(`@/messages/${locale}/components/header.json`)).default,
+      ...(await import(`@/messages/${locale}/components/footer.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/home.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/about.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/committee.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/history.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/sponsors.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/leagues.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/events.json`)).default,
+      ...(await import(`@/messages/${locale}/pages/notices.json`)).default,
+      ...(await import(`@/messages/${locale}/errors/error.json`)).default,
+      ...(await import(`@/messages/${locale}/errors/not-found.json`)).default,
+    }, // 언어별 message
   };
 });

@@ -1,4 +1,4 @@
-import { GraduationCapIcon, MapPinIcon } from "@phosphor-icons/react";
+import { GraduationCapIcon, MapPinIcon } from "@phosphor-icons/react/dist/ssr";
 
 import type { LearningCenter } from "@/types/learningCenter";
 

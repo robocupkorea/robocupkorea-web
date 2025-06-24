@@ -1,0 +1,17 @@
+{
+  "menu": [
+    {
+      "name": "한국로보컵협회",
+      "submenu": [
+        { "name": "소개", "href": "/info/about" },
+        { "name": "위원회", "href": "/info/committee" },
+        { "name": "연혁", "href": "/info/history" },
+        { "name": "인증 교육기관", "href": "/info/learning-centers" },
+        { "name": "후원", "href": "/info/sponsors" }
+      ]
+    },
+    { "name": "로보컵 리그", "href": "/leagues" },
+    { "name": "로보컵 대회", "href": "/events" },
+    { "name": "공지사항", "href": "/notices" }
+  ]
+}

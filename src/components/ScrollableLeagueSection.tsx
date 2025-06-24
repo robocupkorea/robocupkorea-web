@@ -2,10 +2,10 @@
 
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import type { League } from "@/data/leagueData";
-import type { LeagueDivision } from "@/data/leagueDivisionData";
+import type { League, LeagueDivision } from "@/types/leagues";
 
 export default function ScrollableLeagueSection({
   league,
@@ -14,6 +14,7 @@ export default function ScrollableLeagueSection({
   league: League;
   divisions: LeagueDivision[];
 }) {
+  const locale = useLocale();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -103,7 +104,7 @@ export default function ScrollableLeagueSection({
                   src={leagueDivision.imageUrl}
                   alt={leagueDivision.name}
                   fill
-                  sizes="(max-width: 640px) calc(100vw - 6rem), (max-width: 768px) 256px, (max-width: 1024px) 288px, 320px"
+                  sizes="(max-width: 640px) calc(100vw - 6rem), (max-width: 768px) 256px, (max-width: 1024px) 288px, 375px"
                   className="object-cover"
                 />
               </div>
@@ -115,13 +116,9 @@ export default function ScrollableLeagueSection({
                   </h3>
                 </div>
 
-                <p className="line-clamp-2 text-sm leading-relaxed text-gray-600">
-                  {leagueDivision.description}
-                </p>
-
                 <div className="mt-4 flex items-center gap-1">
                   <span className="text-sm font-medium text-gray-900">
-                    자세히 보기
+                    {locale === "ko" ? "자세히 보기" : "View Details"}
                   </span>
                   <ArrowRightIcon
                     size={14}
