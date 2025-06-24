@@ -1,7 +1,8 @@
 {
   "footer": {
     "organization": "한국로보컵협회",
-    "address": "(06732) 서울시 서초구 서운로 13 중앙로얄 오피스텔 1308 TEL. 070-4247-7485",
+    "address": "(06732) 서울시 서초구 서운로 13 중앙로얄 오피스텔 1308",
+    "tel": "TEL. 070-4247-7485",
     "copyright": "COPYRIGHT ©한국로보컵협회. ALL RIGHT RESERVED.",
     "credits": "Credits",
     "close": "닫기",
