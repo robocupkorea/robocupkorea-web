@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
 interface CreditsModalProps {
@@ -6,6 +9,8 @@ interface CreditsModalProps {
 }
 
 export default function CreditsModal({ isOpen, onClose }: CreditsModalProps) {
+  const t = useTranslations("footer");
+
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose(); // Esc 키로 크레딧 모달 닫기
@@ -70,7 +75,7 @@ export default function CreditsModal({ isOpen, onClose }: CreditsModalProps) {
           onClick={onClose}
           className="w-full rounded bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200"
         >
-          닫기
+          {t("close")}
         </button>
       </div>
     </div>

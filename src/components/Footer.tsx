@@ -21,7 +21,7 @@ export default async function Footer() {
           >
             <Image
               src={ministryOfTradeIndustryAndEnergy}
-              alt="산업통상자원부"
+              alt={footer.sponsors.ministryOfTradeIndustryAndEnergy}
               className="mb-2 h-12 w-auto"
             />
           </a>
@@ -33,7 +33,7 @@ export default async function Footer() {
           >
             <Image
               src={nationalTaxService}
-              alt="국세청"
+              alt={footer.sponsors.nationalTaxService}
               className="mb-2 h-12 w-auto"
             />
           </a>
@@ -45,7 +45,7 @@ export default async function Footer() {
           >
             <Image
               src={antiCorruption}
-              alt="국민권익위원회"
+              alt={footer.sponsors.antiCorruption}
               className="mb-2 h-12 w-auto"
             />
           </a>

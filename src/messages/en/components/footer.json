@@ -3,6 +3,12 @@
     "organization": "RoboCup Korea Association",
     "address": "(06732) 1308, 13, Seoun-ro, Seocho-gu, Seoul, Republic of Korea TEL. 070-4247-7485",
     "copyright": "COPYRIGHT ©RoboCup Korea Association. ALL RIGHT RESERVED.",
-    "credits": "Credits"
+    "credits": "Credits",
+    "close": "Close",
+    "sponsors": {
+      "ministryOfTradeIndustryAndEnergy": "Ministry of Trade, Industry and Energy",
+      "nationalTaxService": "National Tax Service",
+      "antiCorruption": "Anti-Corruption and Civil Rights Commission"
+    }
   }
 }
