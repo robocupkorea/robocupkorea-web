@@ -1,6 +1,6 @@
 "use client";
 
-import { CaretDownIcon } from "@phosphor-icons/react";
+import { ArrowUpRightIcon, CaretDownIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useLocale, useMessages } from "next-intl";
 
@@ -113,12 +113,17 @@ export default function Header() {
               href="https://www.robocup.org"
               target="_blank"
               rel="noreferrer"
-              className="hover:opacity-80"
+              className="group relative hover:opacity-80"
             >
               <Image
                 src={robocupLogo}
                 alt="RoboCup International Federation"
                 className="h-9 w-auto md:h-10"
+              />
+              <ArrowUpRightIcon
+                size={12}
+                weight="bold"
+                className="absolute -right-0.5 top-0 bg-gray-100 text-gray-500 group-hover:opacity-80"
               />
             </a>
 
