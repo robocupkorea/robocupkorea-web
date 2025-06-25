@@ -9,7 +9,7 @@ import robocupLogo from "@/assets/images/robocup-logo.png";
 import LocaleSelector from "@/components/LocaleSelector";
 import MobileMenu from "@/components/MobileMenu";
 import { Link, usePathname } from "@/i18n/navigation";
-import { MenuItem } from "@/types/menuItem";
+import { MenuItem } from "@/types/menu-item";
 
 export default function Header() {
   const locale = useLocale();

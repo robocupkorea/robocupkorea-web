@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
 import LearningCenterItem from "@/components/LearningCenterItem";
-import { learningCenterData } from "@/data/learningCenterData";
-import { LearningCenter } from "@/types/learningCenter";
+import { learningCenterData } from "@/data/learning-center-data";
+import { LearningCenter } from "@/types/learning-center";
 
 export default async function LearningCentersPage() {
   const locale = await getLocale();

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
-import { leagueData } from "@/data/leagueData";
-import { leagueDivisionData } from "@/data/leagueDivisionData";
+import { leagueData } from "@/data/league-data";
+import { leagueDivisionData } from "@/data/league-division-data";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { convertPage } from "@/lib/notion/notion-to-md";
 

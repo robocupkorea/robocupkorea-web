@@ -1,8 +1,8 @@
 import { getLocale, getMessages } from "next-intl/server";
 
 import EventCard from "@/components/EventCard";
-import { eventData } from "@/data/eventData";
-import { eventDetailData } from "@/data/eventDetailData";
+import { eventData } from "@/data/event-data";
+import { eventDetailData } from "@/data/event-detail-data";
 
 export default async function EventPage() {
   const locale = await getLocale();

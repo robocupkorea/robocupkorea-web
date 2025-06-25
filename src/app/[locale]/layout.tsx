@@ -18,42 +18,42 @@ export const metadata: Metadata = {
 export const pretendard = localFont({
   src: [
     {
-      path: "../../assets/fonts/Pretendard-Regular.woff2",
+      path: "../../assets/fonts/pretendard-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/Pretendard-Regular.woff",
+      path: "../../assets/fonts/pretendard-regular.woff",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/Pretendard-Medium.woff2",
+      path: "../../assets/fonts/pretendard-medium.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/Pretendard-Medium.woff",
+      path: "../../assets/fonts/pretendard-medium.woff",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/Pretendard-SemiBold.woff2",
+      path: "../../assets/fonts/pretendard-semiBold.woff2",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/Pretendard-SemiBold.woff",
+      path: "../../assets/fonts/pretendard-semiBold.woff",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/Pretendard-Bold.woff2",
+      path: "../../assets/fonts/pretendard-bold.woff2",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../../assets/fonts/Pretendard-Bold.woff",
+      path: "../../assets/fonts/pretendard-bold.woff",
       weight: "700",
       style: "normal",
     },

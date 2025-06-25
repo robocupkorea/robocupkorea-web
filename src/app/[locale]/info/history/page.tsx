@@ -1,7 +1,7 @@
 import { getLocale, getMessages } from "next-intl/server";
 
-import { eventData } from "@/data/eventData";
-import { eventDetailData } from "@/data/eventDetailData";
+import { eventData } from "@/data/event-data";
+import { eventDetailData } from "@/data/event-detail-data";
 import { formatDateRange } from "@/utils/date";
 
 export default async function HistoryPage() {

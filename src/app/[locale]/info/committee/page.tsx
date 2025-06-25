@@ -2,7 +2,7 @@ import { getLocale, getMessages } from "next-intl/server";
 
 import CommitteeMemberCard from "@/components/CommitteeMemberCard";
 import EmailCopyBox from "@/components/EmailCopyBox";
-import { committeeMemberData } from "@/data/committeeMemberData";
+import { committeeMemberData } from "@/data/committee-member-data";
 
 export default async function CommitteePage() {
   const locale = await getLocale();

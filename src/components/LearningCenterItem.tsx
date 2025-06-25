@@ -1,6 +1,6 @@
 import { GraduationCapIcon, MapPinIcon } from "@phosphor-icons/react/dist/ssr";
 
-import type { LearningCenter } from "@/types/learningCenter";
+import type { LearningCenter } from "@/types/learning-center";
 
 export default function LearningCenterItem({
   learningCenter,

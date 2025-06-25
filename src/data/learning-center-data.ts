@@ -1,4 +1,4 @@
-import { LearningCenter } from "@/types/learningCenter";
+import { LearningCenter } from "@/types/learning-center";
 
 export const learningCenterData: LearningCenter[] = [
   {

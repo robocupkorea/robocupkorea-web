@@ -1,4 +1,4 @@
-import type { CommitteeMember } from "@/types/committeeMember";
+import type { CommitteeMember } from "@/types/committee-member";
 
 export const committeeMemberData: CommitteeMember[] = [
   {

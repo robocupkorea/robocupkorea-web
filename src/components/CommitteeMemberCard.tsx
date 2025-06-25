@@ -1,6 +1,6 @@
 import { BuildingIcon, UserIcon } from "@phosphor-icons/react/dist/ssr";
 
-import type { CommitteeMember } from "@/types/committeeMember";
+import type { CommitteeMember } from "@/types/committee-member";
 
 export default function CommitteeMemberCard({
   member,

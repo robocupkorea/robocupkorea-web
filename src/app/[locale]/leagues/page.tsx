@@ -1,8 +1,8 @@
 import { getMessages } from "next-intl/server";
 
 import ScrollableLeagueSection from "@/components/ScrollableLeagueSection";
-import { leagueData } from "@/data/leagueData";
-import { leagueDivisionData } from "@/data/leagueDivisionData";
+import { leagueData } from "@/data/league-data";
+import { leagueDivisionData } from "@/data/league-division-data";
 import { Link } from "@/i18n/navigation";
 
 export default async function LeaguesPage() {
