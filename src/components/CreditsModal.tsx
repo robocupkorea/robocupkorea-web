@@ -31,7 +31,7 @@ export default function CreditsModal({ isOpen, onClose }: CreditsModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="fixed inset-0 z-50 flex min-w-[375px] items-center justify-center bg-black/50"
       onClick={onClose}
       aria-hidden="true"
     >
