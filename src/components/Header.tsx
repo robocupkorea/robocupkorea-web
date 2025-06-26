@@ -39,7 +39,7 @@ export default function Header() {
               <Link href="/" className="flex items-center">
                 <Image
                   src={rckaLogo}
-                  alt="logo"
+                  alt="Logo"
                   className="h-14 w-auto md:h-[70px]"
                 />
               </Link>

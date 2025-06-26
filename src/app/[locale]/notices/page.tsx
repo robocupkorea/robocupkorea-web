@@ -10,7 +10,7 @@ export default async function NoticesPage() {
 
   return (
     <>
-      <div className="bg-gray-50">
+      <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
             <h1 className="break-keep text-4xl font-bold text-gray-900">
@@ -21,45 +21,55 @@ export default async function NoticesPage() {
             </p>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="overflow-x-auto">
-          <div className="min-w-full border-t border-gray-200">
-            <div className="flex bg-gray-50 text-left text-sm font-semibold text-gray-600">
-              <div className="w-16 p-4">{notices.table.number}</div>
-              <div className="flex-1 p-4">{notices.table.title}</div>
-              <div className="w-24 p-4 text-right">{notices.table.date}</div>
-            </div>
-
-            {noticesData?.length === 0 ? (
-              <div className="flex justify-center py-8">
-                <div className="text-gray-600">{notices.noNotices}</div>
-              </div>
-            ) : (
-              <div>
-                {noticesData?.map((notice, index) => (
-                  <Link
-                    key={notice.id}
-                    href={`/notices/${notice.id}`}
-                    className="flex cursor-pointer border-b hover:bg-gray-100"
-                  >
-                    <div className="w-16 p-4 text-sm text-gray-500">
+          <table className="min-w-full border-t border-gray-200">
+            <thead>
+              <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                <th scope="col" className="w-16 p-4">
+                  {notices.table.number}
+                </th>
+                <th scope="col" className="flex-1 p-4">
+                  {notices.table.title}
+                </th>
+                <th scope="col" className="w-24 p-4 text-right">
+                  {notices.table.date}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {noticesData?.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className="py-8 text-center">
+                    <div className="text-gray-600">{notices.noNotices}</div>
+                  </td>
+                </tr>
+              ) : (
+                noticesData?.map((notice, index) => (
+                  <tr key={notice.id} className="border-b hover:bg-gray-100">
+                    <td className="w-16 p-4 text-sm text-gray-500">
                       {noticesData.length - index}
-                    </div>
-                    <div className="flex-1 truncate p-4 font-medium text-gray-800">
-                      {notice.title}
-                    </div>
-                    <div className="w-24 p-4 text-right text-sm text-gray-500">
+                    </td>
+                    <td className="flex-1 p-4">
+                      <Link
+                        href={`/notices/${notice.id}`}
+                        className="block truncate font-medium text-gray-800 hover:text-blue-600"
+                      >
+                        {notice.title}
+                      </Link>
+                    </td>
+                    <td className="w-24 p-4 text-right text-sm text-gray-500">
                       {formatISODate(notice.createdAt)}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
-      </div>
+      </section>
     </>
   );
 }

@@ -21,7 +21,7 @@ export default async function LeaguesPage() {
 
   return (
     <>
-      <div className="bg-gray-50">
+      <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
             <h1 className="break-keep text-4xl font-bold text-gray-900">
@@ -32,11 +32,14 @@ export default async function LeaguesPage() {
             </p>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-16 text-center">
-          <h2 className="break-keep text-3xl font-bold text-gray-900">
+          <h2
+            id="overview-heading"
+            className="break-keep text-3xl font-bold text-gray-900"
+          >
             {leagues.overview.title}
           </h2>
           <p className="mt-4 break-keep text-lg text-gray-700">
@@ -51,7 +54,7 @@ export default async function LeaguesPage() {
             );
 
             return (
-              <div
+              <article
                 key={league.id}
                 className="border border-gray-200 bg-white p-4"
               >
@@ -74,21 +77,21 @@ export default async function LeaguesPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             );
           })}
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
-        <div className="space-y-16">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+        <div id="detailed-leagues" className="space-y-16">
           {groupedLeagues.map(({ league, divisions }) => (
             <div id={league.slug} key={league.id} className="scroll-mt-20">
               <ScrollableLeagueSection league={league} divisions={divisions} />
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }

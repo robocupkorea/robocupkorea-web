@@ -27,6 +27,7 @@ export default function SponsorContactButton({
       <button
         onClick={() => copyTextToClipboard(email)}
         className="flex h-12 items-center justify-center gap-1.5 border border-white bg-transparent px-6 font-medium text-white hover:bg-white/10"
+        type="button"
       >
         {buttonText}
       </button>

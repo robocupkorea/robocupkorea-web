@@ -17,7 +17,7 @@ export default async function LearningCentersPage() {
 
   return (
     <>
-      <div className="bg-gray-50">
+      <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
             <p className="text-md mb-2 break-keep text-gray-500">교육기관</p>
@@ -34,12 +34,12 @@ export default async function LearningCentersPage() {
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 break-keep text-gray-500">전국 교육기관</p>
-          <h2 className="break-keep text-3xl font-bold">
+          <h2 id="centers-heading" className="break-keep text-3xl font-bold">
             전국 {learningCenters.length}개 인증 교육기관
           </h2>
           <p className="mt-4 text-gray-600">
@@ -55,7 +55,7 @@ export default async function LearningCentersPage() {
             />
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }

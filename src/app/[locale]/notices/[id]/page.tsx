@@ -21,14 +21,15 @@ export default async function NoticeDetailPage({
 
   return (
     <>
-      <div className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
-        <div
+      <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
+        <article
+          id="notice-content"
           className="prose space-y-5"
           dangerouslySetInnerHTML={{
             __html: await convertMarkdownToHtml(mdString),
           }}
         />
-      </div>
+      </section>
     </>
   );
 }

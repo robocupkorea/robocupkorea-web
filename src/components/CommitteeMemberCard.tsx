@@ -8,7 +8,7 @@ export default function CommitteeMemberCard({
   member: CommitteeMember;
 }) {
   return (
-    <div className="relative h-full w-full border bg-white p-6">
+    <article className="relative h-full w-full border bg-white p-6">
       <div className="mb-6 flex items-center justify-center">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-100">
           <UserIcon size={32} weight="light" className="text-gray-600" />
@@ -16,7 +16,10 @@ export default function CommitteeMemberCard({
       </div>
 
       <div className="text-center">
-        <h3 className="mb-2 text-xl font-semibold text-gray-900">
+        <h3
+          id={`member-${member.id}-name`}
+          className="mb-2 text-xl font-semibold text-gray-900"
+        >
           {member.name}
         </h3>
         <p className="mb-4 text-sm font-medium text-gray-500">
@@ -37,6 +40,6 @@ export default function CommitteeMemberCard({
           {member.affiliation}
         </p>
       </div>
-    </div>
+    </article>
   );
 }

@@ -29,7 +29,7 @@ export default async function EventPage() {
 
   return (
     <>
-      <div className="bg-gray-50">
+      <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
             <h1 className="break-keep text-4xl font-bold text-gray-900">
@@ -40,18 +40,21 @@ export default async function EventPage() {
             </p>
           </div>
         </div>
-      </div>
+      </header>
 
       {eventWithDetails.length === 0 && (
-        <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+        <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <p className="break-keep text-center text-gray-500">
             {events.noEvents}
           </p>
-        </div>
+        </section>
       )}
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
-        <div className="mb-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+        <div
+          id="events-list"
+          className="mb-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {eventWithDetails.map(({ eventDetail, event }) => (
             <EventCard
               key={eventDetail.id}
@@ -60,7 +63,7 @@ export default async function EventPage() {
             />
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }

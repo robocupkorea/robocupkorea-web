@@ -15,7 +15,7 @@ export default async function CommitteePage() {
 
   return (
     <>
-      <div className="bg-gray-50">
+      <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="mb-12 text-center">
             <h1 className="mb-4 break-keep text-4xl font-bold">
@@ -26,14 +26,14 @@ export default async function CommitteePage() {
             </p>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 break-keep text-gray-500">
             {committee.members.section}
           </p>
-          <h2 className="break-keep text-3xl font-bold">
+          <h2 id="members-heading" className="break-keep text-3xl font-bold">
             {committee.members.title}
           </h2>
         </div>
@@ -43,15 +43,18 @@ export default async function CommitteePage() {
             <CommitteeMemberCard key={member.id} member={member} />
           ))}
         </div>
-      </div>
+      </section>
 
-      <div className="bg-gray-50">
+      <section className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="mb-12 text-center">
             <p className="text-md mb-2 break-keep text-gray-500">
               {committee.contact.section}
             </p>
-            <h2 className="break-keep text-3xl font-bold text-gray-900">
+            <h2
+              id="contact-heading"
+              className="break-keep text-3xl font-bold text-gray-900"
+            >
               {committee.contact.title}
             </h2>
           </div>
@@ -68,7 +71,7 @@ export default async function CommitteePage() {
             />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

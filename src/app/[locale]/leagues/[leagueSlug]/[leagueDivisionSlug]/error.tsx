@@ -6,9 +6,9 @@ export default function Error({ reset }: { reset: () => void }) {
   const t = useTranslations("error");
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-16">
+    <section className="container mx-auto max-w-4xl px-4 py-16">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 id="error-heading" className="text-2xl font-bold text-gray-900">
           {t("leagues.title")}
         </h1>
         <p className="mt-4 text-gray-600">{t("leagues.desc")}</p>
@@ -19,6 +19,6 @@ export default function Error({ reset }: { reset: () => void }) {
           {t("leagues.retry")}
         </button>
       </div>
-    </div>
+    </section>
   );
 }

@@ -31,51 +31,53 @@ export default async function Footer() {
   return (
     <footer className="bg-white py-20">
       <div className="container mx-auto flex max-w-7xl flex-col justify-center gap-6 px-4 md:px-8 xl:px-20">
-        <div className="flex flex-wrap items-center gap-2">
-          <a
-            href="https://www.motie.go.kr/"
-            target="_blank"
-            rel="noreferrer"
-            className="cursor-pointer hover:opacity-80"
-          >
-            <Image
-              src={images.ministryOfTradeIndustryAndEnergy}
-              alt={footer.sponsors.ministryOfTradeIndustryAndEnergy}
-              className="mb-2 h-10 w-auto md:h-11"
-              width={145}
-              height={48}
-            />
-          </a>
-          <a
-            href="https://www.nts.go.kr/"
-            target="_blank"
-            rel="noreferrer"
-            className="cursor-pointer hover:opacity-80"
-          >
-            <Image
-              src={images.nationalTaxService}
-              alt={footer.sponsors.nationalTaxService}
-              className="mb-2 h-10 w-auto md:h-11"
-              width={94}
-              height={48}
-            />
-          </a>
-          <a
-            href="https://www.acrc.go.kr/"
-            target="_blank"
-            rel="noreferrer"
-            className="cursor-pointer hover:opacity-80"
-          >
-            <Image
-              src={images.antiCorruption}
-              alt={footer.sponsors.antiCorruption}
-              className="mb-2 h-10 w-auto md:h-11"
-              width={181}
-              height={48}
-            />
-          </a>
-        </div>
-        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+        <section>
+          <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="https://www.motie.go.kr/"
+              target="_blank"
+              rel="noreferrer"
+              className="cursor-pointer hover:opacity-80"
+            >
+              <Image
+                src={images.ministryOfTradeIndustryAndEnergy}
+                alt={footer.sponsors.ministryOfTradeIndustryAndEnergy}
+                className="mb-2 h-10 w-auto md:h-11"
+                width={145}
+                height={48}
+              />
+            </a>
+            <a
+              href="https://www.nts.go.kr/"
+              target="_blank"
+              rel="noreferrer"
+              className="cursor-pointer hover:opacity-80"
+            >
+              <Image
+                src={images.nationalTaxService}
+                alt={footer.sponsors.nationalTaxService}
+                className="mb-2 h-10 w-auto md:h-11"
+                width={94}
+                height={48}
+              />
+            </a>
+            <a
+              href="https://www.acrc.go.kr/"
+              target="_blank"
+              rel="noreferrer"
+              className="cursor-pointer hover:opacity-80"
+            >
+              <Image
+                src={images.antiCorruption}
+                alt={footer.sponsors.antiCorruption}
+                className="mb-2 h-10 w-auto md:h-11"
+                width={181}
+                height={48}
+              />
+            </a>
+          </div>
+        </section>
+        <section className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
           <div className="space-y-4 text-sm leading-relaxed text-black">
             <p className="break-keep max-md:flex max-md:flex-col max-md:gap-1 md:space-x-3">
               <span className="font-bold">{footer.organization}</span>
@@ -87,7 +89,7 @@ export default async function Footer() {
           <div>
             <CreditsButton />
           </div>
-        </div>
+        </section>
       </div>
     </footer>
   );

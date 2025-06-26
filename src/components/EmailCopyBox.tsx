@@ -24,13 +24,14 @@ export default function EmailCopyBox({
 
   return (
     <div className="mx-auto max-w-md">
-      <div
+      <button
         onClick={() => copyTextToClipboard(email)}
         className="inline-flex cursor-pointer items-center gap-2 border border-gray-300 bg-white px-4 py-2 hover:bg-gray-50"
+        type="button"
       >
         <span className="text-blue-700">{email}</span>
         <span className="text-sm text-gray-500">{copyText}</span>
-      </div>
+      </button>
     </div>
   );
 }

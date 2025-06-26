@@ -6,7 +6,7 @@ export default async function About() {
 
   return (
     <>
-      <div className="bg-gray-50">
+      <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
             <h1 className="break-keep text-4xl font-bold text-gray-900">
@@ -17,14 +17,16 @@ export default async function About() {
             </p>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 break-keep text-gray-500">
             {about.chairperson.section}
           </p>
-          <h2 className="text-3xl font-bold">{about.chairperson.title}</h2>
+          <h2 id="chairperson-heading" className="text-3xl font-bold">
+            {about.chairperson.title}
+          </h2>
         </div>
 
         <div className="mx-auto max-w-4xl">
@@ -33,7 +35,7 @@ export default async function About() {
               <div className="relative h-64 w-64 flex-shrink-0 overflow-hidden rounded-full border-4 border-gray-200">
                 <Image
                   src="https://media.robocupkorea.org/images/organization/chairperson/portrait.png"
-                  alt="portrait"
+                  alt="Portrait"
                   fill
                   sizes="256px"
                   className="object-cover"
@@ -65,14 +67,14 @@ export default async function About() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 break-keep text-gray-500">
             {about.robocup.section}
           </p>
-          <h2 className="break-keep text-3xl font-bold">
+          <h2 id="robocup-heading" className="break-keep text-3xl font-bold">
             {about.robocup.title}
           </h2>
         </div>
@@ -96,14 +98,16 @@ export default async function About() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
           <p className="text-md mb-2 break-keep text-gray-500">
             {about.video.section}
           </p>
-          <h2 className="break-keep text-3xl font-bold">{about.video.title}</h2>
+          <h2 id="video-heading" className="break-keep text-3xl font-bold">
+            {about.video.title}
+          </h2>
         </div>
 
         <div className="mb-8">
@@ -131,7 +135,7 @@ export default async function About() {
             </p>
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }

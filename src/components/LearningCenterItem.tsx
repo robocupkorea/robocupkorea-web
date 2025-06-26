@@ -8,7 +8,7 @@ export default function LearningCenterItem({
   learningCenter: LearningCenter;
 }) {
   return (
-    <div
+    <article
       key={learningCenter.id}
       className="relative h-full w-full border bg-white"
     >
@@ -26,7 +26,10 @@ export default function LearningCenterItem({
           <p className="break-keep text-sm font-medium tracking-wide text-gray-500">
             {learningCenter.region}
           </p>
-          <h3 className="mt-0.5 line-clamp-2 break-keep text-xl font-bold text-gray-900">
+          <h3
+            id={`learning-center-${learningCenter.id}-title`}
+            className="mt-0.5 line-clamp-2 break-keep text-xl font-bold text-gray-900"
+          >
             {learningCenter.name}
           </h3>
         </div>
@@ -41,6 +44,6 @@ export default function LearningCenterItem({
           </p>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

@@ -6,9 +6,9 @@ export default async function NotFound() {
   const { notFound } = await getMessages();
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-16">
+    <section className="container mx-auto max-w-4xl px-4 py-16">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 id="not-found-heading" className="text-2xl font-bold text-gray-900">
           {notFound.leagues.title}
         </h1>
         <p className="mt-4 text-gray-600">{notFound.leagues.desc}</p>
@@ -19,6 +19,6 @@ export default async function NotFound() {
           {notFound.leagues.back}
         </Link>
       </div>
-    </div>
+    </section>
   );
 }

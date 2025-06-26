@@ -49,7 +49,7 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
         )}
       </button>
 
-      <div
+      <nav
         className={`fixed left-0 top-16 z-40 h-[calc(100dvh-4rem)] w-full bg-white transition-all duration-100 md:hidden ${
           isMenuOpen ? "" : "hidden"
         }`}
@@ -107,7 +107,7 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
             ))}
           </ul>
         </div>
-      </div>
+      </nav>
     </>
   );
 }

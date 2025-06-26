@@ -76,9 +76,14 @@ export default function ScrollableLeagueSection({
   }, [checkScroll]);
 
   return (
-    <div>
+    <section>
       <div className="mb-12 text-center">
-        <h2 className="text-3xl font-bold text-gray-900">{league.name}</h2>
+        <h2
+          id={`league-${league.id}-title`}
+          className="text-3xl font-bold text-gray-900"
+        >
+          {league.name}
+        </h2>
       </div>
 
       <div className="relative">
@@ -122,6 +127,6 @@ export default function ScrollableLeagueSection({
           <div className="pointer-events-none absolute right-[-1px] top-0 z-10 h-full w-12 bg-gradient-to-l from-white to-transparent" />
         )}
       </div>
-    </div>
+    </section>
   );
 }
