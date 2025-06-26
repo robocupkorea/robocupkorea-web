@@ -23,10 +23,10 @@ export default function LearningCenterItem({
 
       <div className="p-5">
         <div className="mb-2">
-          <p className="text-sm font-medium tracking-wide text-gray-500">
+          <p className="break-keep text-sm font-medium tracking-wide text-gray-500">
             {learningCenter.region}
           </p>
-          <h3 className="mt-0.5 line-clamp-2 text-xl font-bold text-gray-900">
+          <h3 className="mt-0.5 line-clamp-2 break-keep text-xl font-bold text-gray-900">
             {learningCenter.name}
           </h3>
         </div>
@@ -36,7 +36,7 @@ export default function LearningCenterItem({
             size={16}
             className="mt-0.5 flex-shrink-0 text-gray-400"
           />
-          <p className="line-clamp-2 text-sm leading-relaxed text-gray-600">
+          <p className="line-clamp-2 break-keep text-sm leading-relaxed text-gray-600">
             {learningCenter.address}
           </p>
         </div>

@@ -13,10 +13,12 @@ export default async function NoticesPage() {
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900">
+            <h1 className="break-keep text-4xl font-bold text-gray-900">
               {notices.title}
             </h1>
-            <p className="mt-4 text-lg text-gray-800">{notices.subtitle}</p>
+            <p className="mt-4 break-keep text-lg text-gray-800">
+              {notices.subtitle}
+            </p>
           </div>
         </div>
       </div>
@@ -25,9 +27,9 @@ export default async function NoticesPage() {
         <div className="overflow-x-auto">
           <div className="min-w-full border-t border-gray-200">
             <div className="flex bg-gray-50 text-left text-sm font-semibold text-gray-600">
-              <div className="w-24 p-4">{notices.table.number}</div>
+              <div className="w-16 p-4">{notices.table.number}</div>
               <div className="flex-1 p-4">{notices.table.title}</div>
-              <div className="w-40 p-4 text-right">{notices.table.date}</div>
+              <div className="w-24 p-4 text-right">{notices.table.date}</div>
             </div>
 
             {noticesData?.length === 0 ? (
@@ -42,13 +44,13 @@ export default async function NoticesPage() {
                     href={`/notices/${notice.id}`}
                     className="flex cursor-pointer border-b hover:bg-gray-100"
                   >
-                    <div className="w-24 p-4 text-sm text-gray-500">
+                    <div className="w-16 p-4 text-sm text-gray-500">
                       {noticesData.length - index}
                     </div>
-                    <div className="flex-1 p-4 font-medium text-gray-800">
+                    <div className="flex-1 truncate p-4 font-medium text-gray-800">
                       {notice.title}
                     </div>
-                    <div className="w-40 p-4 text-right text-sm text-gray-500">
+                    <div className="w-24 p-4 text-right text-sm text-gray-500">
                       {formatISODate(notice.createdAt)}
                     </div>
                   </Link>

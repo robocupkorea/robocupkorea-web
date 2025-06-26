@@ -32,15 +32,21 @@ export default async function EventPage() {
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900">{events.title}</h1>
-            <p className="mt-4 text-lg text-gray-800">{events.subtitle}</p>
+            <h1 className="break-keep text-4xl font-bold text-gray-900">
+              {events.title}
+            </h1>
+            <p className="mt-4 break-keep text-lg text-gray-800">
+              {events.subtitle}
+            </p>
           </div>
         </div>
       </div>
 
       {eventWithDetails.length === 0 && (
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
-          <p className="text-center text-gray-500">{events.noEvents}</p>
+          <p className="break-keep text-center text-gray-500">
+            {events.noEvents}
+          </p>
         </div>
       )}
 

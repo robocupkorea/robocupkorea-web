@@ -24,7 +24,7 @@ export default async function LeaguesPage() {
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900">
+            <h1 className="break-keep text-4xl font-bold text-gray-900">
               {leagues.title}
             </h1>
             <p className="mt-4 break-keep text-lg text-gray-800">
@@ -36,7 +36,7 @@ export default async function LeaguesPage() {
 
       <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold text-gray-900">
+          <h2 className="break-keep text-3xl font-bold text-gray-900">
             {leagues.overview.title}
           </h2>
           <p className="mt-4 break-keep text-lg text-gray-700">

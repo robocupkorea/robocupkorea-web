@@ -9,15 +9,19 @@ export default async function About() {
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900">{about.title}</h1>
-            <p className="mt-4 text-lg text-gray-800">{about.subtitle}</p>
+            <h1 className="break-keep text-4xl font-bold text-gray-900">
+              {about.title}
+            </h1>
+            <p className="mt-4 break-keep text-lg text-gray-800">
+              {about.subtitle}
+            </p>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
-          <p className="text-md mb-2 text-gray-500">
+          <p className="text-md mb-2 break-keep text-gray-500">
             {about.chairperson.section}
           </p>
           <h2 className="text-3xl font-bold">{about.chairperson.title}</h2>
@@ -65,8 +69,12 @@ export default async function About() {
 
       <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
-          <p className="text-md mb-2 text-gray-500">{about.robocup.section}</p>
-          <h2 className="text-3xl font-bold">{about.robocup.title}</h2>
+          <p className="text-md mb-2 break-keep text-gray-500">
+            {about.robocup.section}
+          </p>
+          <h2 className="break-keep text-3xl font-bold">
+            {about.robocup.title}
+          </h2>
         </div>
 
         <div className="flex flex-col items-center gap-8 text-center">
@@ -92,8 +100,10 @@ export default async function About() {
 
       <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
-          <p className="text-md mb-2 text-gray-500">{about.video.section}</p>
-          <h2 className="text-3xl font-bold">{about.video.title}</h2>
+          <p className="text-md mb-2 break-keep text-gray-500">
+            {about.video.section}
+          </p>
+          <h2 className="break-keep text-3xl font-bold">{about.video.title}</h2>
         </div>
 
         <div className="mb-8">
@@ -109,14 +119,14 @@ export default async function About() {
         </div>
 
         <div className="mx-auto max-w-3xl text-center leading-relaxed text-gray-700">
-          <p className="font-semibold text-black">
+          <p className="break-keep font-semibold text-black">
             {about.video.eventTitle}{" "}
             <span className="font-normal text-gray-600">
               ({about.video.eventDate})
             </span>
           </p>
           {about.video.description.map((paragraph: string, index: number) => (
-            <p key={index} className="mt-2">
+            <p key={index} className="mt-2 break-keep">
               {paragraph}
             </p>
           ))}

@@ -14,20 +14,24 @@ export default async function HistoryPage() {
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900">
+            <h1 className="break-keep text-4xl font-bold text-gray-900">
               {history.title}
             </h1>
-            <p className="mt-4 text-lg text-gray-800">{history.subtitle}</p>
+            <p className="mt-4 break-keep text-lg text-gray-800">
+              {history.subtitle}
+            </p>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div className="mb-12 text-center">
-          <p className="text-md mb-2 text-gray-500">
+          <p className="text-md mb-2 break-keep text-gray-500">
             {history.timeline.section}
           </p>
-          <h2 className="text-3xl font-bold">{history.timeline.title}</h2>
+          <h2 className="break-keep text-3xl font-bold">
+            {history.timeline.title}
+          </h2>
         </div>
 
         <div className="flex justify-center">
@@ -47,7 +51,7 @@ export default async function HistoryPage() {
                       <>
                         <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-700 bg-gray-700" />
                         <div className="mb-4">
-                          <h3 className="text-2xl font-bold leading-none text-gray-700">
+                          <h3 className="break-keep text-2xl font-bold leading-none text-gray-700">
                             {event.year}
                           </h3>
                         </div>
@@ -55,13 +59,15 @@ export default async function HistoryPage() {
                     )}
 
                     <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-300 bg-gray-300" />
-                    <time className="text-sm text-gray-500">
+                    <time className="break-keep text-sm text-gray-500">
                       {formatDateRange(event.dateStart, event.dateEnd, locale)}
                     </time>
-                    <h3 className="mt-0.5 text-xl font-semibold">
+                    <h3 className="mt-0.5 break-keep text-xl font-semibold">
                       {content?.title}
                     </h3>
-                    <p className="mb-6 text-gray-500">{content?.location}</p>
+                    <p className="mb-6 break-keep text-gray-500">
+                      {content?.location}
+                    </p>
                   </li>
                 );
               })}
