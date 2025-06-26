@@ -1,6 +1,7 @@
 "use client";
 
 import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react";
+import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
 import { Link } from "@/i18n/navigation";
@@ -18,6 +19,7 @@ interface MobileMenuProps {
 export default function MobileMenu({ menuItems }: MobileMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChildMenuOpen, setIsChildMenuOpen] = useState(true);
+  const locale = useLocale();
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -66,7 +68,7 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
                       onClick={() => setIsChildMenuOpen(!isChildMenuOpen)}
                       className="flex cursor-default cursor-pointer items-center gap-2 text-lg font-medium"
                     >
-                      {item.name}
+                      <span>{locale === "en" ? item.name[0] : item.name}</span>
                       <CaretDownIcon
                         className={`${isChildMenuOpen ? "rotate-180" : ""}`}
                         size={20}
