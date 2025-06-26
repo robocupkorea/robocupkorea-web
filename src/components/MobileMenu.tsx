@@ -4,7 +4,7 @@ import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react";
 import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 interface MenuItem {
   name: string;
@@ -20,6 +20,11 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChildMenuOpen, setIsChildMenuOpen] = useState(true);
   const locale = useLocale();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
