@@ -7,6 +7,7 @@ import { getMessages } from "next-intl/server";
 import "@/app/globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import ScrollToTop from "@/components/ScrollToTop";
 import { routing } from "@/i18n/routing";
 
 import "highlight.js/styles/github.css";
@@ -130,11 +131,12 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${pretendard.variable} flex min-h-svh min-w-[375px] flex-col antialiased`}
+        className={`${pretendard.variable} min-h-svh min-w-[375px] antialiased`}
       >
+        <ScrollToTop />
         <NextIntlClientProvider messages={messages}>
           <Header />
-          <main className="min-h-svh grow">{children}</main>
+          <main className="grow">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>
