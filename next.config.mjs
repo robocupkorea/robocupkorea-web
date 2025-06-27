@@ -15,6 +15,8 @@ const nextConfig = {
   env: {
     NOTION_TOKEN: process.env.NOTION_TOKEN,
     NOTION_NOTICES_DATABASE_ID: process.env.NOTION_NOTICES_DATABASE_ID,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
 };
 
