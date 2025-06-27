@@ -41,11 +41,16 @@ export interface NoticePage {
  * Notion 공지사항 목록 조회
  * @returns 공지사항 목록
  */
-export async function getNotices(): Promise<Notice[]> {
+export async function getNotices(locale: string): Promise<Notice[]> {
   try {
     const { results } = await notion.databases.query({
       database_id: process.env.NOTION_NOTICES_DATABASE_ID!,
-      filter: { property: "Status", select: { equals: "Published" } }, // 발행된 공지사항만 반환
+      filter: {
+        and: [
+          { property: "Status", select: { equals: "Published" } },
+          { property: "Locale", select: { equals: locale } },
+        ],
+      }, // 발행된 공지사항만 반환
       sorts: [{ property: "CreatedAt", direction: "descending" }], // 작성일 기준 내림차순 정렬
     });
 

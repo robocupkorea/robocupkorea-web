@@ -1,4 +1,4 @@
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 import { getNotices } from "@/lib/notion/notices";
@@ -15,7 +15,8 @@ export async function generateMetadata() {
 
 export default async function NoticesPage() {
   const { notices } = await getMessages();
-  const noticesData = await getNotices();
+  const locale = await getLocale();
+  const noticesData = await getNotices(locale);
 
   return (
     <>
@@ -37,13 +38,13 @@ export default async function NoticesPage() {
           <table className="min-w-full border-t border-gray-200">
             <thead>
               <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                <th scope="col" className="w-16 p-4">
+                <th scope="col" className="min-w-16 p-4">
                   {notices.table.number}
                 </th>
                 <th scope="col" className="flex-1 p-4">
                   {notices.table.title}
                 </th>
-                <th scope="col" className="w-24 p-4 text-right">
+                <th scope="col" className="min-w-24 p-4 text-right">
                   {notices.table.date}
                 </th>
               </tr>
@@ -58,18 +59,18 @@ export default async function NoticesPage() {
               ) : (
                 noticesData?.map((notice, index) => (
                   <tr key={notice.id} className="border-b hover:bg-gray-100">
-                    <td className="w-16 p-4 text-sm text-gray-500">
+                    <td className="min-w-16 p-4 text-sm text-gray-500">
                       {noticesData.length - index}
                     </td>
                     <td className="flex-1 p-4">
                       <Link
                         href={`/notices/${notice.id}`}
-                        className="block truncate font-medium text-gray-800 hover:text-blue-600"
+                        className="block truncate font-medium text-gray-800"
                       >
                         {notice.title}
                       </Link>
                     </td>
-                    <td className="w-24 p-4 text-right text-sm text-gray-500">
+                    <td className="min-w-24 p-4 text-right text-sm text-gray-500">
                       {formatISODate(notice.createdAt)}
                     </td>
                   </tr>
