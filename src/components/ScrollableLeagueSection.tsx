@@ -89,7 +89,7 @@ export default function ScrollableLeagueSection({
       <div className="relative">
         {/* 왼쪽 그라데이션 */}
         {canScrollLeft && (
-          <div className="pointer-events-none absolute left-[-1px] top-0 z-10 h-full w-12 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute left-[-1px] top-0 z-10 h-full w-12 bg-gradient-to-r from-white to-transparent opacity-80" />
         )}
 
         <div
@@ -124,7 +124,7 @@ export default function ScrollableLeagueSection({
 
         {/* 오른쪽 그라데이션 */}
         {canScrollRight && (
-          <div className="pointer-events-none absolute right-[-1px] top-0 z-10 h-full w-12 bg-gradient-to-l from-white to-transparent" />
+          <div className="pointer-events-none absolute right-[-1px] top-0 z-10 h-full w-12 bg-gradient-to-l from-white to-transparent opacity-80" />
         )}
       </div>
     </section>
