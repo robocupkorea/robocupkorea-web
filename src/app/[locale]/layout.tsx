@@ -131,7 +131,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${pretendard.variable} min-h-svh min-w-[375px] antialiased`}
+        className={`${pretendard.variable} flex min-h-svh min-w-[375px] flex-col antialiased`}
       >
         <ScrollToTop />
         <NextIntlClientProvider messages={messages}>
