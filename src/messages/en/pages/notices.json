@@ -1,5 +1,9 @@
 {
   "notices": {
+    "meta": {
+      "title": "Notices | RoboCup Korea Association",
+      "description": "Check out competition news, updates, and announcements from the RoboCup Korea Association"
+    },
     "title": "Notices",
     "subtitle": "Check out competition news, updates, and announcements from the RoboCup Korea Association",
     "table": {

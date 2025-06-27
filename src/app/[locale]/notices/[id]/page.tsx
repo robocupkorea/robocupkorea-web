@@ -1,8 +1,18 @@
 import { notFound } from "next/navigation";
+import { getMessages } from "next-intl/server";
 
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { getNoticePage } from "@/lib/notion/notices";
 import { convertPage } from "@/lib/notion/notion-to-md";
+
+export async function generateMetadata() {
+  const { notices } = await getMessages();
+
+  return {
+    title: notices.meta.title,
+    description: notices.meta.description,
+  };
+}
 
 export default async function NoticeDetailPage({
   params,

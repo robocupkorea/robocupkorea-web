@@ -5,6 +5,14 @@ import LearningCenterItem from "@/components/LearningCenterItem";
 import { learningCenterData } from "@/data/learning-center-data";
 import { LearningCenter } from "@/types/learning-center";
 
+export async function generateMetadata() {
+  return {
+    title: "한국로보컵협회 인증 교육기관",
+    description:
+      "본 교육원은 한국로보컵협회의 다양한 교육 및 실습 기회를 제공하여, 청소년들이 로보컵을 통해 로봇 및 AI 관련 기술 능력과 역량을 향상시킬 수 있도록 협회가 공식적으로 지원하는 교육기관입니다.",
+  };
+}
+
 export default async function LearningCentersPage() {
   const locale = await getLocale();
 

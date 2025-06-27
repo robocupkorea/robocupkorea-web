@@ -4,6 +4,15 @@ import CommitteeMemberCard from "@/components/CommitteeMemberCard";
 import EmailCopyBox from "@/components/EmailCopyBox";
 import { committeeMemberData } from "@/data/committee-member-data";
 
+export async function generateMetadata() {
+  const { committee } = await getMessages();
+
+  return {
+    title: committee.meta.title,
+    description: committee.meta.description,
+  };
+}
+
 export default async function CommitteePage() {
   const locale = await getLocale();
 

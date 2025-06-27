@@ -5,6 +5,15 @@ import { leagueData } from "@/data/league-data";
 import { leagueDivisionData } from "@/data/league-division-data";
 import { Link } from "@/i18n/navigation";
 
+export async function generateMetadata() {
+  const { leagues } = await getMessages();
+
+  return {
+    title: leagues.meta.title,
+    description: leagues.meta.description,
+  };
+}
+
 export default async function LeaguesPage() {
   const { leagues } = await getMessages();
 

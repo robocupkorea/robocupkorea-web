@@ -1,6 +1,15 @@
 import Image from "next/image";
 import { getMessages } from "next-intl/server";
 
+export async function generateMetadata() {
+  const { about } = await getMessages();
+
+  return {
+    title: about.meta.title,
+    description: about.meta.description,
+  };
+}
+
 export default async function About() {
   const { about } = await getMessages();
 

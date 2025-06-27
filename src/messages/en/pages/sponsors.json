@@ -1,5 +1,9 @@
 {
   "sponsors": {
+    "meta": {
+      "title": "Sponsors | RoboCup Korea Association",
+      "description": "Check out competition news, updates, and announcements from the RoboCup Korea Association"
+    },
     "description1": "The RoboCup Korea Association is a non-profit organization that has been operating RoboCup competitions for over 10 years since 2013.",
     "description2": "All sponsorship funds are used for various purposes to nurture robotics dreamers and promote AI and robotics education.",
     "contactButton": "Contact for Sponsorship",

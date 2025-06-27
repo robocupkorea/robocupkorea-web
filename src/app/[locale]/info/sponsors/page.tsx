@@ -4,6 +4,15 @@ import { getMessages } from "next-intl/server";
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
 import SponsorContactButton from "@/components/SponsorContactButton";
 
+export async function generateMetadata() {
+  const { sponsors } = await getMessages();
+
+  return {
+    title: sponsors.meta.title,
+    description: sponsors.meta.description,
+  };
+}
+
 export default async function SponsorsPage() {
   const { sponsors } = await getMessages();
 

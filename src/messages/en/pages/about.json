@@ -1,5 +1,9 @@
 {
   "about": {
+    "meta": {
+      "title": "About | RoboCup Korea Association",
+      "description": "Introducing the goals and activities of the RoboCup Korea Association leading the future of robotics education"
+    },
     "title": "About RoboCup Korea Association",
     "subtitle": "Introducing the goals and activities of the RoboCup Korea Association leading the future of robotics education",
     "chairperson": {

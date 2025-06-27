@@ -1,9 +1,19 @@
 import { notFound } from "next/navigation";
+import { getMessages } from "next-intl/server";
 
 import { leagueData } from "@/data/league-data";
 import { leagueDivisionData } from "@/data/league-division-data";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { convertPage } from "@/lib/notion/notion-to-md";
+
+export async function generateMetadata() {
+  const { leagues } = await getMessages();
+
+  return {
+    title: leagues.meta.title,
+    description: leagues.meta.description,
+  };
+}
 
 export default async function LeagueDivisionPage({
   params,

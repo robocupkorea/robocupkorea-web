@@ -4,6 +4,15 @@ import { eventData } from "@/data/event-data";
 import { eventDetailData } from "@/data/event-detail-data";
 import { formatDateRange } from "@/utils/date";
 
+export async function generateMetadata() {
+  const { history } = await getMessages();
+
+  return {
+    title: history.meta.title,
+    description: history.meta.description,
+  };
+}
+
 export default async function HistoryPage() {
   const locale = await getLocale();
 

@@ -1,7 +1,17 @@
 import { notFound } from "next/navigation";
+import { getMessages } from "next-intl/server";
 
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { convertPage } from "@/lib/notion/notion-to-md";
+
+export async function generateMetadata() {
+  const { events } = await getMessages();
+
+  return {
+    title: events.meta.title,
+    description: events.meta.description,
+  };
+}
 
 export default async function EventPage({
   params,

@@ -4,6 +4,15 @@ import { Link } from "@/i18n/navigation";
 import { getNotices } from "@/lib/notion/notices";
 import { formatISODate } from "@/utils/date";
 
+export async function generateMetadata() {
+  const { notices } = await getMessages();
+
+  return {
+    title: notices.meta.title,
+    description: notices.meta.description,
+  };
+}
+
 export default async function NoticesPage() {
   const { notices } = await getMessages();
   const noticesData = await getNotices();
