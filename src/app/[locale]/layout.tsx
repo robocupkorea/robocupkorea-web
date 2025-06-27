@@ -59,7 +59,6 @@ export async function generateMetadata({
       ],
       apple: "/apple-touch-icon.png",
     },
-    manifest: "/site.webmanifest",
   };
 }
 
