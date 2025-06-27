@@ -134,7 +134,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <Header />
-          <main className="grow">{children}</main>
+          <main className="min-h-svh grow">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>
