@@ -9,6 +9,7 @@ import {
   UsersIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
+import Link from "next/link";
 import { getLocale, getMessages } from "next-intl/server";
 
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
@@ -17,13 +18,13 @@ import computerImacSmileyFaceIcon from "@/assets/svg/computer-imac-smiley-face-s
 import trophyIcon from "@/assets/svg/trophy-streamline-icon.svg";
 import EventCard from "@/components/EventCard";
 import LeagueCard from "@/components/LeagueCard";
+import TimelineItem from "@/components/TimelineItem";
 import VideoPlayer from "@/components/VideoPlayer";
 import { eventData } from "@/data/event-data";
 import { eventDetailData } from "@/data/event-detail-data";
 import { leagueData } from "@/data/league-data";
 import { leagueDivisionData } from "@/data/league-division-data";
-import { Link } from "@/i18n/navigation";
-import { LeagueDivision } from "@/types/leagues";
+import type { LeagueDivision } from "@/types/leagues";
 import { formatDateRange } from "@/utils/date";
 
 export default async function Home() {
@@ -267,49 +268,14 @@ export default async function Home() {
                 {eventData
                   .slice(-5, -1)
                   .reverse()
-                  .map((event, idx, arr) => {
-                    const content = eventDetailData.find(
-                      (c) => c.eventId === event.id && c.locale === locale,
-                    );
-                    const showYear =
-                      idx === 0 || arr[idx - 1].year !== event.year;
-
-                    return (
-                      <li
-                        key={event.id}
-                        className="mb-10 ml-4 w-full md:w-auto"
-                      >
-                        {showYear && (
-                          <>
-                            <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-700 bg-gray-700" />
-                            <div className="mb-4">
-                              <h3 className="text-2xl font-bold leading-none text-gray-700">
-                                {event.year}
-                              </h3>
-                            </div>
-                          </>
-                        )}
-
-                        <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-300 bg-gray-300" />
-                        <time
-                          className="text-sm text-gray-500"
-                          dateTime={event.dateStart}
-                        >
-                          {formatDateRange(
-                            event.dateStart,
-                            event.dateEnd,
-                            locale,
-                          )}
-                        </time>
-                        <h3 className="mt-0.5 text-xl font-semibold">
-                          {content?.title}
-                        </h3>
-                        <address className="mb-6 not-italic text-gray-500">
-                          {content?.location}
-                        </address>
-                      </li>
-                    );
-                  })}
+                  .map((event, idx, arr) => (
+                    <TimelineItem
+                      key={event.id}
+                      event={event}
+                      events={arr}
+                      eventIndex={idx}
+                    />
+                  ))}
               </ol>
             </div>
           </div>

@@ -1,8 +1,7 @@
-import { getLocale, getMessages } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 
+import TimelineItem from "@/components/TimelineItem";
 import { eventData } from "@/data/event-data";
-import { eventDetailData } from "@/data/event-detail-data";
-import { formatDateRange } from "@/utils/date";
 
 export async function generateMetadata() {
   const { history } = await getMessages();
@@ -14,9 +13,9 @@ export async function generateMetadata() {
 }
 
 export default async function HistoryPage() {
-  const locale = await getLocale();
-
   const { history } = await getMessages();
+
+  const reversedEvents = eventData.slice().reverse();
 
   return (
     <>
@@ -45,41 +44,14 @@ export default async function HistoryPage() {
 
         <div className="flex justify-center">
           <ol className="relative border-s border-gray-300">
-            {eventData
-              .slice()
-              .reverse()
-              .map((event, idx, arr) => {
-                const content = eventDetailData.find(
-                  (c) => c.eventId === event.id && c.locale === locale,
-                );
-                const showYear = idx === 0 || arr[idx - 1].year !== event.year;
-
-                return (
-                  <li key={event.id} className="mb-10 ml-4 w-full md:w-auto">
-                    {showYear && (
-                      <>
-                        <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-700 bg-gray-700" />
-                        <div className="mb-4">
-                          <h3 className="break-keep text-2xl font-bold leading-none text-gray-700">
-                            {event.year}
-                          </h3>
-                        </div>
-                      </>
-                    )}
-
-                    <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-300 bg-gray-300" />
-                    <time className="break-keep text-sm text-gray-500">
-                      {formatDateRange(event.dateStart, event.dateEnd, locale)}
-                    </time>
-                    <h3 className="mt-0.5 break-keep text-xl font-semibold">
-                      {content?.title}
-                    </h3>
-                    <p className="mb-6 break-keep text-gray-500">
-                      {content?.location}
-                    </p>
-                  </li>
-                );
-              })}
+            {reversedEvents.map((event, idx) => (
+              <TimelineItem
+                key={event.id}
+                event={event}
+                events={reversedEvents}
+                eventIndex={idx}
+              />
+            ))}
           </ol>
         </div>
       </section>
