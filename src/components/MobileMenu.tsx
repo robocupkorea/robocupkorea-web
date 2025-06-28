@@ -20,12 +20,28 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChildMenuOpen, setIsChildMenuOpen] = useState(true);
   const locale = useLocale();
+
+  // 현재 경로 가져오기
   const pathname = usePathname();
 
+  // 현재 경로가 메뉴 아이템과 일치하는지 확인하는 함수
+  const isActive = (href: string) => {
+    // locale prefix 제거
+    const pathWithoutLocale = pathname.replace(
+      /^\/[a-z]{2}(?:-[A-Z]{2})?(?=\/|$)/,
+      "",
+    );
+
+    if (href === "/") return pathWithoutLocale === "/";
+    return pathWithoutLocale.startsWith(href);
+  };
+
+  // 경로가 변경될 때 메뉴 닫기
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  // 키보드로 메뉴 닫기
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setIsMenuOpen(false);
@@ -71,7 +87,13 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
                     <button
                       type="button"
                       onClick={() => setIsChildMenuOpen(!isChildMenuOpen)}
-                      className="flex cursor-default cursor-pointer items-center gap-2 text-lg font-medium"
+                      className={`flex cursor-default cursor-pointer items-center gap-2 text-lg ${
+                        item.submenu.some((subItem) =>
+                          isActive(subItem.href || ""),
+                        )
+                          ? "font-bold"
+                          : "font-medium group-hover:text-gray-600"
+                      }`}
                     >
                       <span>{locale === "en" ? item.name[0] : item.name}</span>
                       <CaretDownIcon
@@ -88,7 +110,11 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
                         <li key={subItem.name} className="flex">
                           <Link
                             href={subItem.href}
-                            className="block py-1 text-base font-medium text-gray-700 hover:text-gray-600"
+                            className={`block py-1 text-base text-gray-700 hover:text-gray-600 ${
+                              isActive(subItem.href || "")
+                                ? "font-bold"
+                                : "font-medium"
+                            }`}
                             onClick={() => setIsMenuOpen(false)}
                           >
                             {subItem.name}
@@ -101,7 +127,11 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
                   <div className="flex">
                     <Link
                       href={item.href || "#"}
-                      className="block text-lg font-medium hover:text-gray-700"
+                      className={`block text-lg hover:text-gray-700 ${
+                        isActive(item.href || "")
+                          ? "font-bold"
+                          : "font-medium hover:text-gray-600"
+                      }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
