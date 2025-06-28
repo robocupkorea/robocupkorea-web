@@ -1,5 +1,6 @@
 "use client";
 
+import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import LeagueCard from "@/components/LeagueCard";
@@ -46,6 +47,20 @@ export default function ScrollableLeagueSection({
     }
   }, [divisions.length]);
 
+  const scrollLeft = useCallback(() => {
+    if (scrollRef.current) {
+      const scrollDistance = Math.min(200, window.innerWidth * 0.4);
+      scrollRef.current.scrollBy({ left: -scrollDistance, behavior: "smooth" });
+    }
+  }, []);
+
+  const scrollRight = useCallback(() => {
+    if (scrollRef.current) {
+      const scrollDistance = Math.min(200, window.innerWidth * 0.4);
+      scrollRef.current.scrollBy({ left: scrollDistance, behavior: "smooth" });
+    }
+  }, []);
+
   useEffect(() => {
     const scrollElement = scrollRef.current;
     if (scrollElement) {
@@ -87,9 +102,20 @@ export default function ScrollableLeagueSection({
       </div>
 
       <div className="relative">
-        {/* 왼쪽 그라데이션 */}
+        {/* 왼쪽 그라데이션 (모바일용) */}
         {canScrollLeft && (
-          <div className="pointer-events-none absolute left-[-1px] top-0 z-10 h-full w-12 bg-gradient-to-r from-white to-transparent opacity-80" />
+          <div className="pointer-events-none absolute left-[-1px] top-0 z-10 h-full w-8 bg-gradient-to-r from-white to-transparent opacity-80 sm:hidden" />
+        )}
+
+        {/* 왼쪽 화살표 버튼 (데스크탑용) */}
+        {canScrollLeft && (
+          <button
+            onClick={scrollLeft}
+            className="absolute left-2 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg transition-all hover:bg-gray-50 hover:shadow-xl sm:flex"
+            disabled={!canScrollLeft}
+          >
+            <CaretLeftIcon size={20} className="text-gray-700" />
+          </button>
         )}
 
         <div
@@ -105,6 +131,17 @@ export default function ScrollableLeagueSection({
             />
           ))}
         </div>
+
+        {/* 오른쪽 화살표 버튼 (데스크탑용) */}
+        {canScrollRight && (
+          <button
+            onClick={scrollRight}
+            className="absolute right-2 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg transition-all hover:bg-gray-50 hover:shadow-xl sm:flex"
+            disabled={!canScrollRight}
+          >
+            <CaretRightIcon size={20} className="text-gray-700" />
+          </button>
+        )}
 
         {/* 스크롤 인디케이터 */}
         {isScrollable && (
@@ -122,9 +159,9 @@ export default function ScrollableLeagueSection({
           </div>
         )}
 
-        {/* 오른쪽 그라데이션 */}
+        {/* 오른쪽 그라데이션 (모바일용) */}
         {canScrollRight && (
-          <div className="pointer-events-none absolute right-[-1px] top-0 z-10 h-full w-12 bg-gradient-to-l from-white to-transparent opacity-80" />
+          <div className="pointer-events-none absolute right-[-1px] top-0 z-10 h-full w-8 bg-gradient-to-l from-white to-transparent opacity-80 sm:hidden" />
         )}
       </div>
     </section>
