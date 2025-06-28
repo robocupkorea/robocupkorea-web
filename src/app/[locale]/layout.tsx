@@ -39,11 +39,20 @@ export async function generateMetadata({
       siteName: meta.ogSiteName,
       locale: locale,
       alternateLocale: locale === "ko" ? "en" : "ko",
+      images: [
+        {
+          url: "https://media.robocupkorea.org/images/meta/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: meta.ogTitle,
+        },
+      ],
     },
     twitter: {
       card: meta.twitterCard,
       title: meta.twitterTitle,
       description: meta.twitterDescription,
+      images: ["https://media.robocupkorea.org/images/meta/og-image.jpg"],
     },
   };
 }
