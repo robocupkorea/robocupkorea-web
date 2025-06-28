@@ -9,23 +9,23 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     name: meta.title,
     short_name: meta.title,
     description: meta.description,
+    start_url: "/",
+    display: "standalone",
+    background_color: "#ffffff",
+    theme_color: "#ffffff",
     icons: [
       {
-        src: "/web-app-manifest-192x192.png",
+        src: "/icon-192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "maskable",
       },
       {
-        src: "/web-app-manifest-512x512.png",
+        src: "/icon-512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
       },
     ],
-    theme_color: "#ffffff",
-    background_color: "#ffffff",
-    display: "standalone",
-    start_url: "/",
   };
 }

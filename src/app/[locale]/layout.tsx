@@ -45,22 +45,6 @@ export async function generateMetadata({
       title: meta.twitterTitle,
       description: meta.twitterDescription,
     },
-    icons: {
-      icon: [
-        { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-        {
-          url: "/web-app-manifest-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          url: "/web-app-manifest-512x512.png",
-          sizes: "512x512",
-          type: "image/png",
-        },
-      ],
-      apple: "/apple-touch-icon.png",
-    },
   };
 }
 
