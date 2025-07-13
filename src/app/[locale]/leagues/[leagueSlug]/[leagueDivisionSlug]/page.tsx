@@ -48,13 +48,15 @@ export default async function LeagueDivisionPage({
     notFound();
   }
 
+  const htmlContent = await convertMarkdownToHtml(mdString);
+
   return (
     <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
       <article
         id="league-division-content"
         className="prose leading-tight"
         dangerouslySetInnerHTML={{
-          __html: await convertMarkdownToHtml(mdString),
+          __html: htmlContent,
         }}
       />
     </section>

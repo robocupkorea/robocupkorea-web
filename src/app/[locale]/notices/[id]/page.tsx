@@ -29,6 +29,12 @@ export default async function NoticeDetailPage({
 
   const mdString = await convertPage(id);
 
+  if (!mdString) {
+    notFound();
+  }
+
+  const htmlContent = await convertMarkdownToHtml(mdString);
+
   return (
     <>
       <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
@@ -36,7 +42,7 @@ export default async function NoticeDetailPage({
           id="notice-content"
           className="prose leading-tight"
           dangerouslySetInnerHTML={{
-            __html: await convertMarkdownToHtml(mdString),
+            __html: htmlContent,
           }}
         />
       </section>
