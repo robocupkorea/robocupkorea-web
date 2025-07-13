@@ -302,6 +302,7 @@ export default async function Home() {
 
         <div className="mb-12 grid grid-cols-1 gap-10 max-md:mx-auto max-md:max-w-md md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {leagueDivisionData
+            .filter((leagueDivision) => leagueDivision.locale === locale)
             .slice(0, 3)
             .map((leagueDivision: LeagueDivision) => {
               return (

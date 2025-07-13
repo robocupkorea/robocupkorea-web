@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 
 import { leagueData } from "@/data/league-data";
 import { leagueDivisionData } from "@/data/league-division-data";
@@ -20,6 +20,7 @@ export default async function LeagueDivisionPage({
 }: {
   params: { leagueSlug: string; leagueDivisionSlug: string };
 }) {
+  const locale = await getLocale();
   const { leagueSlug, leagueDivisionSlug } = params;
 
   // 리그 찾기
@@ -33,7 +34,8 @@ export default async function LeagueDivisionPage({
   const leagueDivision = leagueDivisionData.find(
     (leagueDivision) =>
       leagueDivision.leagueId === league.id &&
-      leagueDivision.slug === leagueDivisionSlug,
+      leagueDivision.slug === leagueDivisionSlug &&
+      leagueDivision.locale === locale,
   );
 
   if (!leagueDivision) {

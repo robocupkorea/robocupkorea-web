@@ -1,4 +1,4 @@
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 
 import ScrollableLeagueSection from "@/components/ScrollableLeagueSection";
 import { leagueData } from "@/data/league-data";
@@ -15,12 +15,14 @@ export async function generateMetadata() {
 }
 
 export default async function LeaguesPage() {
+  const locale = await getLocale();
   const { leagues } = await getMessages();
 
   // 리그별로 그룹화
   const groupedLeagues = leagueData.map((league) => {
     const divisions = leagueDivisionData.filter(
-      (division) => division.leagueId === league.id,
+      (division) =>
+        division.leagueId === league.id && division.locale === locale,
     );
     return {
       league,
@@ -59,7 +61,8 @@ export default async function LeaguesPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {leagueData.map((league) => {
             const divisions = leagueDivisionData.filter(
-              (division) => division.leagueId === league.id,
+              (division) =>
+                division.leagueId === league.id && division.locale === locale,
             );
 
             return (
