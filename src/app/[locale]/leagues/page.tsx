@@ -1,3 +1,4 @@
+import { ArrowElbowRightDownIcon } from "@phosphor-icons/react/dist/ssr";
 import { getLocale, getMessages } from "next-intl/server";
 
 import ScrollableLeagueSection from "@/components/ScrollableLeagueSection";
@@ -58,6 +59,7 @@ export default async function LeaguesPage() {
           </p>
         </div>
 
+        {/* 리그 목록 */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {leagueData.map((league) => {
             const divisions = leagueDivisionData.filter(
@@ -71,18 +73,22 @@ export default async function LeaguesPage() {
                 className="border border-gray-200 bg-white p-4"
               >
                 <Link href={`#${league.slug}`} className="cursor-pointer">
-                  <h3 className="mb-3 text-lg font-bold text-gray-800 underline underline-offset-2 hover:text-blue-600">
+                  <h3 className="mb-1.5 flex items-center gap-1 text-lg font-bold text-gray-800 hover:text-blue-600">
                     {league.name}
+                    <ArrowElbowRightDownIcon
+                      className="h-4 w-4"
+                      weight="regular"
+                    />
                   </h3>
                 </Link>
-                <ul className="space-y-1">
+                <ul className="space-y-0.5">
                   {divisions.map((division) => (
                     <li key={division.id} className="flex">
                       <Link
                         href={`/leagues/${league.slug}/${division.slug}`}
                         className="block rounded-md p-1"
                       >
-                        <span className="text-sm text-gray-600 hover:text-blue-600">
+                        <span className="text-sm text-gray-600 underline underline-offset-2 hover:text-blue-600">
                           {division.name}
                         </span>
                       </Link>
