@@ -6,6 +6,7 @@ import { getMessages } from "next-intl/server";
 
 import "@/app/globals.css";
 import { PostHogProvider } from "@/app/providers";
+import ClientLayout from "@/components/ClientLayout";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -129,10 +130,12 @@ export default async function RootLayout({
       >
         <PostHogProvider>
           <NextIntlClientProvider messages={messages}>
-            <ScrollToTop />
-            <Header />
-            <main className="grow">{children}</main>
-            <Footer />
+            <ClientLayout>
+              <ScrollToTop />
+              <Header />
+              <main className="grow">{children}</main>
+              <Footer />
+            </ClientLayout>
           </NextIntlClientProvider>
         </PostHogProvider>
       </body>

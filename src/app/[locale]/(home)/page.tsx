@@ -9,7 +9,6 @@ import {
   UsersIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
-import Link from "next/link";
 import { getLocale, getMessages } from "next-intl/server";
 
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
@@ -24,6 +23,7 @@ import { eventData } from "@/data/event-data";
 import { eventDetailData } from "@/data/event-detail-data";
 import { leagueData } from "@/data/league-data";
 import { leagueDivisionData } from "@/data/league-division-data";
+import { Link } from "@/i18n/navigation";
 import type { LeagueDivision } from "@/types/leagues";
 import { formatDateRange } from "@/utils/date";
 
