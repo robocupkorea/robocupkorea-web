@@ -73,12 +73,14 @@ export default async function LeaguesPage() {
                 className="border border-gray-200 bg-white p-4"
               >
                 <Link href={`#${league.slug}`} className="cursor-pointer">
-                  <h3 className="mb-1.5 flex items-center gap-1 text-lg font-bold text-gray-800 hover:text-blue-600">
+                  <h3 className="mb-1.5 flex items-center gap-1.5 text-lg font-bold text-gray-800 hover:text-blue-600">
                     {league.name}
-                    <ArrowElbowRightDownIcon
-                      className="h-4 w-4"
-                      weight="regular"
-                    />
+                    <div className="flex items-center rounded-full border border-gray-400 p-0.5">
+                      <ArrowElbowRightDownIcon
+                        className="h-3 w-3 text-gray-600"
+                        weight="regular"
+                      />
+                    </div>
                   </h3>
                 </Link>
                 <ul className="space-y-0.5">
