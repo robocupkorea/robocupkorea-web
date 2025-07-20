@@ -386,7 +386,7 @@ export default async function Home() {
               fill
               sizes="100vw"
               className="object-cover object-[center_20%]"
-              priority
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-black/70" />
           </div>

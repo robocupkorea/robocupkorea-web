@@ -33,6 +33,7 @@ export default function LeagueCard({
             fill
             sizes="(max-width: 640px) calc(100vw - 6rem), (max-width: 768px) 256px, (max-width: 1024px) 288px, 375px"
             className="object-cover"
+            loading="lazy"
           />
         </div>
 

@@ -48,6 +48,7 @@ export default async function About() {
                   fill
                   sizes="256px"
                   className="object-cover"
+                  loading="lazy"
                 />
               </div>
 
