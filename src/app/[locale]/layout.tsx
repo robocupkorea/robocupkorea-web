@@ -33,6 +33,10 @@ export async function generateMetadata({
     description: meta.description,
     keywords: meta.keywords,
     authors: [{ name: meta.author }],
+    other: {
+      // 네이버 서치어드바이저
+      "naver-site-verification": "054de8b6e7c7e246c12f1aa4454f1c27f2cec5b6",
+    },
     openGraph: {
       title: meta.ogTitle,
       description: meta.ogDescription,
