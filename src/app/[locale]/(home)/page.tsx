@@ -48,6 +48,7 @@ export default async function Home() {
       <section className="relative h-[calc(100svh-64px)] max-h-[1000px] w-full bg-black md:h-[calc(100svh-80px)]">
         <VideoPlayer
           src="https://media.robocupkorea.org/videos/landing/intro.m3u8"
+          previewSrc="https://media.robocupkorea.org/images/landing/preview.png"
           fallbackSrc="https://media.robocupkorea.org/images/landing/fallback.png"
           autoPlay
           className="pointer-events-none h-full w-full object-cover"

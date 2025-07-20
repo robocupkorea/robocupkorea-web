@@ -6,12 +6,14 @@ import { type VideoHTMLAttributes, useEffect, useRef, useState } from "react";
 
 type VideoPlayerProps = VideoHTMLAttributes<HTMLVideoElement> & {
   src: string; // 비디오
+  previewSrc?: string; // 비디오 첫 프레임 이미지
   fallbackSrc?: string; // fallback 이미지
   className?: string;
 };
 
 const VideoPlayer = ({
   src,
+  previewSrc,
   fallbackSrc,
   className,
   ...props
@@ -22,6 +24,7 @@ const VideoPlayer = ({
   const [showFallback, setFallback] = useState(false); // fallback 이미지 표시 여부
   const [isMobile, setIsMobile] = useState(false); // 모바일 화면 여부 (768px 이하)
   const [imageLoaded, setImageLoaded] = useState(false); // 이미지 로드 완료 여부
+  const [previewLoaded, setPreviewLoaded] = useState(false); // 프리뷰 이미지 로드 완료 여부
 
   /**
    * 디바운스된 리사이즈 핸들러
@@ -150,13 +153,24 @@ const VideoPlayer = ({
 
   return (
     <>
-      <video
-        ref={videoRef}
-        className={`transition-opacity duration-100 ease-linear ${
-          isReady ? "opacity-100" : "opacity-0"
-        } ${className ? className : ""}`}
-        {...props}
-      />
+      {/* 랜딩 비디오의 프리뷰 이미지 */}
+      {previewSrc && !isReady && (
+        <Image
+          src={previewSrc}
+          alt="Video preview"
+          fill
+          priority
+          onLoad={() => setPreviewLoaded(true)}
+          className={`transition-opacity duration-300 ease-in-out ${
+            previewLoaded ? "opacity-100" : "opacity-0"
+          } ${className}`}
+        />
+      )}
+
+      {/* 랜딩 비디오 */}
+      <video ref={videoRef} className={className} {...props} />
+
+      {/* fallback 이미지 (모바일 대응) */}
       {showFallback && fallbackSrc && (
         <Image
           src={fallbackSrc}
