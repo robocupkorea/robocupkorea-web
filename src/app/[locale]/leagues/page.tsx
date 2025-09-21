@@ -1,4 +1,4 @@
-import { ArrowElbowRightDownIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDownIcon } from "@phosphor-icons/react/dist/ssr";
 import { getLocale, getMessages } from "next-intl/server";
 
 import ScrollableLeagueSection from "@/components/ScrollableLeagueSection";
@@ -72,16 +72,12 @@ export default async function LeaguesPage() {
                 key={league.id}
                 className="border border-gray-200 bg-white p-4"
               >
-                <Link href={`#${league.slug}`} className="cursor-pointer">
-                  <h3 className="mb-1.5 flex items-center gap-1.5 text-lg font-bold text-gray-800 hover:text-blue-600">
-                    {league.name}
-                    <div className="flex items-center rounded-full border border-gray-400 p-0.5">
-                      <ArrowElbowRightDownIcon
-                        className="h-3 w-3 text-gray-600"
-                        weight="regular"
-                      />
-                    </div>
-                  </h3>
+                <Link
+                  href={`#${league.slug}`}
+                  className="flex cursor-pointer items-center gap-1 text-gray-800 hover:text-blue-600"
+                >
+                  <ArrowDownIcon className="h-4 w-4" weight="bold" />
+                  <h3 className="text-lg font-bold">{league.name}</h3>
                 </Link>
                 <ul className="space-y-0.5">
                   {divisions.map((division) => (
