@@ -141,4 +141,11 @@ export const eventData: Event[] = [
     dateStart: "2025-08-09",
     dateEnd: "2025-08-10",
   },
+  {
+    id: 21,
+    slug: "robocup-korea-open-2026",
+    year: "2026",
+    dateStart: "2026-02-06",
+    dateEnd: "2026-02-08",
+  },
 ];

@@ -285,7 +285,6 @@ export const eventDetailData: EventDetail[] = [
     posterImageUrl:
       "https://media.robocupkorea.org/images/events/creative-coding-challenge/2025/ko/poster.png",
     cmsPageId: "219b858854e081eba4aef63c9c2e088d",
-    showInMain: true,
     showInEvents: true,
   },
   {
@@ -299,7 +298,22 @@ export const eventDetailData: EventDetail[] = [
     posterImageUrl:
       "https://media.robocupkorea.org/images/events/creative-coding-challenge/2025/ko/poster.png",
     cmsPageId: "21cb858854e0800bb6b9e933efa14fe0",
-    showInMain: true,
     showInEvents: true,
+  },
+  {
+    id: 41,
+    eventId: 21,
+    locale: "ko",
+    title: "제14회 한국로보컵오픈",
+    location: "평창 알펜시아리조트",
+    showInMain: true,
+  },
+  {
+    id: 42,
+    eventId: 21,
+    locale: "en",
+    title: "RoboCup Korea Open 2026",
+    location: "Alpensia Ski Resort, Pyeongchang",
+    showInMain: true,
   },
 ];
