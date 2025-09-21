@@ -8,6 +8,8 @@ import { eventDetailData } from "@/data/event-detail-data";
 import { Link } from "@/i18n/navigation";
 
 const WELCOME_MODAL_KEY = "welcome-modal-dismissed";
+const FALLBACK_IMAGE_URL =
+  "https://media.robocupkorea.org/images/events/fallback.jpg";
 
 export default function WelcomeModal() {
   const locale = useLocale();
@@ -75,7 +77,7 @@ export default function WelcomeModal() {
         onClick={(e) => e.stopPropagation()}
       >
         {/* 메인 이벤트 이미지 */}
-        {mainEventDetail?.posterImageUrl && (
+        {mainEventDetail?.posterImageUrl ? (
           <Link
             href={`/events/${mainEventDetail.cmsPageId}`}
             prefetch
@@ -89,6 +91,29 @@ export default function WelcomeModal() {
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
               className="object-cover"
             />
+          </Link>
+        ) : (
+          <Link
+            // 공지사항으로 fallback 이동
+            href={`/notices`}
+            prefetch
+            onClick={closeModal}
+            className="relative block aspect-[842/1191] w-full overflow-hidden"
+          >
+            <Image
+              src={FALLBACK_IMAGE_URL}
+              alt={locale === "ko" ? "메인 이벤트 이미지" : "Main event image"}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
+              className="object-cover opacity-70"
+            />
+            {/* fallback 이미지에 오버레이하여 메인 이벤트 제목을 표시 */}
+            {mainEventDetail && (
+              <div className="absolute left-1/2 top-1/4 w-full -translate-x-1/2 -translate-y-1/2 text-center text-2xl font-bold text-gray-800 md:text-3xl">
+                {mainEventDetail.title}{" "}
+                {locale === "ko" ? "개최안내" : "Event information"}
+              </div>
+            )}
           </Link>
         )}
 
