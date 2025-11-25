@@ -39,6 +39,44 @@ export interface NoticePage {
 }
 
 /**
+ * Notion 공지사항 데이터베이스에서 최신 1개의 공지사항을 불러와 7일 이내에 작성되었는지 여부를 반환
+ */
+export async function hasNewNoticePage(locale: string): Promise<boolean> {
+  try {
+    const { results } = await notion.databases.query({
+      database_id: process.env.NOTION_NOTICES_DATABASE_ID!,
+      filter: {
+        and: [
+          { property: "Status", select: { equals: "Published" } },
+          { property: "Locale", select: { equals: locale } },
+        ],
+      },
+      sorts: [{ property: "Date", direction: "descending" }],
+      page_size: 1,
+    });
+
+    // 타입 가드
+    const notice = results.filter(isFullPage).filter(hasNotionNoticeProps)[0];
+    if (!notice) return false;
+
+    // 날짜 파싱
+    const noticeDate = new Date(notice.properties.Date?.date?.start ?? "");
+    noticeDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+    const diff = today.getTime() - noticeDate.getTime();
+
+    return diff >= 0 && diff <= sevenDaysInMs; // 7일 이내인지 여부 반환
+  } catch (err) {
+    console.error("Error checking hasNewNoticePage:", err);
+    return false;
+  }
+}
+
+/**
  * Notion 공지사항 목록 조회
  * @returns 공지사항 목록
  */

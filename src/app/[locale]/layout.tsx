@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import { routing } from "@/i18n/routing";
+import { hasNewNoticePage } from "@/lib/notion/notices";
 
 import "highlight.js/styles/github.css";
 
@@ -126,6 +127,7 @@ export default async function RootLayout({
   }
 
   const messages = await getMessages();
+  const hasNewNotice = await hasNewNoticePage(locale);
 
   return (
     <html lang={locale}>
@@ -136,7 +138,7 @@ export default async function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <ClientLayout>
               <ScrollToTop />
-              <Header />
+              <Header hasNewNotice={hasNewNotice} />
               <main className="grow">{children}</main>
               <Footer />
             </ClientLayout>

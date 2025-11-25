@@ -1,6 +1,10 @@
 "use client";
 
-import { ArrowUpRightIcon, CaretDownIcon } from "@phosphor-icons/react";
+import {
+  ArrowUpRightIcon,
+  CaretDownIcon,
+  DotOutlineIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import { useLocale, useMessages } from "next-intl";
 
@@ -11,7 +15,11 @@ import MobileMenu from "@/components/MobileMenu";
 import { Link, usePathname } from "@/i18n/navigation";
 import { MenuItem } from "@/types/menu-item";
 
-export default function Header() {
+interface HeaderProps {
+  hasNewNotice: boolean;
+}
+
+export default function Header({ hasNewNotice }: HeaderProps) {
   const locale = useLocale();
   const messages = useMessages();
 
@@ -100,6 +108,14 @@ export default function Header() {
                         }`}
                       >
                         {item.name}
+                        {/* 새 공지사항이 있으면 공지사항 메뉴에 아이콘 표시 */}
+                        {item.href === "/notices" ? (
+                          hasNewNotice ? (
+                            <span className="absolute -right-[10px] -top-[10px] text-red-600">
+                              <DotOutlineIcon size={28} weight="fill" />
+                            </span>
+                          ) : null
+                        ) : null}
                       </Link>
                     )}
                   </li>
