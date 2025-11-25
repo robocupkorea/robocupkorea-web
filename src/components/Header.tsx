@@ -145,7 +145,7 @@ export default function Header({ hasNewNotice }: HeaderProps) {
 
             <LocaleSelector />
 
-            <MobileMenu menuItems={messages.menu} />
+            <MobileMenu menuItems={messages.menu} hasNewNotice={hasNewNotice} />
           </div>
         </nav>
       </div>

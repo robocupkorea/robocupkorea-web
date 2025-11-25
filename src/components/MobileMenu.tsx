@@ -1,6 +1,11 @@
 "use client";
 
-import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react";
+import {
+  CaretDownIcon,
+  DotOutlineIcon,
+  ListIcon,
+  XIcon,
+} from "@phosphor-icons/react";
 import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -14,9 +19,13 @@ interface MenuItem {
 
 interface MobileMenuProps {
   menuItems: MenuItem[];
+  hasNewNotice: boolean;
 }
 
-export default function MobileMenu({ menuItems }: MobileMenuProps) {
+export default function MobileMenu({
+  menuItems,
+  hasNewNotice,
+}: MobileMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChildMenuOpen, setIsChildMenuOpen] = useState(true);
   const locale = useLocale();
@@ -127,7 +136,7 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
                   <div className="flex">
                     <Link
                       href={item.href || "#"}
-                      className={`block text-lg hover:text-gray-700 ${
+                      className={`relative block text-lg hover:text-gray-700 ${
                         isActive(item.href || "")
                           ? "font-bold"
                           : "font-medium hover:text-gray-600"
@@ -135,6 +144,13 @@ export default function MobileMenu({ menuItems }: MobileMenuProps) {
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
+                      {item.href === "/notices" ? (
+                        hasNewNotice ? (
+                          <span className="absolute -right-[20px] -top-[10px] text-red-600">
+                            <DotOutlineIcon size={28} weight="fill" />
+                          </span>
+                        ) : null
+                      ) : null}
                     </Link>
                   </div>
                 )}
