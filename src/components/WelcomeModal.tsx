@@ -35,17 +35,17 @@ export default function WelcomeModal() {
 
       try {
         const { date } = JSON.parse(dismissedData);
-        const dismissedDate = new Date(date);
-        const today = new Date();
+        const dismissedDate = new Date(date).getTime();
+        const today = new Date().getTime();
+        const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
 
-        // 날짜가 다른 경우 (다음날) 모달 다시 표시
-        if (
-          dismissedDate.getDate() !== today.getDate() ||
-          dismissedDate.getMonth() !== today.getMonth() ||
-          dismissedDate.getFullYear() !== today.getFullYear()
-        ) {
+        // 일주일이 지났는지 확인
+        // - 일주일이 지나지 않았으면 모달을 표시하지 않음 (isOpen = false)
+        // - 일주일이 지났으면 모달을 표시함 (isOpen = true)
+        if (dismissedDate + sevenDaysInMs <= today) {
           setIsOpen(true);
         }
+        // - 일주일이 지나지 않았으면 isOpen은 false로 유지됨
       } catch {
         // 파싱 에러 시 모달 표시
         setIsOpen(true);
@@ -69,7 +69,7 @@ export default function WelcomeModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex min-w-[375px] items-center justify-center bg-black/50 p-4"
+      className="fixed inset-0 z-[60] flex min-w-[375px] items-center justify-center bg-black/50 p-4"
       onClick={closeModal}
     >
       <div
@@ -123,7 +123,9 @@ export default function WelcomeModal() {
             onClick={dontShowToday}
             className="flex-1 px-4 py-4 text-sm font-medium tracking-wide text-black transition hover:bg-gray-50"
           >
-            {locale === "ko" ? "오늘 하루 보지 않기" : "Don't show today"}
+            {locale === "ko"
+              ? "일주일 동안 보지 않기"
+              : "Don't show for a week"}
           </button>
           <button
             onClick={closeModal}
