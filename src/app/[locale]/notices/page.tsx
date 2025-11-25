@@ -95,7 +95,7 @@ export default async function NoticesPage() {
                           <div className="relative flex items-center gap-2">
                             {notice.title}
                             {isWithinSevenDays ? (
-                              <span className="absolute -right-[20px] -top-[10px] z-50 text-red-600">
+                              <span className="absolute -right-[20px] -top-[10px] text-red-600">
                                 <DotOutlineIcon size={28} weight="fill" />
                               </span>
                             ) : null}
