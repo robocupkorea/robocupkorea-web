@@ -15,6 +15,7 @@ type NotionNoticeProps = {
   Title: { type: "title"; title: Array<{ plain_text: string }> };
   Date: { type: "date"; date: { start: string; end?: string } | null };
   Status?: { type: "select"; select: { name: string } | null }; // 발행 여부
+  Type?: { type: "select"; select: { name: string } | null }; // 공지사항 유형 (유형별 아이콘 표시를 위함)
 };
 
 function hasNotionNoticeProps(
@@ -105,10 +106,11 @@ export async function getNoticePage(id: string): Promise<NoticePage | null> {
 function mapPageToNotice(
   page: PageObjectResponse & { properties: NotionNoticeProps },
 ): Notice {
-  const { Title, Date: DateProperty } = page.properties;
+  const { Title, Date: DateProperty, Type } = page.properties;
   return {
     id: page.id,
     title: Title.title[0]?.plain_text ?? "제목 없음",
     date: DateProperty.date?.start ?? "2025-01-01",
+    type: Type?.select?.name ?? null,
   };
 }
