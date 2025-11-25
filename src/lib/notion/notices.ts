@@ -13,7 +13,7 @@ import { Notice } from "@/types/notice";
  */
 type NotionNoticeProps = {
   Title: { type: "title"; title: Array<{ plain_text: string }> };
-  CreatedAt: { type: "created_time"; created_time: string };
+  Date: { type: "date"; date: { start: string; end?: string } | null };
   Status?: { type: "select"; select: { name: string } | null }; // 발행 여부
 };
 
@@ -24,8 +24,8 @@ function hasNotionNoticeProps(
   return (
     "Title" in p &&
     p.Title.type === "title" &&
-    "CreatedAt" in p &&
-    p.CreatedAt.type === "created_time"
+    "Date" in p &&
+    p.Date.type === "date"
   );
 }
 
@@ -51,7 +51,7 @@ export async function getNotices(locale: string): Promise<Notice[]> {
           { property: "Locale", select: { equals: locale } },
         ],
       }, // 발행된 공지사항만 반환
-      sorts: [{ property: "CreatedAt", direction: "descending" }], // 작성일 기준 내림차순 정렬
+      sorts: [{ property: "Date", direction: "descending" }], // 날짜 기준 내림차순 정렬
     });
 
     return results
@@ -105,10 +105,10 @@ export async function getNoticePage(id: string): Promise<NoticePage | null> {
 function mapPageToNotice(
   page: PageObjectResponse & { properties: NotionNoticeProps },
 ): Notice {
-  const { Title, CreatedAt } = page.properties;
+  const { Title, Date: DateProperty } = page.properties;
   return {
     id: page.id,
     title: Title.title[0]?.plain_text ?? "제목 없음",
-    createdAt: CreatedAt.created_time,
+    date: DateProperty.date?.start ?? "2025-01-01",
   };
 }

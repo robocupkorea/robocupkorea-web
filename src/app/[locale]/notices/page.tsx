@@ -71,7 +71,7 @@ export default async function NoticesPage() {
                       </Link>
                     </td>
                     <td className="min-w-24 p-4 text-right text-sm text-gray-500">
-                      {formatISODate(notice.createdAt)}
+                      {formatISODate(notice.date)}
                     </td>
                   </tr>
                 ))
