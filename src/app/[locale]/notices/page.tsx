@@ -1,3 +1,4 @@
+import { MegaphoneIcon, TicketIcon } from "@phosphor-icons/react/dist/ssr";
 import { getLocale, getMessages } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
@@ -57,24 +58,35 @@ export default async function NoticesPage() {
                   </td>
                 </tr>
               ) : (
-                noticesData?.map((notice, index) => (
-                  <tr key={notice.id} className="border-b hover:bg-gray-100">
-                    <td className="min-w-16 p-4 text-sm text-gray-500">
-                      {noticesData.length - index}
-                    </td>
-                    <td className="flex-1 p-4">
-                      <Link
-                        href={`/notices/${notice.id}`}
-                        className="block truncate font-medium text-gray-800"
-                      >
-                        {notice.title}
-                      </Link>
-                    </td>
-                    <td className="min-w-24 p-4 text-right text-sm text-gray-500">
-                      {formatISODate(notice.date)}
-                    </td>
-                  </tr>
-                ))
+                noticesData?.map((notice, index) => {
+                  return (
+                    <tr key={notice.id} className="border-b hover:bg-gray-100">
+                      <td className="min-w-16 p-4 text-sm tabular-nums text-gray-500">
+                        {noticesData.length - index}
+                      </td>
+                      <td className="flex-1 p-4">
+                        <Link
+                          href={`/notices/${notice.id}`}
+                          className="relative block flex items-center truncate font-medium text-gray-800"
+                        >
+                          {notice.type === "Announcement" ? (
+                            <span className="mr-2 inline-block shrink-0 text-gray-600">
+                              <MegaphoneIcon size={16} />
+                            </span>
+                          ) : notice.type === "Registration" ? (
+                            <span className="mr-2 inline-block shrink-0 text-gray-600">
+                              <TicketIcon size={16} />
+                            </span>
+                          ) : null}
+                          {notice.title}
+                        </Link>
+                      </td>
+                      <td className="min-w-24 p-4 text-right text-sm tabular-nums tracking-tight">
+                        {formatISODate(notice.date)}
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
