@@ -1,4 +1,8 @@
-import { MegaphoneIcon, TicketIcon } from "@phosphor-icons/react/dist/ssr";
+import {
+  DotOutlineIcon,
+  MegaphoneIcon,
+  TicketIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import { getLocale, getMessages } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
@@ -18,6 +22,10 @@ export default async function NoticesPage() {
   const { notices } = await getMessages();
   const locale = await getLocale();
   const noticesData = await getNotices(locale);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
 
   return (
     <>
@@ -59,6 +67,12 @@ export default async function NoticesPage() {
                 </tr>
               ) : (
                 noticesData?.map((notice, index) => {
+                  const noticeDate = new Date(notice.date);
+                  noticeDate.setHours(0, 0, 0, 0);
+                  const daysDiff = today.getTime() - noticeDate.getTime();
+                  const isWithinSevenDays =
+                    daysDiff >= 0 && daysDiff <= sevenDaysInMs;
+
                   return (
                     <tr key={notice.id} className="border-b hover:bg-gray-100">
                       <td className="min-w-16 p-4 text-sm tabular-nums text-gray-500">
@@ -78,7 +92,14 @@ export default async function NoticesPage() {
                               <TicketIcon size={16} />
                             </span>
                           ) : null}
-                          {notice.title}
+                          <div className="relative flex items-center gap-2">
+                            {notice.title}
+                            {isWithinSevenDays ? (
+                              <span className="absolute -right-[20px] -top-[10px] z-50 text-red-600">
+                                <DotOutlineIcon size={28} weight="fill" />
+                              </span>
+                            ) : null}
+                          </div>
                         </Link>
                       </td>
                       <td className="min-w-24 p-4 text-right text-sm tabular-nums tracking-tight">
