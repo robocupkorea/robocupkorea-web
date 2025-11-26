@@ -75,8 +75,15 @@ export default async function NoticesPage() {
 
                   return (
                     <tr key={notice.id} className="border-b hover:bg-gray-100">
-                      <td className="min-w-16 p-4 text-sm tabular-nums text-gray-500">
-                        {noticesData.length - index}
+                      <td className="relative min-w-16 p-4 text-sm tabular-nums text-gray-500">
+                        <span className="relative">
+                          {noticesData.length - index}
+                          {isWithinSevenDays ? (
+                            <span className="absolute -right-[20px] -top-[12px] text-red-600">
+                              <DotOutlineIcon size={28} weight="fill" />
+                            </span>
+                          ) : null}
+                        </span>
                       </td>
                       <td className="flex-1 p-4">
                         <Link
@@ -92,14 +99,7 @@ export default async function NoticesPage() {
                               <TicketIcon size={16} />
                             </span>
                           ) : null}
-                          <div className="relative flex items-center gap-2">
-                            {notice.title}
-                            {isWithinSevenDays ? (
-                              <span className="absolute -right-[20px] -top-[10px] text-red-600">
-                                <DotOutlineIcon size={28} weight="fill" />
-                              </span>
-                            ) : null}
-                          </div>
+                          {notice.title}
                         </Link>
                       </td>
                       <td className="min-w-24 p-4 text-right text-sm tabular-nums tracking-tight">
