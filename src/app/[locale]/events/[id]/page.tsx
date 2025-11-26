@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 
+import ProseArticle from "@/components/ProseArticle";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { convertPage } from "@/lib/notion/notion-to-md";
 
@@ -31,13 +32,7 @@ export default async function EventPage({
   return (
     <>
       <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
-        <article
-          id="event-content"
-          className="prose leading-tight"
-          dangerouslySetInnerHTML={{
-            __html: htmlContent,
-          }}
-        />
+        <ProseArticle id="event-content" htmlContent={htmlContent} />
       </section>
     </>
   );

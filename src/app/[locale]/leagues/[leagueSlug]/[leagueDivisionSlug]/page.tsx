@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getLocale, getMessages } from "next-intl/server";
 
+import ProseArticle from "@/components/ProseArticle";
 import { leagueData } from "@/data/league-data";
 import { leagueDivisionData } from "@/data/league-division-data";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
@@ -52,13 +53,7 @@ export default async function LeagueDivisionPage({
 
   return (
     <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
-      <article
-        id="league-division-content"
-        className="prose leading-tight"
-        dangerouslySetInnerHTML={{
-          __html: htmlContent,
-        }}
-      />
+      <ProseArticle id="league-division-content" htmlContent={htmlContent} />
     </section>
   );
 }
