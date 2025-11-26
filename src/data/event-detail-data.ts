@@ -306,7 +306,11 @@ export const eventDetailData: EventDetail[] = [
     locale: "ko",
     title: "제14회 한국로보컵오픈",
     location: "평창 알펜시아리조트",
+    address: "강원특별자치도 평창군 알펜시아리조트 컨벤션센터",
+    posterImageUrl: "https://media.robocupkorea.org/images/events/fallback.jpg",
+    cmsPageId: "2b7b858854e08032a056de53ee0fd432",
     showInMain: true,
+    showInEvents: true,
   },
   {
     id: 42,
@@ -314,6 +318,11 @@ export const eventDetailData: EventDetail[] = [
     locale: "en",
     title: "RoboCup Korea Open 2026",
     location: "Alpensia Ski Resort, Pyeongchang",
+    address:
+      "Alpensia Convention Center, Pyeongchang-gun, Gangwon Special Self-Governing Province",
+    posterImageUrl: "https://media.robocupkorea.org/images/events/fallback.jpg",
+    cmsPageId: "2b7b858854e08036a87ef9567db55243",
     showInMain: true,
+    showInEvents: true,
   },
 ];
