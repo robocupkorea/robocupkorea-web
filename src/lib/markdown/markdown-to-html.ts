@@ -21,5 +21,11 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
     .use(rehypeStringify) // HTML AST를 HTML 문자열로 변환
     .process(markdown);
 
-  return String(result);
+  // 이메일을 <a> 태그가 아닌 일반 텍스트로 변환
+  const html = String(result).replace(
+    /<a[^>]*href=["']mailto:([^"']+)["'][^>]*>(.*?)<\/a>/gi,
+    "$2",
+  );
+
+  return html;
 }
