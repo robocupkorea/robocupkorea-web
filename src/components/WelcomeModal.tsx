@@ -5,15 +5,22 @@ import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
 import { eventDetailData } from "@/data/event-detail-data";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 const WELCOME_MODAL_KEY = "welcome-modal-dismissed";
 const FALLBACK_IMAGE_URL =
   "https://media.robocupkorea.org/images/events/fallback.jpg";
 
+/**
+ * 웰컴 모달 컴포넌트
+ * - 공지사항 페이지에서는 모달을 표시하지 않음
+ * - 유저가 이미 관련 공지사항을 확인하러 이동했다는 뜻으로 해석함
+ */
 export default function WelcomeModal() {
   const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isNoticesPage = pathname.includes("/notices"); // 공지사항 페이지인지 여부
 
   // 상세 이벤트에서 메인 이벤트 찾기
   const mainEventDetail = eventDetailData.find(
@@ -65,7 +72,7 @@ export default function WelcomeModal() {
     setIsOpen(false);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || isNoticesPage) return null;
 
   return (
     <div
