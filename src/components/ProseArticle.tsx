@@ -16,6 +16,7 @@ export default function ProseArticle({ id, htmlContent }: ProseArticleProps) {
         "prose w-full max-w-none max-md:prose-sm",
         "prose-a:font-bold prose-a:text-blue-600 prose-a:underline-offset-2",
         "prose-hr:my-3.5",
+        "prose-table:block prose-table:max-w-full prose-table:overflow-x-auto prose-table:whitespace-nowrap",
         "max-md:leading-[1.1rem] max-md:prose-h1:text-2xl md:leading-[1.25rem] md:prose-h1:text-3xl",
       ].join(" ")}
       dangerouslySetInnerHTML={{
