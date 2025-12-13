@@ -1,3 +1,4 @@
+import rehypeExternalLinks from "rehype-external-links";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSanitize from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";
@@ -17,6 +18,10 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
     .use(remarkGfm) // GitHub Flavored Markdown 지원
     .use(remarkRehype) // Markdown AST를 HTML AST로 변환
     .use(rehypeSanitize) // XSS 방지
+    .use(rehypeExternalLinks, {
+      target: "_blank",
+      rel: ["noopener", "noreferrer"],
+    })
     .use(rehypeHighlight) // 코드 하이라이트 지원
     .use(rehypeStringify) // HTML AST를 HTML 문자열로 변환
     .process(markdown);
