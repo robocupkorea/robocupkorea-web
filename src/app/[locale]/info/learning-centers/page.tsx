@@ -2,8 +2,7 @@ import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
 import LearningCenterItem from "@/components/LearningCenterItem";
-import { LearningCenter } from "@/generated/prisma";
-import prisma from "@/lib/prisma";
+import prisma, { LearningCenter } from "@/lib/prisma";
 
 export async function generateMetadata() {
   return {

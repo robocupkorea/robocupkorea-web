@@ -1,6 +1,6 @@
 import { GraduationCapIcon, MapPinIcon } from "@phosphor-icons/react/dist/ssr";
 
-import { LearningCenter } from "@/generated/prisma";
+import { LearningCenter } from "@/lib/prisma";
 
 export default function LearningCenterItem({
   learningCenter,
