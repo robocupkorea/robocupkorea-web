@@ -1,8 +1,7 @@
 import { getLocale, getMessages } from "next-intl/server";
 
 import EventCard from "@/components/EventCard";
-import { eventData } from "@/data/event-data";
-import { eventDetailData } from "@/data/event-detail-data";
+import prisma, { Locale } from "@/lib/prisma";
 
 export async function generateMetadata() {
   const { events } = await getMessages();
@@ -14,27 +13,14 @@ export async function generateMetadata() {
 }
 
 export default async function EventPage() {
-  const locale = await getLocale();
-
+  const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
   const { events } = await getMessages();
 
-  // showInEvents가 true이고 현재 locale과 일치하는 이벤트만 필터링
-  const filteredEventDetails = eventDetailData.filter(
-    (eventDetail) => eventDetail.showInEvents && eventDetail.locale === locale,
-  );
-
-  // eventDetails와 eventData를 Join하고 dateStart 기준으로 내림차순 정렬
-  const eventWithDetails = filteredEventDetails
-    .map((eventDetail) => {
-      const event = eventData.find((event) => event.id === eventDetail.eventId);
-      return event ? { eventDetail, event } : null;
-    })
-    .filter((item): item is NonNullable<typeof item> => item !== null)
-    .sort(
-      (a, b) =>
-        new Date(b.event.dateStart).getTime() -
-        new Date(a.event.dateStart).getTime(),
-    );
+  const eventDetails = await prisma.eventDetail.findMany({
+    where: { showInEvents: true, locale: locale },
+    include: { event: true },
+    orderBy: { event: { dateStart: "desc" } },
+  });
 
   return (
     <>
@@ -51,12 +37,14 @@ export default async function EventPage() {
         </div>
       </header>
 
-      {eventWithDetails.length === 0 && (
+      {eventDetails.length === 0 ? (
         <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <p className="break-keep text-center text-gray-500">
             {events.noEvents}
           </p>
         </section>
+      ) : (
+        {}
       )}
 
       <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
@@ -64,12 +52,13 @@ export default async function EventPage() {
           id="events-list"
           className="mb-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {eventWithDetails.map(({ eventDetail, event }) => (
-            <EventCard
+          {eventDetails.map((eventDetail) => (
+            <li
               key={eventDetail.id}
-              eventDetail={eventDetail}
-              event={event}
-            />
+              className="w-full sm:w-[calc(50%-1rem)] xl:w-[calc(33.333%-1.5rem)]"
+            >
+              <EventCard eventDetail={eventDetail} event={eventDetail.event} />
+            </li>
           ))}
         </div>
       </section>

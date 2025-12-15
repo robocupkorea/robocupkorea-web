@@ -6,7 +6,7 @@ import { useLocale } from "next-intl";
 
 import EventStatus from "@/components/EventStatus";
 import { Link } from "@/i18n/navigation";
-import { Event, EventDetail } from "@/types/events";
+import { Event, EventDetail } from "@/lib/prisma";
 import { formatDateRange, getEventStatus } from "@/utils/date";
 
 interface EventCardProps {

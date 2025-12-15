@@ -1,7 +1,7 @@
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 
 import TimelineItem from "@/components/TimelineItem";
-import { eventData } from "@/data/event-data";
+import prisma, { Locale } from "@/lib/prisma";
 
 export async function generateMetadata() {
   const { history } = await getMessages();
@@ -13,9 +13,19 @@ export async function generateMetadata() {
 }
 
 export default async function HistoryPage() {
+  const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
   const { history } = await getMessages();
 
-  const reversedEvents = eventData.slice().reverse();
+  const events = await prisma.event.findMany({
+    include: {
+      details: {
+        where: { locale: locale },
+      },
+    },
+    orderBy: {
+      dateStart: "desc",
+    },
+  });
 
   return (
     <>
@@ -44,14 +54,16 @@ export default async function HistoryPage() {
 
         <div className="flex justify-center">
           <ol className="relative border-s border-gray-300">
-            {reversedEvents.map((event, idx) => (
-              <TimelineItem
-                key={event.id}
-                event={event}
-                events={reversedEvents}
-                eventIndex={idx}
-              />
-            ))}
+            {events.map((event, idx) => {
+              return (
+                <TimelineItem
+                  key={event.id}
+                  event={event}
+                  events={events}
+                  eventIndex={idx}
+                />
+              );
+            })}
           </ol>
         </div>
       </section>

@@ -19,8 +19,6 @@ import EventCard from "@/components/EventCard";
 import LeagueCard from "@/components/LeagueCard";
 import TimelineItem from "@/components/TimelineItem";
 import VideoPlayer from "@/components/VideoPlayer";
-import { eventData } from "@/data/event-data";
-import { eventDetailData } from "@/data/event-detail-data";
 import { Link } from "@/i18n/navigation";
 import prisma, { Locale } from "@/lib/prisma";
 import { formatDateRange } from "@/utils/date";
@@ -30,20 +28,28 @@ export default async function Home() {
 
   const { home } = await getMessages();
 
-  // 상세 이벤트에서 메인 이벤트 찾기
-  const mainEventDetail = eventDetailData.find(
-    (eventDetail) => eventDetail.showInMain && eventDetail.locale === locale,
-  );
-
-  // 메인 이벤트에서 날짜 찾기
-  const mainEvent = eventData.find(
-    (event) => event.id === mainEventDetail?.eventId,
-  );
+  const mainEvent = await prisma.eventDetail.findFirst({
+    where: { showInMain: true, locale: locale },
+    include: { event: true },
+  });
 
   const leagueDivisions = await prisma.leagueDivision.findMany({
     where: { locale: locale }, // 잘못된 locale은 url path에서 error로 처리됨
     include: { league: true },
     take: 3,
+  });
+
+  const events = await prisma.event.findMany({
+    orderBy: { dateStart: "desc" },
+    include: { details: true },
+    take: 4,
+  });
+
+  const eventDetails = await prisma.eventDetail.findMany({
+    where: { showInEvents: true, locale },
+    include: { event: true },
+    orderBy: { event: { dateStart: "desc" } },
+    take: 6,
   });
 
   return (
@@ -67,39 +73,53 @@ export default async function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/15 to-black/50" />
         <header className="absolute inset-x-0 top-8">
           <div className="container mx-auto flex max-w-7xl flex-col px-4 text-white md:px-8 xl:px-20">
-            <h1 className="mb-3 break-keep text-[2.5rem] font-black leading-tight sm:text-5xl lg:mb-5 lg:text-6xl">
-              {mainEventDetail?.title}
-            </h1>
-            <div className="mb-8 flex flex-col gap-3 md:text-lg">
-              <div className="flex items-center gap-2">
-                <CalendarIcon size={24} weight="fill" />
-                <time className="font-medium" dateTime={mainEvent?.dateStart}>
-                  {formatDateRange(
-                    mainEvent?.dateStart || "",
-                    mainEvent?.dateEnd || "",
-                    locale,
+            {mainEvent ? (
+              <>
+                <h1 className="mb-3 break-keep text-[2.5rem] font-black leading-tight sm:text-5xl lg:mb-5 lg:text-6xl">
+                  {mainEvent.title}
+                </h1>
+                <div className="mb-8 flex flex-col gap-3 md:text-lg">
+                  <div className="flex items-center gap-2">
+                    <CalendarIcon size={24} weight="fill" />
+                    <time
+                      className="font-medium"
+                      dateTime={mainEvent.event?.dateStart?.toISOString()}
+                    >
+                      {mainEvent.event &&
+                        formatDateRange(
+                          mainEvent.event.dateStart?.toISOString() || "",
+                          mainEvent.event.dateEnd?.toISOString() || "",
+                          locale,
+                        )}
+                    </time>
+                  </div>
+                  {mainEvent.location && (
+                    <div className="flex items-center gap-2">
+                      <MapPinIcon size={24} weight="fill" />
+                      <address className="font-medium not-italic">
+                        {mainEvent.location}
+                      </address>
+                    </div>
                   )}
-                </time>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPinIcon size={24} weight="fill" />
-                <address className="font-medium not-italic">
-                  {mainEventDetail?.location}
-                </address>
-              </div>
-            </div>
-            <Link
-              href={
-                mainEventDetail?.cmsPageId
-                  ? `/events/${mainEventDetail.cmsPageId}`
-                  : "/events"
-              }
-              prefetch
-              className="flex h-12 w-full items-center justify-center gap-1.5 border border-gray-500 bg-white px-8 font-medium text-black hover:bg-gray-100 sm:w-fit"
-            >
-              {home.button.learnMore}
-              <ArrowRightIcon size={24} weight="thin" />
-            </Link>
+                </div>
+              </>
+            ) : (
+              <h1 className="mb-3 break-keep text-[2.5rem] font-black leading-tight sm:text-5xl lg:mb-5 lg:text-6xl">
+                {home.title}
+              </h1>
+            )}
+            {mainEvent && (
+              <Link
+                href={
+                  mainEvent.cmsPageId ? `/events/${mainEvent.cmsPageId}` : "#"
+                }
+                prefetch
+                className="flex h-12 w-full items-center justify-center gap-1.5 border border-gray-500 bg-white px-8 font-medium text-black hover:bg-gray-100 sm:w-fit"
+              >
+                {home.button.learnMore}
+                <ArrowRightIcon size={24} weight="thin" />
+              </Link>
+            )}
           </div>
         </header>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
@@ -270,17 +290,14 @@ export default async function Home() {
 
             <div className="flex justify-center md:flex-1 md:justify-start">
               <ol className="relative border-s border-gray-300">
-                {eventData
-                  .slice(-5, -1)
-                  .reverse()
-                  .map((event, idx, arr) => (
-                    <TimelineItem
-                      key={event.id}
-                      event={event}
-                      events={arr}
-                      eventIndex={idx}
-                    />
-                  ))}
+                {events.map((event, idx, arr) => (
+                  <TimelineItem
+                    key={event.id}
+                    event={event}
+                    events={arr}
+                    eventIndex={idx}
+                  />
+                ))}
               </ol>
             </div>
           </div>
@@ -340,30 +357,14 @@ export default async function Home() {
           </header>
 
           <div className="mb-12 grid grid-cols-1 gap-10 max-md:mx-auto max-md:max-w-md md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-            {eventDetailData
-              .filter(
-                (eventDetail) =>
-                  eventDetail.showInEvents && eventDetail.locale === locale,
-              )
-              .map((eventDetail) => {
-                const event = eventData.find(
-                  (event) => event.id === eventDetail.eventId,
-                );
-                return event ? { eventDetail, event } : null;
-              })
-              .filter((item): item is NonNullable<typeof item> => item !== null)
-              .sort(
-                (a, b) =>
-                  new Date(b.event.dateStart).getTime() -
-                  new Date(a.event.dateStart).getTime(),
-              )
-              .map(({ eventDetail, event }) => {
-                return (
-                  <article key={eventDetail.id}>
-                    <EventCard eventDetail={eventDetail} event={event} />
-                  </article>
-                );
-              })}
+            {eventDetails.map((eventDetail) => (
+              <article key={eventDetail.id}>
+                <EventCard
+                  eventDetail={eventDetail}
+                  event={eventDetail.event}
+                />
+              </article>
+            ))}
           </div>
 
           <footer className="flex justify-center">

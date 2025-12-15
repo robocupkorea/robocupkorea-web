@@ -6,12 +6,13 @@ import { getMessages } from "next-intl/server";
 
 import "@/app/globals.css";
 import { PostHogProvider } from "@/app/providers";
-import ClientLayout from "@/components/ClientLayout";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
+import WelcomeModal from "@/components/WelcomeModal";
 import { routing } from "@/i18n/routing";
 import { hasNewNoticePage } from "@/lib/notion/notices";
+import prisma from "@/lib/prisma";
 
 import "highlight.js/styles/github.css";
 
@@ -129,6 +130,12 @@ export default async function RootLayout({
   const messages = await getMessages();
   const hasNewNotice = await hasNewNoticePage(locale);
 
+  const mainEventDetail = await prisma.eventDetail.findFirst({
+    where: { locale: locale, showInMain: true },
+    include: { event: true },
+    orderBy: { event: { dateStart: "desc" } }, // 최근 대회 중 첫번째
+  });
+
   return (
     <html lang={locale}>
       <body
@@ -136,12 +143,11 @@ export default async function RootLayout({
       >
         <PostHogProvider>
           <NextIntlClientProvider messages={messages}>
-            <ClientLayout>
-              <ScrollToTop />
-              <Header hasNewNotice={hasNewNotice} />
-              <main className="grow">{children}</main>
-              <Footer />
-            </ClientLayout>
+            <WelcomeModal mainEventDetail={mainEventDetail} />
+            <ScrollToTop />
+            <Header hasNewNotice={hasNewNotice} />
+            <main className="grow">{children}</main>
+            <Footer />
           </NextIntlClientProvider>
         </PostHogProvider>
       </body>

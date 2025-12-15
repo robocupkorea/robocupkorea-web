@@ -1,12 +1,11 @@
 import { getLocale } from "next-intl/server";
 
-import { eventDetailData } from "@/data/event-detail-data";
-import type { Event } from "@/types/events";
+import { Event, EventDetail, Locale } from "@/lib/prisma";
 import { formatDateRange } from "@/utils/date";
 
 interface TimelineItemProps {
-  event: Event;
-  events: Event[];
+  event: Event & { details: EventDetail[] };
+  events: (Event & { details: EventDetail[] })[];
   eventIndex: number;
 }
 
@@ -15,10 +14,8 @@ export default async function TimelineItem({
   events,
   eventIndex,
 }: TimelineItemProps) {
-  const locale = await getLocale();
-  const content = eventDetailData.find(
-    (c) => c.eventId === event.id && c.locale === locale,
-  );
+  const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
+  const content = event.details.find((detail) => detail.locale === locale);
   const showYear =
     eventIndex === 0 || events[eventIndex - 1].year !== event.year;
 
@@ -38,16 +35,22 @@ export default async function TimelineItem({
       <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-300 bg-gray-300" />
       <time
         className="break-keep text-sm font-medium text-gray-600"
-        dateTime={event.dateStart}
+        dateTime={event.dateStart.toISOString()}
       >
-        {formatDateRange(event.dateStart, event.dateEnd, locale)}
+        {formatDateRange(
+          event.dateStart.toISOString(),
+          event.dateEnd.toISOString(),
+          locale,
+        )}
       </time>
       <h3 className="mt-1 break-keep text-lg font-bold text-gray-800">
         {content?.title}
       </h3>
-      <address className="mb-6 not-italic text-gray-500">
-        {content?.location}
-      </address>
+      {content?.location && (
+        <address className="mb-6 not-italic text-gray-500">
+          {content?.location}
+        </address>
+      )}
     </li>
   );
 }
