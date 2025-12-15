@@ -49,6 +49,43 @@ model LeagueDivision {
   @@index([locale]) // 다국어 필터링을 위함
 }
 
+model Event {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique // url path (.../events/[slug])
+  year      String
+  dateStart DateTime
+  dateEnd   DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 1:N
+  details EventDetail[]
+}
+
+model EventDetail {
+  id Int @id @default(autoincrement())
+
+  // N:1
+  eventId Int
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  locale         Locale
+  title          String
+  location       String? // 위치
+  address        String? // 상세주소
+  posterImageUrl String?
+  cmsPageId      String?
+
+  showInEvents Boolean @default(false) // (.../events)에 표시 여부
+  showInMain   Boolean @default(false) // (.../home)에 표시 여부
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([eventId, locale]) // 대회별 언어가 하나씩 존재함
+}
+
 // 인증 교육기관
 model LearningCenter {
   id        Int      @id @default(autoincrement())
