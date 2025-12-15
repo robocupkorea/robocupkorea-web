@@ -2,9 +2,8 @@ import { ArrowDownIcon } from "@phosphor-icons/react/dist/ssr";
 import { getLocale, getMessages } from "next-intl/server";
 
 import ScrollableLeagueSection from "@/components/ScrollableLeagueSection";
-import { leagueData } from "@/data/league-data";
-import { leagueDivisionData } from "@/data/league-division-data";
 import { Link } from "@/i18n/navigation";
+import prisma, { Locale } from "@/lib/prisma";
 
 export async function generateMetadata() {
   const { leagues } = await getMessages();
@@ -16,19 +15,18 @@ export async function generateMetadata() {
 }
 
 export default async function LeaguesPage() {
-  const locale = await getLocale();
+  const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
   const { leagues } = await getMessages();
 
   // 리그별로 그룹화
-  const groupedLeagues = leagueData.map((league) => {
-    const divisions = leagueDivisionData.filter(
-      (division) =>
-        division.leagueId === league.id && division.locale === locale,
-    );
-    return {
-      league,
-      divisions,
-    };
+  const leaguesData = await prisma.league.findMany({
+    orderBy: { id: "asc" },
+    include: {
+      divisions: {
+        where: { locale: locale },
+        orderBy: { id: "asc" },
+      },
+    },
   });
 
   return (
@@ -61,11 +59,8 @@ export default async function LeaguesPage() {
 
         {/* 리그 목록 */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {leagueData.map((league) => {
-            const divisions = leagueDivisionData.filter(
-              (division) =>
-                division.leagueId === league.id && division.locale === locale,
-            );
+          {leaguesData.map((league) => {
+            const divisions = league.divisions;
 
             return (
               <article
@@ -101,9 +96,12 @@ export default async function LeaguesPage() {
 
       <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div id="detailed-leagues" className="space-y-16">
-          {groupedLeagues.map(({ league, divisions }) => (
+          {leaguesData.map((league) => (
             <div id={league.slug} key={league.id} className="scroll-mt-20">
-              <ScrollableLeagueSection league={league} divisions={divisions} />
+              <ScrollableLeagueSection
+                league={league}
+                divisions={league.divisions}
+              />
             </div>
           ))}
         </div>

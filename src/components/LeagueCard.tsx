@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useLocale } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
-import { League, LeagueDivision } from "@/types/leagues";
+import { League, LeagueDivision } from "@/lib/prisma";
 
 export default function LeagueCard({
   league,
@@ -28,7 +28,10 @@ export default function LeagueCard({
       >
         <div className="relative h-40 w-full sm:h-48">
           <Image
-            src={leagueDivision.imageUrl}
+            src={
+              leagueDivision.imageUrl ||
+              "https://media.robocupkorea.org/images/landing/fallback.png"
+            }
             alt={leagueDivision.name}
             fill
             sizes="(max-width: 640px) calc(100vw - 6rem), (max-width: 768px) 256px, (max-width: 1024px) 288px, 375px"

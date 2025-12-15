@@ -21,14 +21,12 @@ import TimelineItem from "@/components/TimelineItem";
 import VideoPlayer from "@/components/VideoPlayer";
 import { eventData } from "@/data/event-data";
 import { eventDetailData } from "@/data/event-detail-data";
-import { leagueData } from "@/data/league-data";
-import { leagueDivisionData } from "@/data/league-division-data";
 import { Link } from "@/i18n/navigation";
-import type { LeagueDivision } from "@/types/leagues";
+import prisma, { Locale } from "@/lib/prisma";
 import { formatDateRange } from "@/utils/date";
 
 export default async function Home() {
-  const locale = await getLocale();
+  const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
 
   const { home } = await getMessages();
 
@@ -41,6 +39,12 @@ export default async function Home() {
   const mainEvent = eventData.find(
     (event) => event.id === mainEventDetail?.eventId,
   );
+
+  const leagueDivisions = await prisma.leagueDivision.findMany({
+    where: { locale: locale }, // 잘못된 locale은 url path에서 error로 처리됨
+    include: { league: true },
+    take: 3,
+  });
 
   return (
     <>
@@ -302,20 +306,17 @@ export default async function Home() {
         </header>
 
         <div className="mb-12 grid grid-cols-1 gap-10 max-md:mx-auto max-md:max-w-md md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-          {leagueDivisionData
-            .filter((leagueDivision) => leagueDivision.locale === locale)
-            .slice(0, 3)
-            .map((leagueDivision: LeagueDivision) => {
-              return (
-                <article key={leagueDivision.id}>
-                  <LeagueCard
-                    league={leagueData[0]}
-                    leagueDivision={leagueDivision}
-                    fullWidth
-                  />
-                </article>
-              );
-            })}
+          {leagueDivisions.map((division) => {
+            return (
+              <article key={division.id}>
+                <LeagueCard
+                  league={division.league}
+                  leagueDivision={division}
+                  fullWidth
+                />
+              </article>
+            );
+          })}
         </div>
 
         <footer className="flex justify-center">

@@ -2,10 +2,9 @@ import { notFound } from "next/navigation";
 import { getLocale, getMessages } from "next-intl/server";
 
 import ProseArticle from "@/components/ProseArticle";
-import { leagueData } from "@/data/league-data";
-import { leagueDivisionData } from "@/data/league-division-data";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { convertPage } from "@/lib/notion/notion-to-md";
+import prisma, { Locale } from "@/lib/prisma";
 
 export async function generateMetadata() {
   const { leagues } = await getMessages();
@@ -21,25 +20,23 @@ export default async function LeagueDivisionPage({
 }: {
   params: { leagueSlug: string; leagueDivisionSlug: string };
 }) {
-  const locale = await getLocale();
+  const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
   const { leagueSlug, leagueDivisionSlug } = params;
 
-  // 리그 찾기
-  const league = leagueData.find((league) => league.slug === leagueSlug);
+  const leagueDivision = await prisma.leagueDivision.findFirst({
+    where: {
+      slug: leagueDivisionSlug, // 하위 리그 slug 일치
+      locale: locale, // 언어 일치
+      league: {
+        slug: leagueSlug, // 상위 리그 slug 일치
+      },
+    },
+    select: {
+      cmsPageId: true, // page id만 있으면 된다
+    },
+  });
 
-  if (!league) {
-    notFound();
-  }
-
-  // 리그 부문 찾기
-  const leagueDivision = leagueDivisionData.find(
-    (leagueDivision) =>
-      leagueDivision.leagueId === league.id &&
-      leagueDivision.slug === leagueDivisionSlug &&
-      leagueDivision.locale === locale,
-  );
-
-  if (!leagueDivision) {
+  if (!leagueDivision || !leagueDivision.cmsPageId) {
     notFound();
   }
 

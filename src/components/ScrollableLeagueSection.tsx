@@ -4,7 +4,7 @@ import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import LeagueCard from "@/components/LeagueCard";
-import type { League, LeagueDivision } from "@/types/leagues";
+import type { League, LeagueDivision } from "@/lib/prisma";
 
 export default function ScrollableLeagueSection({
   league,
