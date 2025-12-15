@@ -9,3 +9,14 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// 인증 교육기관
+model LearningCenter {
+  id        Int      @id @default(autoincrement())
+  alias     String // 기관 별칭
+  name      String // 기관 명칭
+  address   String // 상세 주소
+  latitude  Float? // 위도
+  longitude Float? // 경도
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
