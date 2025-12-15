@@ -9,6 +9,46 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// 다국어 지원
+enum Locale {
+  ko
+  en
+}
+
+// 리그
+model League {
+  id   Int    @id @default(autoincrement())
+  slug String @unique // url path (.../leagues/[league.slug]/[leagueDivision.slug])
+  name String
+
+  // 1:N
+  divisions LeagueDivision[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 리그 부문
+model LeagueDivision {
+  id Int @id @default(autoincrement())
+
+  // N:1
+  leagueId Int
+  league   League @relation(fields: [leagueId], references: [id], onDelete: Cascade)
+
+  locale    Locale
+  slug      String // url path (.../leagues/[league.slug]/[leagueDivision.slug])
+  name      String
+  imageUrl  String?
+  cmsPageId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([leagueId, slug, locale]) // 종목별 언어가 하나씩 존재함
+  @@index([locale]) // 다국어 필터링을 위함
+}
+
 // 인증 교육기관
 model LearningCenter {
   id        Int      @id @default(autoincrement())
