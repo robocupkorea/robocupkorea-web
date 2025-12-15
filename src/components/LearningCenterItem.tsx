@@ -1,6 +1,6 @@
 import { GraduationCapIcon, MapPinIcon } from "@phosphor-icons/react/dist/ssr";
 
-import type { LearningCenter } from "@/types/learning-center";
+import { LearningCenter } from "@/generated/prisma";
 
 export default function LearningCenterItem({
   learningCenter,
@@ -24,7 +24,7 @@ export default function LearningCenterItem({
       <div className="p-5">
         <div className="mb-2">
           <p className="break-keep text-sm font-medium tracking-wide text-gray-500">
-            {learningCenter.region}
+            {learningCenter.alias}
           </p>
           <h3
             id={`learning-center-${learningCenter.id}-title`}

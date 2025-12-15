@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
 import LearningCenterItem from "@/components/LearningCenterItem";
-import { learningCenterData } from "@/data/learning-center-data";
-import { LearningCenter } from "@/types/learning-center";
+import { LearningCenter } from "@/generated/prisma";
+import prisma from "@/lib/prisma";
 
 export async function generateMetadata() {
   return {
@@ -21,7 +21,7 @@ export default async function LearningCentersPage() {
     notFound();
   }
 
-  const learningCenters = learningCenterData;
+  const learningCenters = await prisma.learningCenter.findMany({});
 
   return (
     <>
