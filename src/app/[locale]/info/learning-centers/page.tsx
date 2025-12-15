@@ -21,7 +21,9 @@ export default async function LearningCentersPage() {
     notFound();
   }
 
-  const learningCenters = await prisma.learningCenter.findMany({});
+  const learningCenters = await prisma.learningCenter.findMany({
+    orderBy: [{ alias: "asc" }],
+  });
 
   return (
     <>
