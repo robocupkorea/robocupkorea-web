@@ -63,7 +63,7 @@ export async function generateMetadata({
   };
 }
 
-export const pretendard = localFont({
+const pretendard = localFont({
   src: [
     {
       path: "../../assets/fonts/pretendard-regular.woff2",
