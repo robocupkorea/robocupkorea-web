@@ -58,30 +58,37 @@ export default async function LeaguesPage() {
         </div>
 
         {/* 리그 목록 */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {leaguesData.map((league) => {
             const divisions = league.divisions;
 
             return (
               <article
                 key={league.id}
-                className="border border-gray-200 bg-white p-4"
+                className="border border-gray-200 bg-white p-2 sm:p-3 md:p-4"
               >
-                <Link
-                  href={`#${league.slug}`}
-                  className="flex cursor-pointer items-center gap-1 text-gray-800 hover:text-blue-600"
-                >
-                  <ArrowDownIcon className="h-4 w-4" weight="bold" />
-                  <h3 className="text-lg font-bold">{league.name}</h3>
-                </Link>
-                <ul className="space-y-0.5">
+                <div className="mb-1 flex">
+                  <Link
+                    href={`#${league.slug}`}
+                    className="flex cursor-pointer items-center text-gray-800 hover:text-blue-600"
+                  >
+                    <ArrowDownIcon
+                      className="h-3 w-3 md:h-4 md:w-4"
+                      weight="bold"
+                    />
+                    <h3 className="text-sm font-semibold tracking-tighter sm:text-base md:text-lg">
+                      {league.name}
+                    </h3>
+                  </Link>
+                </div>
+                <ul className="flex flex-col gap-2 md:gap-3">
                   {divisions.map((division) => (
                     <li key={division.id} className="flex">
                       <Link
                         href={`/leagues/${league.slug}/${division.slug}`}
-                        className="block rounded-md p-1"
+                        className="pl-0.5 md:pl-1"
                       >
-                        <span className="text-sm text-gray-600 underline underline-offset-2 hover:text-blue-600">
+                        <span className="block text-xs text-gray-500 underline underline-offset-2 hover:text-blue-600 sm:text-sm">
                           {division.name}
                         </span>
                       </Link>
