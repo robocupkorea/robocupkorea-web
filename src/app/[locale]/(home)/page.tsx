@@ -40,8 +40,8 @@ export default async function Home() {
   });
 
   const events = await prisma.event.findMany({
+    include: { details: { where: { locale: locale } } },
     orderBy: { dateStart: "desc" },
-    include: { details: true },
     take: 4,
   });
 

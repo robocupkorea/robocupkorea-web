@@ -17,14 +17,8 @@ export default async function HistoryPage() {
   const { history } = await getMessages();
 
   const events = await prisma.event.findMany({
-    include: {
-      details: {
-        where: { locale: locale },
-      },
-    },
-    orderBy: {
-      dateStart: "desc",
-    },
+    include: { details: { where: { locale: locale } } },
+    orderBy: { dateStart: "desc" },
   });
 
   return (
