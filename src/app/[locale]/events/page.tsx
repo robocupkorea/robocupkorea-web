@@ -48,13 +48,10 @@ export default async function EventPage() {
       <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div
           id="events-list"
-          className="mb-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="mb-12 grid grid-cols-1 gap-8 px-4 sm:grid-cols-2 md:px-8 lg:grid-cols-3 xl:px-20"
         >
           {eventDetails.map((eventDetail) => (
-            <li
-              key={eventDetail.id}
-              className="w-full list-none sm:w-[calc(50%-1rem)] xl:w-[calc(33.333%-1.5rem)]"
-            >
+            <li key={eventDetail.id} className="w-full list-none">
               <EventCard eventDetail={eventDetail} event={eventDetail.event} />
             </li>
           ))}
