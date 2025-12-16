@@ -21,7 +21,7 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
     .use(rehypeExternalLinks, {
       target: "_blank",
       rel: ["noopener", "noreferrer"],
-      test: (node: any) => {
+      test: (node) => {
         const href = node.properties?.href;
 
         // href가 없거나 문자열이 아니면 처리하지 않음
