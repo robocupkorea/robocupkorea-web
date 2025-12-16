@@ -102,11 +102,6 @@ export default function ScrollableLeagueSection({
       </div>
 
       <div className="relative">
-        {/* 왼쪽 그라데이션 (모바일용) */}
-        {canScrollLeft && (
-          <div className="pointer-events-none absolute left-[-1px] top-0 z-10 h-full w-8 bg-gradient-to-r from-white to-transparent opacity-80 sm:hidden" />
-        )}
-
         {/* 왼쪽 화살표 버튼 (데스크탑용) */}
         {canScrollLeft && (
           <button
@@ -120,7 +115,7 @@ export default function ScrollableLeagueSection({
 
         <div
           ref={scrollRef}
-          className="scrollbar-hide flex gap-4 overflow-x-auto"
+          className="scrollbar-hide flex gap-4 overflow-x-auto px-4 md:px-8 xl:px-20"
         >
           {divisions.map((leagueDivision: LeagueDivision) => (
             <LeagueCard
@@ -157,11 +152,6 @@ export default function ScrollableLeagueSection({
               ))}
             </div>
           </div>
-        )}
-
-        {/* 오른쪽 그라데이션 (모바일용) */}
-        {canScrollRight && (
-          <div className="pointer-events-none absolute right-[-1px] top-0 z-10 h-full w-8 bg-gradient-to-l from-white to-transparent opacity-80 sm:hidden" />
         )}
       </div>
     </section>

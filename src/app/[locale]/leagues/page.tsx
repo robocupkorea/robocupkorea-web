@@ -94,7 +94,7 @@ export default async function LeaguesPage() {
         </div>
       </section>
 
-      <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
+      <section className="container mx-auto max-w-7xl py-16">
         <div id="detailed-leagues" className="space-y-16">
           {leaguesData.map((league) => (
             <div id={league.slug} key={league.id} className="scroll-mt-20">
