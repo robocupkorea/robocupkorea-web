@@ -1,5 +1,6 @@
 import {
   DotOutlineIcon,
+  FileIcon,
   MegaphoneIcon,
   TicketIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -97,6 +98,10 @@ export default async function NoticesPage() {
                           ) : notice.type === "Registration" ? (
                             <span className="mr-2 inline-block shrink-0 text-gray-600">
                               <TicketIcon size={16} />
+                            </span>
+                          ) : notice.type === "Rules" ? (
+                            <span className="mr-2 inline-block shrink-0 text-gray-600">
+                              <FileIcon size={16} />
                             </span>
                           ) : null}
                           {notice.title}
