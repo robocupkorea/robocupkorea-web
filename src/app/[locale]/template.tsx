@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function Template({ children }: { children: React.ReactNode }) {

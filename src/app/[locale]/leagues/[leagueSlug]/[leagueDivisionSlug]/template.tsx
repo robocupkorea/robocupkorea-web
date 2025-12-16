@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import ArticleContentSkeleton from "@/components/ArticleContentSkeleton";
 
 export default function Template({ children }: { children: React.ReactNode }) {
