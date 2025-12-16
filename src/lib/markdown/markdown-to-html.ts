@@ -21,6 +21,21 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
     .use(rehypeExternalLinks, {
       target: "_blank",
       rel: ["noopener", "noreferrer"],
+      test: (node: any) => {
+        const href = node.properties?.href;
+
+        // href가 없거나 문자열이 아니면 처리하지 않음
+        if (typeof href !== "string") return false;
+
+        // robocupkorea.org가 포함된 주소는 내부 링크로 간주하여 해당 탭에서 navigate 되도록 함
+        if (href.includes("robocupkorea.org")) return false;
+
+        // http:// 또는 https:// 로 시작하지 않는 경우(상대 경로 /, 앵커 #, 메일 mailto:)는 처리하지 않음
+        if (!/^https?:\/\//.test(href)) return false;
+
+        // 위 조건에 걸리지 않으면 외부 링크로 간주하여 target="_blank" 적용
+        return true;
+      },
     })
     .use(rehypeHighlight) // 코드 하이라이트 지원
     .use(rehypeStringify) // HTML AST를 HTML 문자열로 변환
