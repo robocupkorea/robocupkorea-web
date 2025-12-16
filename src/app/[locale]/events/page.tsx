@@ -43,9 +43,7 @@ export default async function EventPage() {
             {events.noEvents}
           </p>
         </section>
-      ) : (
-        {}
-      )}
+      ) : null}
 
       <section className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
         <div
@@ -55,7 +53,7 @@ export default async function EventPage() {
           {eventDetails.map((eventDetail) => (
             <li
               key={eventDetail.id}
-              className="w-full sm:w-[calc(50%-1rem)] xl:w-[calc(33.333%-1.5rem)]"
+              className="w-full list-none sm:w-[calc(50%-1rem)] xl:w-[calc(33.333%-1.5rem)]"
             >
               <EventCard eventDetail={eventDetail} event={eventDetail.event} />
             </li>
