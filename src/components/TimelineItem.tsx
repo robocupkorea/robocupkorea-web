@@ -17,7 +17,7 @@ export default async function TimelineItem({
   const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
   const content = event.details.find((detail) => detail.locale === locale);
   const showYear =
-    eventIndex === 0 || events[eventIndex - 1].year !== event.year;
+    eventIndex === 0 || events[eventIndex - 1].year !== event.year; // 첫번째 객체이거나 연도가 다음 객체와 달라지는 경우에만 표시 (연혁 섹션에서 연도 표시를 위함)
 
   return (
     <li className="mb-12 ml-4 w-full md:w-auto">
