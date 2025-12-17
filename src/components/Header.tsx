@@ -49,6 +49,7 @@ export default function Header({ hasNewNotice }: HeaderProps) {
                   src={rckaLogo}
                   alt="Logo"
                   className="h-14 w-auto md:h-[70px]"
+                  priority // 로고 preload를 위함
                 />
               </Link>
             </div>
