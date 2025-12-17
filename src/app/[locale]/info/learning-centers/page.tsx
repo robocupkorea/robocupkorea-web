@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
 import LearningCenterItem from "@/components/LearningCenterItem";
+import PageContainer from "@/components/PageContainer";
 import prisma, { LearningCenter } from "@/lib/prisma";
 
 export async function generateMetadata() {
@@ -25,7 +26,7 @@ export default async function LearningCentersPage() {
   });
 
   return (
-    <>
+    <PageContainer>
       <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
@@ -65,6 +66,6 @@ export default async function LearningCentersPage() {
           ))}
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

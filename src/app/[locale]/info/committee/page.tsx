@@ -2,6 +2,7 @@ import { getLocale, getMessages } from "next-intl/server";
 
 import CommitteeMemberCard from "@/components/CommitteeMemberCard";
 import EmailCopyBox from "@/components/EmailCopyBox";
+import PageContainer from "@/components/PageContainer";
 import { committeeMemberData } from "@/data/committee-member-data";
 
 export async function generateMetadata() {
@@ -23,7 +24,7 @@ export default async function CommitteePage() {
   );
 
   return (
-    <>
+    <PageContainer>
       <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="mb-12 text-center">
@@ -81,6 +82,6 @@ export default async function CommitteePage() {
           </div>
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

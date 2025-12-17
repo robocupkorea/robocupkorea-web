@@ -1,12 +1,13 @@
 import { getMessages } from "next-intl/server";
 
+import PageContainer from "@/components/PageContainer";
 import { Link } from "@/i18n/navigation";
 
 export default async function NotFoundCatchAll() {
   const { notFound } = await getMessages();
 
   return (
-    <>
+    <PageContainer>
       <section className="container mx-auto max-w-3xl px-4 py-24 text-center md:px-8 xl:px-20">
         <header>
           <h1
@@ -29,6 +30,6 @@ export default async function NotFoundCatchAll() {
           </Link>
         </footer>
       </section>
-    </>
+    </PageContainer>
   );
 }

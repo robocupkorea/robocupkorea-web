@@ -17,6 +17,7 @@ import computerImacSmileyFaceIcon from "@/assets/svg/computer-imac-smiley-face-s
 import trophyIcon from "@/assets/svg/trophy-streamline-icon.svg";
 import EventCard from "@/components/EventCard";
 import LeagueCard from "@/components/LeagueCard";
+import PageContainer from "@/components/PageContainer";
 import TimelineItem from "@/components/TimelineItem";
 import VideoPlayer from "@/components/VideoPlayer";
 import { Link } from "@/i18n/navigation";
@@ -53,7 +54,7 @@ export default async function Home() {
   });
 
   return (
-    <>
+    <PageContainer>
       {/* 메인 이벤트 및 랜딩 비디오 */}
       <section className="relative h-[calc(100svh-64px)] max-h-[1000px] w-full bg-black md:h-[calc(100svh-80px)]">
         <VideoPlayer
@@ -409,6 +410,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

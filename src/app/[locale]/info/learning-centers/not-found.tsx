@@ -1,12 +1,13 @@
 import { getMessages } from "next-intl/server";
 
+import PageContainer from "@/components/PageContainer";
 import { Link } from "@/i18n/navigation";
 
 export default async function NotFound() {
   const { notFound } = await getMessages();
 
   return (
-    <>
+    <PageContainer>
       <section className="container mx-auto max-w-4xl px-4 py-16">
         <div className="text-center">
           <h1
@@ -24,6 +25,6 @@ export default async function NotFound() {
           </Link>
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

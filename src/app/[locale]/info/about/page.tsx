@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { getMessages } from "next-intl/server";
 
+import PageContainer from "@/components/PageContainer";
+
 export async function generateMetadata() {
   const { about } = await getMessages();
 
@@ -14,7 +16,7 @@ export default async function About() {
   const { about } = await getMessages();
 
   return (
-    <>
+    <PageContainer>
       <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
@@ -146,6 +148,6 @@ export default async function About() {
           ))}
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

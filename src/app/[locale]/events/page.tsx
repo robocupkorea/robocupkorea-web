@@ -1,6 +1,7 @@
 import { getLocale, getMessages } from "next-intl/server";
 
 import EventCard from "@/components/EventCard";
+import PageContainer from "@/components/PageContainer";
 import prisma, { Locale } from "@/lib/prisma";
 
 export async function generateMetadata() {
@@ -23,7 +24,7 @@ export default async function EventPage() {
   });
 
   return (
-    <>
+    <PageContainer>
       <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
@@ -57,6 +58,6 @@ export default async function EventPage() {
           ))}
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

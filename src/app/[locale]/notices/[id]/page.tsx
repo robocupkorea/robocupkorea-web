@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 
+import PageContainer from "@/components/PageContainer";
 import ProseArticle from "@/components/ProseArticle";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { getNoticePage } from "@/lib/notion/notices";
@@ -37,10 +38,10 @@ export default async function NoticeDetailPage({
   const htmlContent = await convertMarkdownToHtml(mdString);
 
   return (
-    <>
+    <PageContainer>
       <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
         <ProseArticle id="notice-content" htmlContent={htmlContent} />
       </section>
-    </>
+    </PageContainer>
   );
 }

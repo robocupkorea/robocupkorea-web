@@ -1,6 +1,7 @@
 import { ArrowDownIcon } from "@phosphor-icons/react/dist/ssr";
 import { getLocale, getMessages } from "next-intl/server";
 
+import PageContainer from "@/components/PageContainer";
 import ScrollableLeagueSection from "@/components/ScrollableLeagueSection";
 import { Link } from "@/i18n/navigation";
 import prisma, { Locale } from "@/lib/prisma";
@@ -30,7 +31,7 @@ export default async function LeaguesPage() {
   });
 
   return (
-    <>
+    <PageContainer>
       <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
@@ -113,6 +114,6 @@ export default async function LeaguesPage() {
           ))}
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

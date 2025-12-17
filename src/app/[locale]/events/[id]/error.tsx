@@ -2,11 +2,13 @@
 
 import { useTranslations } from "next-intl";
 
+import PageContainer from "@/components/PageContainer";
+
 export default function Error({ reset }: { reset: () => void }) {
   const t = useTranslations("error");
 
   return (
-    <>
+    <PageContainer>
       <section className="container mx-auto max-w-4xl px-4 py-16">
         <div className="text-center">
           <h1 id="error-heading" className="text-2xl font-bold text-gray-900">
@@ -21,6 +23,6 @@ export default function Error({ reset }: { reset: () => void }) {
           </button>
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

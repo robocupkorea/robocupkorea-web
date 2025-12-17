@@ -1,5 +1,6 @@
 import { getLocale, getMessages } from "next-intl/server";
 
+import PageContainer from "@/components/PageContainer";
 import TimelineItem from "@/components/TimelineItem";
 import prisma, { Locale } from "@/lib/prisma";
 
@@ -22,7 +23,7 @@ export default async function HistoryPage() {
   });
 
   return (
-    <>
+    <PageContainer>
       <header className="bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 py-16 md:px-8 xl:px-20">
           <div className="text-center">
@@ -61,6 +62,6 @@ export default async function HistoryPage() {
           </ol>
         </div>
       </section>
-    </>
+    </PageContainer>
   );
 }

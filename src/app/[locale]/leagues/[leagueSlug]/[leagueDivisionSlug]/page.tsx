@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getLocale, getMessages } from "next-intl/server";
 
+import PageContainer from "@/components/PageContainer";
 import ProseArticle from "@/components/ProseArticle";
 import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { convertPage } from "@/lib/notion/notion-to-md";
@@ -49,8 +50,10 @@ export default async function LeagueDivisionPage({
   const htmlContent = await convertMarkdownToHtml(mdString);
 
   return (
-    <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
-      <ProseArticle id="league-division-content" htmlContent={htmlContent} />
-    </section>
+    <PageContainer>
+      <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
+        <ProseArticle id="league-division-content" htmlContent={htmlContent} />
+      </section>
+    </PageContainer>
   );
 }
