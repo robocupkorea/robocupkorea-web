@@ -27,7 +27,7 @@ export default async function NoticesPage() {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+  const tenDaysInMs = 10 * 24 * 60 * 60 * 1000;
 
   return (
     <PageContainer>
@@ -72,15 +72,15 @@ export default async function NoticesPage() {
                   const noticeDate = new Date(notice.date);
                   noticeDate.setHours(0, 0, 0, 0);
                   const daysDiff = today.getTime() - noticeDate.getTime();
-                  const isWithinSevenDays =
-                    daysDiff >= 0 && daysDiff <= sevenDaysInMs;
+                  const isWithinTenDays =
+                    daysDiff >= 0 && daysDiff <= tenDaysInMs;
 
                   return (
                     <tr key={notice.id} className="border-b hover:bg-gray-100">
                       <td className="relative min-w-16 p-4 text-sm tabular-nums text-gray-500">
                         <span className="relative">
                           {noticesData.length - index}
-                          {isWithinSevenDays ? (
+                          {isWithinTenDays ? (
                             <span className="absolute -right-[20px] -top-[12px] text-red-600">
                               <DotOutlineIcon size={28} weight="fill" />
                             </span>

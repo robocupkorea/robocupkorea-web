@@ -66,10 +66,10 @@ export async function hasNewNoticePage(locale: string): Promise<boolean> {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+    const tenDaysInMs = 10 * 24 * 60 * 60 * 1000;
     const diff = today.getTime() - noticeDate.getTime();
 
-    return diff >= 0 && diff <= sevenDaysInMs; // 7일 이내인지 여부 반환
+    return diff >= 0 && diff <= tenDaysInMs; // 7일 이내인지 여부 반환
   } catch (err) {
     console.error("Error checking hasNewNoticePage:", err);
     return false;
