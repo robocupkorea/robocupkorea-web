@@ -1,3 +1,4 @@
+import type { Element, Root } from "hast";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSanitize from "rehype-sanitize";
@@ -6,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import { visit } from "unist-util-visit";
 
 /**
  * Markdown 문자열을 HTML 문자열로 변환
@@ -18,6 +20,11 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
     .use(remarkGfm) // GitHub Flavored Markdown 지원
     .use(remarkRehype) // Markdown AST를 HTML AST로 변환
     .use(rehypeSanitize) // XSS 방지
+
+    // 커스텀 변환 플러그인
+    .use(rehypeWrapTable) // Table Wrap
+    .use(rehypeUnwrapMailto) // 메일 링크 제거
+
     .use(rehypeExternalLinks, {
       target: "_blank",
       rel: ["noopener", "noreferrer"],
@@ -41,11 +48,65 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
     .use(rehypeStringify) // HTML AST를 HTML 문자열로 변환
     .process(markdown);
 
-  // 이메일을 <a> 태그가 아닌 일반 텍스트로 변환
-  const html = String(result).replace(
-    /<a[^>]*href=["']mailto:([^"']+)["'][^>]*>(.*?)<\/a>/gi,
-    "$2",
-  );
+  return String(result);
+}
 
-  return html;
+/**
+ * <table>을
+ * <div class="overflow-x-auto">
+ *   <table>...</table>
+ * </div>
+ * 형태로 감싸는 rehype 플러그인
+ */
+function rehypeWrapTable() {
+  return (tree: Root) => {
+    visit(tree, "element", (node, index, parent) => {
+      if (node.tagName !== "table") return; // table 태그가 아니면 무시
+      if (typeof index !== "number") return; // index 없으면 교체 불가
+      if (!parent) return; // parent 없으면 교체 불가
+
+      // 새로운 div element를 만들어 삽입
+      const wrapper: Element = {
+        type: "element",
+        tagName: "div",
+        properties: {
+          className: ["overflow-x-auto"],
+        },
+        children: [node],
+      };
+
+      parent.children[index] = wrapper;
+    });
+  };
+}
+
+/**
+ * mailto 링크를 비활성화하는 rehype 플러그인
+ *
+ * <a href="mailto:test@test.com">text</a>
+ * ↓
+ * <span>text</span>
+ */
+function rehypeUnwrapMailto() {
+  return (tree: Root) => {
+    visit(tree, "element", (node, index, parent) => {
+      if (node.tagName !== "a") return; // a 태그가 아니면 무시
+      if (typeof index !== "number") return; // index 없으면 교체 불가
+      if (!parent) return; // parent 없으면 교체 불가
+
+      const href = node.properties?.href;
+      if (typeof href !== "string" || !href.startsWith("mailto:")) return;
+
+      // 새로운 span element를 만들어 교체
+      const span: Element = {
+        type: "element",
+        tagName: "span",
+        properties: {},
+        children: node.children,
+      };
+
+      // 부모 children 배열에서 a를 span으로 교체
+      parent.children[index] = span;
+    });
+  };
 }
