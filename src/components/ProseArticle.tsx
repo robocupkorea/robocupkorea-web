@@ -13,11 +13,15 @@ export default function ProseArticle({ id, htmlContent }: ProseArticleProps) {
     <article
       id={id}
       className={[
-        "prose w-full max-w-none max-md:prose-sm",
+        "prose w-full break-keep max-sm:prose-sm",
+        // 테이블 오버플로우
+        "prose-table:!w-max", // 내용물만큼 확장
+        "prose-table:!min-w-full", // 최소한 w-full
+
+        "prose-table:my-1",
+        "prose-th:bg-gray-50 prose-th:px-4 prose-th:py-3 prose-td:px-4 prose-td:py-3",
         "prose-a:font-bold prose-a:text-blue-600 prose-a:underline-offset-2",
-        "prose-hr:my-3.5",
-        "prose-table:block prose-table:max-w-full prose-table:overflow-x-auto prose-table:whitespace-nowrap prose-th:bg-gray-50 prose-th:p-2 prose-td:p-2",
-        "max-md:leading-[1.1rem] max-md:prose-h1:text-2xl md:leading-[1.25rem] md:prose-h1:text-3xl",
+        "max-sm:leading-[1.3rem] max-sm:prose-h1:text-2xl sm:leading-[1.5rem] sm:prose-h1:text-3xl",
       ].join(" ")}
       dangerouslySetInnerHTML={{
         __html: htmlContent,
