@@ -1,4 +1,4 @@
-import { ArrowDownIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDownIcon, DotOutlineIcon } from "@phosphor-icons/react/dist/ssr";
 import { getLocale, getMessages } from "next-intl/server";
 
 import PageContainer from "@/components/PageContainer";
@@ -59,16 +59,16 @@ export default async function LeaguesPage() {
         </div>
 
         {/* 리그 목록 */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {leaguesData.map((league) => {
             const divisions = league.divisions;
 
             return (
               <article
                 key={league.id}
-                className="border border-gray-200 bg-white p-2 sm:p-3 md:p-4"
+                className="border border-gray-200 bg-white p-2.5 sm:p-3 md:p-4"
               >
-                <div className="mb-1 flex">
+                <div className="mb-1.5 flex">
                   <Link
                     href={`#${league.slug}`}
                     className="flex cursor-pointer items-center text-gray-800 hover:text-blue-600"
@@ -84,12 +84,27 @@ export default async function LeaguesPage() {
                 </div>
                 <ul className="flex flex-col gap-2 md:gap-3">
                   {divisions.map((division) => (
-                    <li key={division.id} className="flex">
-                      <Link
-                        href={`/leagues/${league.slug}/${division.slug}`}
-                        className="pl-0.5 md:pl-1"
-                      >
-                        <span className="block text-xs text-gray-500 underline underline-offset-2 hover:text-blue-600 sm:text-sm">
+                    <li
+                      key={division.id}
+                      className="flex items-start gap-0.5 md:gap-1"
+                    >
+                      <DotOutlineIcon
+                        weight="fill"
+                        className={[
+                          "mt-0.5 sm:mt-1 md:mt-0.5",
+                          "h-3 w-3 md:h-4 md:w-4",
+                          "shrink-0 text-gray-400",
+                        ].join(" ")}
+                      />
+                      <Link href={`/leagues/${league.slug}/${division.slug}`}>
+                        <span
+                          className={[
+                            "block text-xs sm:text-sm",
+                            "leading-tight tracking-tight",
+                            "text-gray-500 hover:text-blue-600",
+                            "underline decoration-gray-400 underline-offset-2",
+                          ].join(" ")}
+                        >
                           {division.name}
                         </span>
                       </Link>
