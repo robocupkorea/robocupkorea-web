@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 
+import NotionViewer from "@/components/NotionViewer";
 import PageContainer from "@/components/PageContainer";
-import ProseArticle from "@/components/ProseArticle";
-import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
 import { getNoticePage } from "@/lib/notion/notices";
-import { convertPage } from "@/lib/notion/notion-to-md";
+import { convertPage } from "@/lib/notion/notion-to-page";
 
 export async function generateMetadata() {
   const { notices } = await getMessages();
@@ -29,18 +28,16 @@ export default async function NoticeDetailPage({
     notFound(); // 발행되지 않은 공지사항 페이지
   }
 
-  const mdString = await convertPage(id);
+  const recordMap = await convertPage(id);
 
-  if (!mdString) {
+  if (!recordMap) {
     notFound();
   }
-
-  const htmlContent = await convertMarkdownToHtml(mdString);
 
   return (
     <PageContainer>
       <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
-        <ProseArticle id="notice-content" htmlContent={htmlContent} />
+        <NotionViewer recordMap={recordMap} />
       </section>
     </PageContainer>
   );

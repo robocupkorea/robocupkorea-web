@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 import { getLocale, getMessages } from "next-intl/server";
 
+import NotionViewer from "@/components/NotionViewer";
 import PageContainer from "@/components/PageContainer";
-import ProseArticle from "@/components/ProseArticle";
-import { convertMarkdownToHtml } from "@/lib/markdown/markdown-to-html";
-import { convertPage } from "@/lib/notion/notion-to-md";
+import { convertPage } from "@/lib/notion/notion-to-page";
 import prisma, { Locale } from "@/lib/prisma";
 
 export async function generateMetadata() {
@@ -41,18 +40,16 @@ export default async function LeagueDivisionPage({
     notFound();
   }
 
-  const mdString = await convertPage(leagueDivision.cmsPageId);
+  const recordMap = await convertPage(leagueDivision.cmsPageId);
 
-  if (!mdString) {
+  if (!recordMap) {
     notFound();
   }
-
-  const htmlContent = await convertMarkdownToHtml(mdString);
 
   return (
     <PageContainer>
       <section className="container mx-auto max-w-3xl px-4 py-8 md:px-8 xl:px-20">
-        <ProseArticle id="league-division-content" htmlContent={htmlContent} />
+        <NotionViewer recordMap={recordMap} />
       </section>
     </PageContainer>
   );
