@@ -14,8 +14,6 @@ import { routing } from "@/i18n/routing";
 import { hasNewNoticePage } from "@/lib/notion/notices";
 import prisma from "@/lib/prisma";
 
-import "highlight.js/styles/github.css";
-
 export async function generateMetadata({
   params,
 }: {
