@@ -27,3 +27,53 @@ body {
     display: none;
   }
 }
+
+/* Root Element */
+.notion {
+  padding: 0px !important;
+}
+
+/* Notion 내부의 모든 텍스트 요소 */
+.notion-text,
+.notion-quote,
+.notion-h1,
+.notion-h2,
+.notion-h3,
+.notion-list-item {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Header 링크 숨기기 */
+.notion-hash-link {
+  display: none;
+}
+
+/* 인용 블록 */
+.notion-quote {
+  font-size: 1rem !important; /* 기본 크기로 */
+}
+
+/* 테이블 가로 스크롤 강제 적용 */
+.notion-simple-table {
+  display: block !important; /* 테이블을 블록 박스로 변경 */
+  overflow-x: auto !important; /* 가로 스크롤 허용 */
+  width: 100% !important;
+}
+
+/* 테이블 셀 */
+.notion-simple-table tr td,
+.notion-simple-table tr th {
+  white-space: nowrap !important; /* 텍스트 줄바꿈 금지 */
+  min-width: 120px; /* 최소 너비 */
+  box-sizing: border-box;
+}
+
+/* 스크롤바 */
+.notion-simple-table::-webkit-scrollbar {
+  height: 6px;
+}
+.notion-simple-table::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
