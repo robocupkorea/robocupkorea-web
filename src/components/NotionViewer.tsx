@@ -1,8 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { ExtendedRecordMap } from "notion-types";
 import { NotionRenderer } from "react-notion-x";
 
+// core styles shared by all of react-notion-x (required)
 import "react-notion-x/src/styles.css";
 
 interface NotionViewerProps {
@@ -11,6 +14,11 @@ interface NotionViewerProps {
 
 export default function NotionViewer({ recordMap }: NotionViewerProps) {
   return (
-    <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} />
+    <NotionRenderer
+      recordMap={recordMap}
+      components={{ nextImage: Image, nextLink: Link, Collection: () => null }}
+      fullPage={false}
+      darkMode={false}
+    />
   );
 }
