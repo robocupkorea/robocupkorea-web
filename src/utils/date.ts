@@ -22,6 +22,7 @@ export const formatDate = (dateInput: string | Date, locale: string) => {
 
   // 요일 포맷팅 (Short)
   const weekday = date.toLocaleDateString(locale, { weekday: "short" });
+  console.log(locale);
 
   return `${formattedDate}(${weekday})`;
 };
