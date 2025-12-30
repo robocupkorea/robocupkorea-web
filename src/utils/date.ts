@@ -14,17 +14,31 @@ export const formatDate = (dateInput: string | Date, locale: string) => {
 
   const date = ensureDate(dateInput);
 
-  // 날짜 포맷팅 (YYYY.MM.DD)
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const formattedDate = `${year}.${month}.${day}`;
+  // Date object는 언어만 변경할 뿐 시간대를 변경하지 않는다.
 
-  // 요일 포맷팅 (Short)
-  const weekday = date.toLocaleDateString(locale, { weekday: "short" });
-  console.log(locale);
+  // Intl API를 사용하여 타임존을 'Asia/Seoul'로 고정
+  // 서버 지역과 무관하게 한국 시간으로 변환
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "short",
+  };
 
-  return `${formattedDate}(${weekday})`;
+  // 한국 시간 기준으로 포맷팅된 문자열 획득
+  const formatter = new Intl.DateTimeFormat(locale, options);
+
+  const parts = formatter.formatToParts(date);
+
+  const findPart = (type: string) => parts.find((p) => p.type === type)?.value;
+
+  const year = findPart("year");
+  const month = findPart("month");
+  const day = findPart("day");
+  const weekday = findPart("weekday");
+
+  return `${year}.${month}.${day}(${weekday})`;
 };
 
 /**
