@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
 import PageContainer from "@/components/PageContainer";
 import SponsorContactButton from "@/components/SponsorContactButton";
+import SponsorStatementButton from "@/components/SponsorStatementButton";
 
 export async function generateMetadata() {
   const { sponsors } = await getMessages();
@@ -15,6 +16,7 @@ export async function generateMetadata() {
 }
 
 export default async function SponsorsPage() {
+  const locale = await getLocale();
   const { sponsors } = await getMessages();
 
   return (
@@ -37,12 +39,17 @@ export default async function SponsorsPage() {
               {sponsors.description2}
             </p>
           </div>
-          <SponsorContactButton
-            email={sponsors.email}
-            buttonText={sponsors.contactButton}
-            copySuccess={sponsors.copySuccess}
-            copyError={sponsors.copyError}
-          />
+
+          <div className="flex w-full justify-center gap-4 max-md:flex-col md:justify-start">
+            {locale === "ko" && <SponsorStatementButton />}
+
+            <SponsorContactButton
+              email={sponsors.email}
+              buttonText={sponsors.contactButton}
+              copySuccess={sponsors.copySuccess}
+              copyError={sponsors.copyError}
+            />
+          </div>
         </div>
       </section>
     </PageContainer>
