@@ -1,9 +1,11 @@
 "use client";
 
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
+import pyeongchangLogo2 from "@/assets/images/pyeongchang-culture-and-tourism.jpg";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Event, EventDetail } from "@/lib/prisma";
 
@@ -79,10 +81,41 @@ export default function WelcomeModal({ mainEventDetail }: WelcomeModalProps) {
       onClick={closeModal}
     >
       <div
-        className="w-full max-w-md bg-white shadow-2xl"
+        className="relative w-full max-w-md bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* 메인 이벤트 이미지 */}
+        {/* 1. 우측 상단 '배지' 형태의 바로가기 버튼 (이미지 위) */}
+        <div className="absolute bottom-full right-0">
+          <a
+            href="https://tour.pc.go.kr/Home/index"
+            target="_blank"
+            className="flex h-12 items-center border-b border-l border-gray-200 bg-white"
+          >
+            {/* 로고 영역 */}
+            <div className="relative h-full w-16">
+              <Image
+                src={pyeongchangLogo2}
+                alt={
+                  locale === "ko"
+                    ? "평창문화관광"
+                    : "Pyeongchang Culture and Tourism"
+                }
+                fill
+                className="object-contain pl-1 md:pl-2"
+              />
+            </div>
+
+            {/* 텍스트 영역 */}
+            <div className="flex h-full items-center gap-1 pl-2 pr-4 text-xs font-semibold text-gray-700 sm:text-sm">
+              {locale === "ko"
+                ? "평창문화관광 바로가기"
+                : "Visit Pyeongchang Tourism"}
+              <ArrowRightIcon size={16} weight="regular" />
+            </div>
+          </a>
+        </div>
+
+        {/* 2. 메인 이벤트 이미지 */}
         {mainEventDetail?.posterImageUrl ? (
           <Link
             href={`/events/${mainEventDetail.cmsPageId}`}
@@ -123,8 +156,8 @@ export default function WelcomeModal({ mainEventDetail }: WelcomeModalProps) {
           </Link>
         )}
 
-        {/* 버튼 */}
-        <div className="flex border-t border-gray-200">
+        {/* 3. 하단 닫기 버튼들 */}
+        <div className="flex border-t border-gray-200 bg-white">
           <button
             onClick={dontShowToday}
             className="flex-1 px-4 py-4 text-sm font-medium tracking-wide text-black transition hover:bg-gray-50"
