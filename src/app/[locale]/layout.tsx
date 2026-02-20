@@ -8,6 +8,7 @@ import "@/app/globals.css";
 import { PostHogProvider } from "@/app/providers";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import PromoModal from "@/components/PromoModal";
 import ScrollToTop from "@/components/ScrollToTop";
 // import WelcomeModal from "@/components/WelcomeModal";
 import { routing } from "@/i18n/routing";
@@ -142,6 +143,7 @@ export default async function RootLayout({
         <PostHogProvider>
           <NextIntlClientProvider messages={messages}>
             {/* <WelcomeModal mainEventDetail={mainEventDetail} /> */}
+            <PromoModal />
             <ScrollToTop />
             <Header hasNewNotice={hasNewNotice} />
             <main className="grow">{children}</main>
