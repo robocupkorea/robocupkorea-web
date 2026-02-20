@@ -70,6 +70,7 @@ export default async function Home() {
           preload="none"
           style={{ overflowClipMargin: "content-box 0px" }}
           webkit-playsinline="true"
+          fallbackMobile
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/15 to-black/50" />
         <header className="absolute inset-x-0 top-8">
