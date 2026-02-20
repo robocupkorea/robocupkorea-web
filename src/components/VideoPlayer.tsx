@@ -9,6 +9,7 @@ type VideoPlayerProps = VideoHTMLAttributes<HTMLVideoElement> & {
   previewSrc?: string; // 비디오 첫 프레임 이미지
   fallbackSrc?: string; // fallback 이미지
   className?: string;
+  fallbackMobile?: boolean; // 추가 기능: 모바일 대응 여부 옵션
 };
 
 const VideoPlayer = ({
@@ -16,6 +17,7 @@ const VideoPlayer = ({
   previewSrc,
   fallbackSrc,
   className,
+  fallbackMobile = false,
   ...props
 }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,6 +27,9 @@ const VideoPlayer = ({
   const [isMobile, setIsMobile] = useState(false); // 모바일 화면 여부 (768px 이하)
   const [imageLoaded, setImageLoaded] = useState(false); // 이미지 로드 완료 여부
   const [previewLoaded, setPreviewLoaded] = useState(false); // 프리뷰 이미지 로드 완료 여부
+
+  // 모바일이면서 fallback 옵션이 켜져있을 때만 true가 되는 변수
+  const useMobileFallback = fallbackMobile && isMobile;
 
   /**
    * 디바운스된 리사이즈 핸들러
@@ -55,7 +60,7 @@ const VideoPlayer = ({
    */
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || isMobile) return;
+    if (!video || useMobileFallback) return;
 
     const onCanPlay = () => {
       setIsReady(true);
@@ -77,13 +82,13 @@ const VideoPlayer = ({
       hlsRef.current?.destroy();
       hlsRef.current = null;
     };
-  }, [src, isMobile]);
+  }, [src, useMobileFallback]); // isMobile, fallbackMobile 대신 useMobileFallback을 사용하여 불필요한 재실행 방지
 
   /**
    * 모바일 화면 잠김/복귀 대응
    */
   useEffect(() => {
-    if (isMobile) return;
+    if (useMobileFallback) return;
 
     const handleVisibility = () => {
       const video = videoRef.current;
@@ -104,14 +109,14 @@ const VideoPlayer = ({
     document.addEventListener("visibilitychange", handleVisibility);
     return () =>
       document.removeEventListener("visibilitychange", handleVisibility);
-  }, [isMobile]);
+  }, [useMobileFallback]);
 
   /**
    * 브라우저 비디오 로딩 중단 대응 (iOS 저전력모드 대응)
    */
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || isMobile) return;
+    if (!video || useMobileFallback) return;
 
     const onSuspend = () => setFallback(true); // 비디오 로딩 중단 되면 fallback 이미지 표시
     video.addEventListener("suspend", onSuspend);
@@ -119,13 +124,13 @@ const VideoPlayer = ({
     return () => {
       video.removeEventListener("suspend", onSuspend);
     };
-  }, [isMobile]);
+  }, [useMobileFallback]);
 
   /**
    * 화면 크기 변경 시 상태 초기화
    */
   useEffect(() => {
-    if (isMobile) {
+    if (useMobileFallback) {
       // 모바일로 전환 시 비디오 정리
       hlsRef.current?.destroy();
       hlsRef.current = null;
@@ -134,10 +139,10 @@ const VideoPlayer = ({
       // 데스크톱으로 전환 시 fallback 해제
       setFallback(false);
     }
-  }, [isMobile]);
+  }, [useMobileFallback]);
 
   // 모바일에서는 fallback 이미지만 표시
-  if (isMobile && fallbackSrc) {
+  if (useMobileFallback && fallbackSrc) {
     return (
       <Image
         src={fallbackSrc}
