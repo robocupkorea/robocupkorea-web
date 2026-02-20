@@ -104,19 +104,21 @@ export default function PromoModal() {
           </a>
         </div>
 
-        {/* 2. 메인 영상 */}
-        <VideoPlayer
-          src={`https://media.robocupkorea.org/videos/pyeongchang-promo/${locale}/2min.m3u8`}
-          previewSrc="https://media.robocupkorea.org/videos/pyeongchang-promo/preview.png"
-          autoPlay
-          className="pointer-events-none aspect-[16/9] w-full"
-          controls={false}
-          loop
-          muted
-          playsInline
-          preload="none"
-          webkit-playsinline="true"
-        />
+        <div className="relative aspect-video w-full bg-gray-100">
+          {/* 2. 메인 영상 */}
+          <VideoPlayer
+            src={`https://media.robocupkorea.org/videos/pyeongchang-promo/${locale}/2min.m3u8`}
+            previewSrc="https://media.robocupkorea.org/videos/pyeongchang-promo/preview.jpg"
+            autoPlay
+            className="pointer-events-none relative h-full w-full"
+            controls={false}
+            loop
+            muted
+            playsInline
+            preload="none"
+            webkit-playsinline="true"
+          />
+        </div>
 
         {/* 3. 하단 닫기 버튼들 */}
         <div className="flex border-t border-gray-200 bg-white">
