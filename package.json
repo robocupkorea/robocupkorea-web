@@ -13,6 +13,7 @@
     "@notionhq/client": "^3.1.3",
     "@phosphor-icons/react": "^2.1.10",
     "@prisma/client": "^6.18.0",
+    "@sentry/nextjs": "^10.47.0",
     "hls.js": "^1.6.5",
     "next": "14.2.29",
     "next-intl": "^4.1.0",
