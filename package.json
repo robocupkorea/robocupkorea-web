@@ -20,7 +20,7 @@
     "posthog-js": "^1.255.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-notion-x": "^7.7.3"
+    "react-notion-x": "^7.8.3"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
