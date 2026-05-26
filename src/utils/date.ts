@@ -115,6 +115,76 @@ export const formatDateRange = (
 };
 
 /**
+ * 홈 메인 이벤트 날짜 범위 포맷 (ko 전용)
+ * - 범위: 2026년 6월 23일(화) ~ 26일(금)
+ * - 단일: 2026년 6월 23일(화)
+ *
+ * en 등 ko 외 로케일은 기존 formatDateRange를 그대로 사용
+ */
+export const formatHomeMainEventDateRange = (
+  startDate: string | Date,
+  endDate: string | Date,
+  locale: string,
+) => {
+  if (!startDate) return "";
+
+  if (locale !== "ko") {
+    return formatDateRange(startDate, endDate, locale);
+  }
+
+  const start = ensureDate(startDate);
+  const end = ensureDate(endDate);
+
+  const getKoParts = (dateInput: Date) => {
+    const formatter = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      weekday: "short",
+    });
+
+    const parts = formatter.formatToParts(dateInput);
+    const findPart = (type: string) =>
+      parts.find((p) => p.type === type)?.value ?? "";
+
+    return {
+      year: findPart("year"),
+      month: findPart("month"),
+      day: findPart("day"),
+      weekday: findPart("weekday"),
+    };
+  };
+
+  const formatKoDate = (
+    date: ReturnType<typeof getKoParts>,
+    opts: { includeYear: boolean; includeMonth: boolean },
+  ) => {
+    const yearPrefix = opts.includeYear ? `${date.year}년 ` : "";
+    const monthPrefix = opts.includeMonth ? `${date.month}월 ` : "";
+    return `${yearPrefix}${monthPrefix}${date.day}일(${date.weekday})`;
+  };
+
+  const startKo = getKoParts(start);
+
+  if (!endDate || start.getTime() === end.getTime()) {
+    return formatKoDate(startKo, { includeYear: true, includeMonth: true });
+  }
+
+  const endKo = getKoParts(end);
+  const isSameYear = startKo.year === endKo.year;
+  const isSameMonth = isSameYear && startKo.month === endKo.month;
+
+  const endFormatted = isSameMonth
+    ? formatKoDate(endKo, { includeYear: false, includeMonth: false })
+    : isSameYear
+      ? formatKoDate(endKo, { includeYear: false, includeMonth: true })
+      : formatKoDate(endKo, { includeYear: true, includeMonth: true });
+
+  return `${formatKoDate(startKo, { includeYear: true, includeMonth: true })} ~ ${endFormatted}`;
+};
+
+/**
  * 이벤트 상태 반환 (진행중, 예정, 종료)
  */
 export const getEventStatus = (
