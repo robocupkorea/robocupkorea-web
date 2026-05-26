@@ -16,13 +16,15 @@ interface EventCardProps {
 
 export default function EventCard({ eventDetail, event }: EventCardProps) {
   const locale = useLocale();
+  const fallbackPosterUrl =
+    "https://media.robocupkorea.org/images/events/fallback.jpg";
 
   return (
     <article className="group relative h-full w-full cursor-pointer border bg-white hover:bg-gray-100">
       <Link href={`/events/${eventDetail.cmsPageId}`} className="block h-full">
         <div className="relative aspect-[842/1191] w-full overflow-hidden">
           <Image
-            src={eventDetail.posterImageUrl ?? ""}
+            src={eventDetail.posterImageUrl ?? fallbackPosterUrl}
             alt={eventDetail.title}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
