@@ -185,6 +185,91 @@ export const formatHomeMainEventDateRange = (
 };
 
 /**
+ * 한국어 일정 표기용 단순 날짜 포맷
+ * 2026년 6월 8일(월)
+ */
+export const formatKoreanDate = (dateInput: string | Date) => {
+  if (!dateInput) return "";
+
+  const formatter = new Intl.DateTimeFormat("ko-KR", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    weekday: "short",
+  });
+
+  const parts = formatter.formatToParts(ensureDate(dateInput));
+  const findPart = (type: string) =>
+    parts.find((p) => p.type === type)?.value ?? "";
+
+  return `${findPart("year")}년 ${findPart("month")}월 ${findPart("day")}일(${findPart("weekday")})`;
+};
+
+/**
+ * 한국어 일정 범위 표기용 단순 포맷
+ * 2026년 6월 8일(월) ~ 7월 10일(금)
+ */
+export const formatKoreanDateRange = (
+  startDate: string | Date,
+  endDate: string | Date,
+) => {
+  if (!startDate) return "";
+
+  const getKoParts = (dateInput: string | Date) => {
+    const formatter = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      weekday: "short",
+    });
+
+    const parts = formatter.formatToParts(ensureDate(dateInput));
+    const findPart = (type: string) =>
+      parts.find((p) => p.type === type)?.value ?? "";
+
+    return {
+      year: findPart("year"),
+      month: findPart("month"),
+      day: findPart("day"),
+      weekday: findPart("weekday"),
+    };
+  };
+
+  const formatKo = (
+    date: ReturnType<typeof getKoParts>,
+    includeYear: boolean,
+    includeMonth: boolean,
+  ) => {
+    const year = includeYear ? `${date.year}년 ` : "";
+    const month = includeMonth ? `${date.month}월 ` : "";
+    return `${year}${month}${date.day}일(${date.weekday})`;
+  };
+
+  const start = getKoParts(startDate);
+  if (!endDate) return formatKo(start, true, true);
+
+  const end = getKoParts(endDate);
+  const sameYear = start.year === end.year;
+  const sameMonth = sameYear && start.month === end.month;
+
+  if (
+    start.year === end.year &&
+    start.month === end.month &&
+    start.day === end.day
+  ) {
+    return formatKo(start, true, true);
+  }
+
+  return `${formatKo(start, true, true)} ~ ${formatKo(
+    end,
+    !sameYear,
+    !sameMonth,
+  )}`;
+};
+
+/**
  * 이벤트 상태 반환 (진행중, 예정, 종료)
  */
 export const getEventStatus = (

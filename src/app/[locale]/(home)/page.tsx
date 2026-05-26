@@ -16,13 +16,14 @@ import accountGroupIcon from "@/assets/svg/account-group-streamline-icon.svg";
 import computerImacSmileyFaceIcon from "@/assets/svg/computer-imac-smiley-face-streamline-icon.svg";
 import trophyIcon from "@/assets/svg/trophy-streamline-icon.svg";
 import EventCard from "@/components/EventCard";
+import ImportantDates from "@/components/ImportantDates";
 import LeagueCard from "@/components/LeagueCard";
 import PageContainer from "@/components/PageContainer";
 import TimelineItem from "@/components/TimelineItem";
 import VideoPlayer from "@/components/VideoPlayer";
 import { Link } from "@/i18n/navigation";
 import prisma, { Locale } from "@/lib/prisma";
-import { formatDateRange } from "@/utils/date";
+import { formatHomeMainEventDateRange } from "@/utils/date";
 
 export default async function Home() {
   const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
@@ -53,6 +54,15 @@ export default async function Home() {
     take: 6,
   });
 
+  const importantDate = mainEvent?.event.registrationStart
+    ? {
+        title: locale === Locale.ko ? "등록기간" : "Registration period",
+        dateStart: mainEvent.event.registrationStart,
+        dateEnd:
+          mainEvent.event.registrationEnd ?? mainEvent.event.registrationStart,
+      }
+    : null;
+
   return (
     <PageContainer>
       {/* 메인 이벤트 및 랜딩 비디오 */}
@@ -77,32 +87,25 @@ export default async function Home() {
           <div className="container mx-auto flex max-w-7xl flex-col px-4 text-white md:px-8 xl:px-20">
             {mainEvent ? (
               <>
-                <h1 className="mb-3 break-keep text-[2.5rem] font-black leading-tight sm:text-5xl lg:mb-5 lg:text-6xl">
+                <p className="mb-1.5">{home.intro.association}</p>
+                <h1 className="mb-4 break-keep text-[2.5rem] font-black leading-tight sm:text-5xl lg:mb-5 lg:text-6xl">
                   {mainEvent.title}
                 </h1>
-                <div className="mb-8 flex flex-col gap-3 md:text-lg">
-                  <div className="flex items-center gap-2">
+                <div className="mb-1 flex flex-col gap-1 md:text-lg">
+                  <div className="flex items-center gap-1">
                     <CalendarIcon size={24} weight="fill" />
                     <time
                       className="font-medium"
                       dateTime={mainEvent.event?.dateStart?.toISOString()}
                     >
                       {mainEvent.event &&
-                        formatDateRange(
+                        formatHomeMainEventDateRange(
                           mainEvent.event.dateStart?.toISOString() || "",
                           mainEvent.event.dateEnd?.toISOString() || "",
                           locale,
                         )}
                     </time>
                   </div>
-                  {mainEvent.location && (
-                    <div className="flex items-center gap-2">
-                      <MapPinIcon size={24} weight="fill" />
-                      <address className="font-medium not-italic">
-                        {mainEvent.location}
-                      </address>
-                    </div>
-                  )}
                 </div>
               </>
             ) : (
@@ -110,13 +113,24 @@ export default async function Home() {
                 {home.title}
               </h1>
             )}
+            {mainEvent?.location && (
+              <div className="mb-4 flex items-center gap-1 text-white/90">
+                <MapPinIcon size={24} weight="fill" />
+                <address className="font-medium not-italic">
+                  {mainEvent.location}
+                </address>
+              </div>
+            )}
+            {importantDate && (
+              <ImportantDates locale={locale} item={importantDate} />
+            )}
             {mainEvent && (
               <Link
                 href={
                   mainEvent.cmsPageId ? `/events/${mainEvent.cmsPageId}` : "#"
                 }
                 prefetch
-                className="flex h-12 w-full items-center justify-center gap-1.5 border border-gray-500 bg-white px-8 font-medium text-black hover:bg-gray-100 sm:w-fit"
+                className="mt-4 flex h-12 w-full items-center justify-center gap-1.5 border border-gray-500 bg-white px-8 font-medium text-black hover:bg-gray-100 sm:w-fit"
               >
                 {home.button.learnMore}
                 <ArrowRightIcon size={24} weight="thin" />
