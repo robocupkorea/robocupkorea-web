@@ -55,6 +55,8 @@ model Event {
   year      String
   dateStart DateTime
   dateEnd   DateTime
+  registrationStart DateTime?
+  registrationEnd   DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
