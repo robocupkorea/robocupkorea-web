@@ -3,8 +3,12 @@ import {
   BuildingOfficeIcon,
   CalendarIcon,
   CaretDownIcon,
+  DotOutlineIcon,
+  FileIcon,
   GraduationCapIcon,
   MapPinIcon,
+  MegaphoneIcon,
+  TicketIcon,
   TrophyIcon,
   UsersIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -23,8 +27,9 @@ import PageContainer from "@/components/PageContainer";
 import TimelineItem from "@/components/TimelineItem";
 import VideoPlayer from "@/components/VideoPlayer";
 import { Link } from "@/i18n/navigation";
+import { getNotices } from "@/lib/notion/notices";
 import prisma, { Locale } from "@/lib/prisma";
-import { formatHomeMainEventDateRange } from "@/utils/date";
+import { formatHomeMainEventDateRange, formatISODate } from "@/utils/date";
 
 export default async function Home() {
   const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
@@ -55,6 +60,8 @@ export default async function Home() {
     take: 6,
   });
 
+  const noticesData = (await getNotices(locale)).slice(0, 4);
+
   const importantDate = mainEvent?.event.registrationStart
     ? {
         title: locale === Locale.ko ? "등록기간" : "Registration period",
@@ -63,6 +70,10 @@ export default async function Home() {
           mainEvent.event.registrationEnd ?? mainEvent.event.registrationStart,
       }
     : null;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tenDaysInMs = 10 * 24 * 60 * 60 * 1000;
 
   return (
     <PageContainer>
@@ -421,6 +432,81 @@ export default async function Home() {
             </Link>
           </footer>
         </div>
+      </section>
+
+      {/* 공지사항 */}
+      <section className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
+        <header className="mb-12 text-center">
+          <p className="text-md mb-2 text-gray-500">{home.notices.section}</p>
+          <h2 id="notices-heading" className="break-keep text-3xl font-bold">
+            {home.notices.title}
+          </h2>
+        </header>
+
+        <div className="mb-12 overflow-x-auto">
+          <table className="min-w-full border-t border-gray-200">
+            <tbody>
+              {noticesData.length === 0 ? (
+                <tr>
+                  <td className="border-b py-8 text-center text-gray-600">
+                    {home.notices.noNotices}
+                  </td>
+                </tr>
+              ) : (
+                noticesData.map((notice) => {
+                  const noticeDate = new Date(notice.date);
+                  noticeDate.setHours(0, 0, 0, 0);
+                  const daysDiff = today.getTime() - noticeDate.getTime();
+                  const isWithinTenDays =
+                    daysDiff >= 0 && daysDiff <= tenDaysInMs;
+
+                  return (
+                    <tr key={notice.id} className="border-b hover:bg-gray-100">
+                      <td className="p-4">
+                        <Link
+                          href={`/notices/${notice.id}`}
+                          className="flex min-w-0 items-center font-medium text-gray-800"
+                        >
+                          {notice.type === "Announcement" ? (
+                            <span className="mr-2 inline-block shrink-0 text-gray-600">
+                              <MegaphoneIcon size={16} />
+                            </span>
+                          ) : notice.type === "Registration" ? (
+                            <span className="mr-2 inline-block shrink-0 text-gray-600">
+                              <TicketIcon size={16} />
+                            </span>
+                          ) : notice.type === "Rules" ? (
+                            <span className="mr-2 inline-block shrink-0 text-gray-600">
+                              <FileIcon size={16} />
+                            </span>
+                          ) : null}
+                          <span className="truncate">{notice.title}</span>
+                          {isWithinTenDays ? (
+                            <span className="ml-1 shrink-0 text-red-600">
+                              <DotOutlineIcon size={28} weight="fill" />
+                            </span>
+                          ) : null}
+                        </Link>
+                      </td>
+                      <td className="min-w-24 p-4 text-right text-sm tabular-nums tracking-tight text-gray-700">
+                        {formatISODate(notice.date)}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <footer className="flex justify-center">
+          <Link
+            href="/notices"
+            className="flex h-12 items-center justify-center gap-1.5 border border-gray-500 bg-white px-6 font-medium text-black hover:bg-gray-100"
+          >
+            {home.notices.viewMore}
+          </Link>
+        </footer>
       </section>
 
       {/* 후원 */}

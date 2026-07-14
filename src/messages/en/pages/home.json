@@ -54,6 +54,12 @@
       "title": "Take on the challenge",
       "viewMore": "More events"
     },
+    "notices": {
+      "section": "Notices",
+      "title": "Latest updates from RoboCup Korea",
+      "viewMore": "More notices",
+      "noNotices": "No notices available."
+    },
     "sponsor": {
       "description1": "The RoboCup Korea Association is a non-profit organization that has been operating RoboCup competitions for over 10 years since 2013.",
       "description2": "All sponsorship funds are used for various purposes to foster young talents in robotics and promote AI and robotics education.",
