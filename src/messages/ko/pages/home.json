@@ -25,6 +25,14 @@
       "schools": { "label": "협회 공식 인증 교육기관 수", "value": "19+" },
       "note": "*한국로보컵협회 기준 (2025년 업데이트)"
     },
+    "sponsors": {
+      "section": "후원사",
+      "title": "함께하는 후원사",
+      "pcbway": {
+        "logoAlt": "PCBWay 로고",
+        "linkLabel": "PCBWay 웹사이트 방문"
+      }
+    },
     "aboutLeague": {
       "section": "한국 로보컵 소개",
       "title": "한국 로보컵 주요 활동과 목표",

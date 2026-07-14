@@ -22,6 +22,14 @@
       "schools": { "label": "Certified learning centers", "value": "19+" },
       "note": "*RoboCup Korea Association data (updated 2025)"
     },
+    "sponsors": {
+      "section": "Sponsors",
+      "title": "Our sponsors",
+      "pcbway": {
+        "logoAlt": "PCBWay logo",
+        "linkLabel": "Visit the PCBWay website"
+      }
+    },
     "aboutLeague": {
       "section": "About RoboCup Korea",
       "title": "Main activities & goals of RoboCup Korea Leagues",

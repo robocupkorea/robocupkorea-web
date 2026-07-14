@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import { getLocale, getMessages } from "next-intl/server";
 
+import pcbwayLogo from "@/assets/images/pcbway-logo.png";
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
 import accountGroupIcon from "@/assets/svg/account-group-streamline-icon.svg";
 import computerImacSmileyFaceIcon from "@/assets/svg/computer-imac-smiley-face-streamline-icon.svg";
@@ -221,6 +222,34 @@ export default async function Home() {
               {home.stats.note}
             </p>
           </footer>
+        </div>
+      </section>
+
+      {/* 후원사 */}
+      <section className="container mx-auto max-w-7xl px-4 py-20 md:px-8 xl:px-20">
+        <header className="mb-10 text-center">
+          <p className="text-md mb-2 text-gray-500">{home.sponsors.section}</p>
+          <h2 id="sponsors-heading" className="break-keep text-3xl font-bold">
+            {home.sponsors.title}
+          </h2>
+        </header>
+
+        <div className="flex justify-center">
+          <a
+            href="https://www.pcbway.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label={home.sponsors.pcbway.linkLabel}
+            className="flex h-28 w-full max-w-xs items-center justify-center border bg-white px-10 hover:border-gray-400 hover:bg-gray-50"
+          >
+            <Image
+              src={pcbwayLogo}
+              alt={home.sponsors.pcbway.logoAlt}
+              className="h-auto max-h-14 w-full object-contain"
+              width={320}
+              height={110}
+            />
+          </a>
         </div>
       </section>
 
