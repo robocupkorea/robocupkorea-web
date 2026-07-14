@@ -27,7 +27,8 @@
       "title": "Our sponsors",
       "pcbway": {
         "logoAlt": "PCBWay logo",
-        "linkLabel": "Visit the PCBWay website"
+        "linkLabel": "Visit the PCBWay website",
+        "visit": "Visit the website"
       }
     },
     "aboutLeague": {

@@ -236,34 +236,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 후원사 */}
-      <section className="container mx-auto max-w-7xl px-4 py-20 md:px-8 xl:px-20">
-        <header className="mb-10 text-center">
-          <p className="text-md mb-2 text-gray-500">{home.sponsors.section}</p>
-          <h2 id="sponsors-heading" className="break-keep text-3xl font-bold">
-            {home.sponsors.title}
-          </h2>
-        </header>
-
-        <div className="flex justify-center">
-          <a
-            href="https://www.pcbway.com/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label={home.sponsors.pcbway.linkLabel}
-            className="flex h-28 w-full max-w-xs items-center justify-center border bg-white px-10 hover:border-gray-400 hover:bg-gray-50"
-          >
-            <Image
-              src={pcbwayLogo}
-              alt={home.sponsors.pcbway.logoAlt}
-              className="h-auto max-h-14 w-full object-contain"
-              width={320}
-              height={110}
-            />
-          </a>
-        </div>
-      </section>
-
       {/* 한국 로보컵 소개 */}
       <section className="container mx-auto max-w-7xl px-4 py-24 md:px-8 xl:px-20">
         <header className="mb-12 text-center">
@@ -507,6 +479,47 @@ export default async function Home() {
             {home.notices.viewMore}
           </Link>
         </footer>
+      </section>
+
+      {/* 후원사 */}
+      <section className="bg-gray-50">
+        <div className="container mx-auto max-w-7xl px-4 py-20 md:px-8 xl:px-20">
+          <header className="mb-10 text-center">
+            <p className="text-md mb-2 text-gray-500">
+              {home.sponsors.section}
+            </p>
+            <h2 id="sponsors-heading" className="break-keep text-3xl font-bold">
+              {home.sponsors.title}
+            </h2>
+          </header>
+
+          <div className="flex justify-center">
+            <a
+              href="https://www.pcbway.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={home.sponsors.pcbway.linkLabel}
+              className="group flex h-24 w-full max-w-lg items-stretch overflow-hidden border bg-white hover:border-gray-400 hover:bg-gray-50"
+            >
+              <div className="flex min-w-0 flex-1 items-center gap-4 px-6 md:px-6">
+                <Image
+                  src={pcbwayLogo}
+                  alt={home.sponsors.pcbway.logoAlt}
+                  className="h-auto max-h-16 w-24 shrink-0 object-contain md:w-32"
+                  width={266}
+                  height={56}
+                />
+                <span className="w-28 shrink-0 text-xs font-medium leading-snug text-gray-500 sm:block md:w-24">
+                  PCB Prototype the Easy Way
+                </span>
+              </div>
+              <span className="flex w-32 shrink-0 items-center justify-center gap-0.5 border-l text-sm font-medium text-gray-500 group-hover:border-gray-400 group-hover:bg-gray-100 md:w-40 md:text-base">
+                {home.sponsors.pcbway.visit}
+                <ArrowRightIcon size={18} />
+              </span>
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* 후원 */}

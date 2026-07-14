@@ -30,7 +30,8 @@
       "title": "함께하는 후원사",
       "pcbway": {
         "logoAlt": "PCBWay 로고",
-        "linkLabel": "PCBWay 웹사이트 방문"
+        "linkLabel": "PCBWay 웹사이트 방문",
+        "visit": "페이지 방문하기"
       }
     },
     "aboutLeague": {
