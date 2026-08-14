@@ -3,7 +3,7 @@ import { getLocale, getMessages } from "next-intl/server";
 
 import NotionViewer from "@/components/NotionViewer";
 import PageContainer from "@/components/PageContainer";
-import { convertPage } from "@/lib/notion/notion-to-page";
+import { getPageBlocks } from "@/lib/notion/notion-to-page";
 import prisma, { Locale } from "@/lib/prisma";
 
 export async function generateMetadata() {
@@ -40,16 +40,16 @@ export default async function LeagueDivisionPage({
     notFound();
   }
 
-  const recordMap = await convertPage(leagueDivision.cmsPageId);
+  const blocks = await getPageBlocks(leagueDivision.cmsPageId);
 
-  if (!recordMap) {
+  if (!blocks) {
     notFound();
   }
 
   return (
     <PageContainer>
       <section className="container mx-auto max-w-7xl px-4 py-4 md:px-8 xl:px-20">
-        <NotionViewer recordMap={recordMap} />
+        <NotionViewer blocks={blocks} />
       </section>
     </PageContainer>
   );
