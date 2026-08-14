@@ -32,34 +32,62 @@ import { getNotices } from "@/lib/notion/notices";
 import prisma, { Locale } from "@/lib/prisma";
 import { formatHomeMainEventDateRange, formatISODate } from "@/utils/date";
 
+async function withDatabaseFallback<T>(
+  query: Promise<T>,
+  fallback: T,
+  label: string,
+): Promise<T> {
+  try {
+    return await query;
+  } catch (error) {
+    console.error(`Error fetching home ${label}:`, error);
+    return fallback;
+  }
+}
+
 export default async function Home() {
   const locale = (await getLocale()) === "ko" ? Locale.ko : Locale.en;
 
   const { home } = await getMessages();
 
-  const mainEvent = await prisma.eventDetail.findFirst({
-    where: { showInMain: true, locale: locale },
-    include: { event: true },
-  });
-
-  const leagueDivisions = await prisma.leagueDivision.findMany({
-    where: { locale: locale }, // 잘못된 locale은 url path에서 error로 처리됨
-    include: { league: true },
-    take: 3,
-  });
-
-  const events = await prisma.event.findMany({
-    include: { details: { where: { locale: locale } } },
-    orderBy: { dateStart: "desc" },
-    take: 4,
-  });
-
-  const eventDetails = await prisma.eventDetail.findMany({
-    where: { showInEvents: true, locale },
-    include: { event: true },
-    orderBy: { event: { dateStart: "desc" } },
-    take: 6,
-  });
+  const [mainEvent, leagueDivisions, events, eventDetails] = await Promise.all([
+    withDatabaseFallback(
+      prisma.eventDetail.findFirst({
+        where: { showInMain: true, locale: locale },
+        include: { event: true },
+      }),
+      null,
+      "main event",
+    ),
+    withDatabaseFallback(
+      prisma.leagueDivision.findMany({
+        where: { locale: locale }, // 잘못된 locale은 url path에서 error로 처리됨
+        include: { league: true },
+        take: 3,
+      }),
+      [],
+      "league divisions",
+    ),
+    withDatabaseFallback(
+      prisma.event.findMany({
+        include: { details: { where: { locale: locale } } },
+        orderBy: { dateStart: "desc" },
+        take: 4,
+      }),
+      [],
+      "events",
+    ),
+    withDatabaseFallback(
+      prisma.eventDetail.findMany({
+        where: { showInEvents: true, locale },
+        include: { event: true },
+        orderBy: { event: { dateStart: "desc" } },
+        take: 6,
+      }),
+      [],
+      "event details",
+    ),
+  ]);
 
   const noticesData = (await getNotices(locale)).slice(0, 4);
 
