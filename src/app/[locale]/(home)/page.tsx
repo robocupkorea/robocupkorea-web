@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { getLocale, getMessages } from "next-intl/server";
 
+import kbKookminBankLogo from "@/assets/images/kb-kookmin-bank-logo.png";
 import pcbwayLogo from "@/assets/images/pcbway-logo.png";
 import sponsorBanner from "@/assets/images/sponsor-banner.jpg";
 import accountGroupIcon from "@/assets/svg/account-group-streamline-icon.svg";
@@ -493,27 +494,51 @@ export default async function Home() {
             </h2>
           </header>
 
-          <div className="flex justify-center">
+          <div className="mx-auto grid max-w-5xl gap-4 xl:grid-cols-2">
+            <a
+              href="https://www.kbstar.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={home.sponsors.kbKookminBank.linkLabel}
+              className="group flex h-24 w-full items-stretch overflow-hidden border bg-white hover:border-gray-400 hover:bg-gray-50"
+            >
+              <div className="flex min-w-0 flex-1 items-center gap-3 px-4 sm:gap-4 sm:px-6">
+                <Image
+                  src={kbKookminBankLogo}
+                  alt={home.sponsors.kbKookminBank.logoAlt}
+                  className="h-auto max-h-16 w-20 shrink-0 object-contain sm:w-24"
+                  width={640}
+                  height={104}
+                />
+                <span className="hidden min-w-0 text-xs font-medium leading-snug text-gray-500 sm:block">
+                  {home.sponsors.kbKookminBank.tagline}
+                </span>
+              </div>
+              <span className="flex shrink-0 items-center justify-center gap-0.5 whitespace-nowrap border-l px-4 text-sm font-medium text-gray-500 group-hover:border-gray-400 group-hover:bg-gray-100 sm:px-5 md:text-base">
+                {home.sponsors.kbKookminBank.visit}
+                <ArrowRightIcon size={18} />
+              </span>
+            </a>
             <a
               href="https://www.pcbway.com/"
               target="_blank"
               rel="noreferrer"
               aria-label={home.sponsors.pcbway.linkLabel}
-              className="group flex h-24 w-full max-w-lg items-stretch overflow-hidden border bg-white hover:border-gray-400 hover:bg-gray-50"
+              className="group flex h-24 w-full items-stretch overflow-hidden border bg-white hover:border-gray-400 hover:bg-gray-50"
             >
-              <div className="flex min-w-0 flex-1 items-center gap-4 px-6 md:px-6">
+              <div className="flex min-w-0 flex-1 items-center gap-3 px-4 sm:gap-4 sm:px-6">
                 <Image
                   src={pcbwayLogo}
                   alt={home.sponsors.pcbway.logoAlt}
-                  className="h-auto max-h-16 w-24 shrink-0 object-contain md:w-32"
+                  className="h-auto max-h-16 w-20 shrink-0 object-contain sm:w-24"
                   width={266}
                   height={56}
                 />
-                <span className="w-28 shrink-0 text-xs font-medium leading-snug text-gray-500 sm:block md:w-24">
+                <span className="hidden min-w-0 text-xs font-medium leading-snug text-gray-500 sm:block">
                   PCB Prototype the Easy Way
                 </span>
               </div>
-              <span className="flex w-32 shrink-0 items-center justify-center gap-0.5 border-l text-sm font-medium text-gray-500 group-hover:border-gray-400 group-hover:bg-gray-100 md:w-40 md:text-base">
+              <span className="flex shrink-0 items-center justify-center gap-0.5 whitespace-nowrap border-l px-4 text-sm font-medium text-gray-500 group-hover:border-gray-400 group-hover:bg-gray-100 sm:px-5 md:text-base">
                 {home.sponsors.pcbway.visit}
                 <ArrowRightIcon size={18} />
               </span>

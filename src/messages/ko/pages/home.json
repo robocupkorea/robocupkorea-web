@@ -32,6 +32,12 @@
         "logoAlt": "PCBWay 로고",
         "linkLabel": "PCBWay 웹사이트 방문",
         "visit": "페이지 방문하기"
+      },
+      "kbKookminBank": {
+        "logoAlt": "KB국민은행 로고",
+        "linkLabel": "KB국민은행 웹사이트 방문",
+        "tagline": "국민의 평생 금융파트너",
+        "visit": "페이지 방문하기"
       }
     },
     "aboutLeague": {

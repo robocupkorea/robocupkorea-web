@@ -29,6 +29,12 @@
         "logoAlt": "PCBWay logo",
         "linkLabel": "Visit the PCBWay website",
         "visit": "Visit the website"
+      },
+      "kbKookminBank": {
+        "logoAlt": "KB Kookmin Bank logo",
+        "linkLabel": "Visit the KB Kookmin Bank website",
+        "tagline": "Your lifelong financial partner",
+        "visit": "Visit the website"
       }
     },
     "aboutLeague": {
