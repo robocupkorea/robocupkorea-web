@@ -8,12 +8,11 @@ import "@/app/globals.css";
 import { PostHogProvider } from "@/app/providers";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import PromoModal from "@/components/PromoModal";
 import ScrollToTop from "@/components/ScrollToTop";
-// import WelcomeModal from "@/components/WelcomeModal";
+import WelcomeModal from "@/components/WelcomeModal";
 import { routing } from "@/i18n/routing";
 import { hasNewNoticePage } from "@/lib/notion/notices";
-// import prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 export async function generateMetadata({
   params,
@@ -129,11 +128,11 @@ export default async function RootLayout({
   const messages = await getMessages();
   const hasNewNotice = await hasNewNoticePage(locale);
 
-  // const mainEventDetail = await prisma.eventDetail.findFirst({
-  //   where: { locale: locale, showInMain: true },
-  //   include: { event: true },
-  //   orderBy: { event: { dateStart: "desc" } }, // 최근 대회 중 첫번째
-  // });
+  const mainEventDetail = await prisma.eventDetail.findFirst({
+    where: { locale: locale, showInMain: true },
+    include: { event: true },
+    orderBy: { event: { dateStart: "desc" } }, // 최근 대회 중 첫번째
+  });
 
   return (
     <html lang={locale}>
@@ -142,8 +141,7 @@ export default async function RootLayout({
       >
         <PostHogProvider>
           <NextIntlClientProvider messages={messages}>
-            {/* <WelcomeModal mainEventDetail={mainEventDetail} /> */}
-            <PromoModal />
+            <WelcomeModal mainEventDetail={mainEventDetail} />
             <ScrollToTop />
             <Header hasNewNotice={hasNewNotice} />
             <main className="grow">{children}</main>

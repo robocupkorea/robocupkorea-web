@@ -81,7 +81,7 @@ export default function WelcomeModal({ mainEventDetail }: WelcomeModalProps) {
       onClick={closeModal}
     >
       <div
-        className="relative w-full max-w-md bg-white shadow-2xl"
+        className="relative flex max-h-[calc(100dvh-5rem)] w-full max-w-md flex-col bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* 1. 우측 상단 '배지' 형태의 바로가기 버튼 (이미지 위) */}
@@ -118,17 +118,24 @@ export default function WelcomeModal({ mainEventDetail }: WelcomeModalProps) {
         {/* 2. 메인 이벤트 이미지 */}
         {mainEventDetail?.posterImageUrl ? (
           <Link
-            href={`/events/${mainEventDetail.cmsPageId}`}
+            href={
+              mainEventDetail.event.slug === "robocup-korea-open-2027"
+                ? locale === "ko"
+                  ? "/notices/3fcb858854e081afae3cda886d75fce9"
+                  : "/notices/3fcb858854e08196958bcb6c283c7f87"
+                : `/events/${mainEventDetail.cmsPageId}`
+            }
             prefetch
             onClick={closeModal}
-            className="relative block aspect-[842/1191] w-full overflow-hidden"
+            className="block min-h-0 overflow-y-auto"
           >
             <Image
               src={mainEventDetail.posterImageUrl}
               alt={mainEventDetail.title}
-              fill
+              width={842}
+              height={1191}
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
-              className="object-cover"
+              className="h-auto w-full"
             />
           </Link>
         ) : (
@@ -157,7 +164,7 @@ export default function WelcomeModal({ mainEventDetail }: WelcomeModalProps) {
         )}
 
         {/* 3. 하단 닫기 버튼들 */}
-        <div className="flex border-t border-gray-200 bg-white">
+        <div className="flex shrink-0 border-t border-gray-200 bg-white">
           <button
             onClick={dontShowToday}
             className="flex-1 px-4 py-4 text-sm font-medium tracking-wide text-black transition hover:bg-gray-50"
